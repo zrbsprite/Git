@@ -15,5 +15,6 @@
   </properties>
   <modules>
     <module>Dependencies</module>
+    <module>EaseWeb</module>
   </modules>
 </project>
