@@ -5,6 +5,7 @@
   <groupId>com.jsprite</groupId>
   <artifactId>Ease</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <description>Samite/SAMITE/samite will be my construction's name </description>
   <packaging>pom</packaging>
 
   <name>Ease</name>
