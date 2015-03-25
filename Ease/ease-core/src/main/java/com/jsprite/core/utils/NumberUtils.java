@@ -11,13 +11,7 @@ import com.jsprite.core.exception.NumberException;
 
 public class NumberUtils {
 
-	private static DecimalFormat formater;
-	
 	private static final String DEFAULT_PATTERN = "#,###.00";
-	
-	static{
-		formater = new DecimalFormat();
-	}
 	
 	/**
 	 * 将数字直接截取小数点两位，不考虑进位问题，如：123.257将被格式化为123.25
@@ -25,18 +19,18 @@ public class NumberUtils {
 	 * @return String 格式化后的结果
 	 */
 	public static String defaultNumberFormat(double dNum){
-		useRuleSplit();
+		DecimalFormat formater = useRuleSplit();
 		return formater.format(dNum);
 	}
 	
 	public static String charSequenceNumberFormat(String sNum){
-		useRuleSplit();
+		DecimalFormat formater = useRuleSplit();
 		BigDecimal decimal = new BigDecimal(sNum);
 		return formater.format(decimal);
 	}
 	
 	public static String roundNumberFormat(BigDecimal decimal){
-		useRuleRound();
+		DecimalFormat formater = useRuleRound();
 		return formater.format(decimal);
 	}
 	
@@ -50,12 +44,12 @@ public class NumberUtils {
 	}
 	
 	public static String roundAndGroupNumberFormat(BigDecimal decimal){
-		useRule(RoundingMode.HALF_EVEN, 2, 2, 3, true);
+		DecimalFormat formater = useRule(RoundingMode.HALF_EVEN, 2, 2, 3, true);
 		return formater.format(decimal);
 	}
 	
 	public static String roundAndGroupNumberFormat(BigDecimal decimal, RoundingMode roundingMode, int max, int min, int groupSize){
-		useRule(roundingMode, max, min, groupSize, true);
+		DecimalFormat formater = useRule(roundingMode, max, min, groupSize, true);
 		return formater.format(decimal);
 	}
 	
@@ -64,6 +58,7 @@ public class NumberUtils {
 	}
 	
 	public static String customNumberFormat(BigDecimal decimal, String pattern){
+		DecimalFormat formater = new DecimalFormat();
 		formater.applyPattern(pattern);
 		return customNumberFormat(decimal, formater);
 	}
@@ -78,7 +73,8 @@ public class NumberUtils {
 		return matcher.matches();
 	}
 	
-	private static void useRule(RoundingMode roundingMode, int maxFractionDigits, int minFractionDigits, int groupSize, boolean useGroup){
+	private static DecimalFormat useRule(RoundingMode roundingMode, int maxFractionDigits, int minFractionDigits, int groupSize, boolean useGroup){
+		DecimalFormat formater = new DecimalFormat();
 		formater.setRoundingMode(roundingMode);
 		formater.setMaximumFractionDigits(maxFractionDigits);
 		formater.setMinimumFractionDigits(minFractionDigits);
@@ -86,14 +82,15 @@ public class NumberUtils {
 		if(useGroup){
 			formater.setGroupingSize(groupSize);
 		}
+		return formater;
 	}
 	
-	private static void useRuleSplit(){
-		useRule(RoundingMode.FLOOR, 2, 2, 0, false);
+	private static DecimalFormat useRuleSplit(){
+		return useRule(RoundingMode.FLOOR, 2, 2, 0, false);
 	}
 	
-	private static void useRuleRound(){
-		useRule(RoundingMode.HALF_EVEN, 2, 2, 0, false);
+	private static DecimalFormat useRuleRound(){
+		return useRule(RoundingMode.HALF_EVEN, 2, 2, 0, false);
 	}
 	
 }
