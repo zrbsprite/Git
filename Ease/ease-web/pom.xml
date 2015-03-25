@@ -9,9 +9,9 @@
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../Dependencies/pom.xml</relativePath>
 	</parent>
-	<artifactId>EaseWeb</artifactId>
+	<artifactId>ease-web</artifactId>
 	<packaging>war</packaging>
-	<name>EaseWeb Maven Webapp</name>
+	<name>ease web Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>
