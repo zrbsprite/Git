@@ -108,9 +108,11 @@ public class HttpUtils {
 		httpParams.setContentCharset("UTF-8");
 		post.setParams(httpParams);
 		MultipartRequestEntity requestEntity = makesMultipartRequestEntity(post, paramMap);
-		long len = paramMap.size();
-		if(len>0){
-			post.setRequestEntity(requestEntity);
+		if(null!=requestEntity){
+			long len = paramMap.size();
+			if(len>0){
+				post.setRequestEntity(requestEntity);
+			}
 		}
 		HttpConnectionManagerParams params = client.getHttpConnectionManager().getParams();
 		params.setConnectionTimeout(3000);
@@ -153,6 +155,9 @@ public class HttpUtils {
 	}
 	
 	private static String makeQueryString(Map<String, String> paramMap){
+		if(null==paramMap){
+			return null;
+		}
 		StringBuffer queryString = new StringBuffer(); 
 		Set<Entry<String, String>> set = paramMap.entrySet();
 		for(Entry<String, String> entry : set){
@@ -166,6 +171,9 @@ public class HttpUtils {
 	}
 	
 	private static MultipartRequestEntity makesMultipartRequestEntity(PostMethod post, Map<String, String> paramMap){
+		if(null==paramMap){
+			return null;
+		}
 		Set<Entry<String, String>> set = paramMap.entrySet();
 		Part[] parts = null;
 		List<Part> listPart = new ArrayList<Part>();
@@ -178,6 +186,9 @@ public class HttpUtils {
 	}
 	
 	private static NameValuePair[] makesNameValuePairArray(HttpMethod method, Map<String, String> paramMap){
+		if(null==paramMap){
+			return new NameValuePair[0];
+		}
 		List<NameValuePair> list = new ArrayList<NameValuePair>();
 		Set<Entry<String, String>> set = paramMap.entrySet();
 		for(Entry<String, String> entry : set){
