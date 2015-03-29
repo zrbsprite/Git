@@ -1,0 +1,11 @@
+.metadata/*
+*.settings/*
+*.component
+*.prefs
+*.classpath
+*.project
+Servers/*
+*.jsdtscope
+Ease/ease-web/.settings/org.eclipse.wst.jsdt.ui.superType.name
+*.container
+Ease/ease-web/.settings/org.eclipse.wst.common.project.facet.core.xml
