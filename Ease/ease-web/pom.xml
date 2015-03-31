@@ -55,8 +55,11 @@
 						<artifactId>mysql-connector-java</artifactId>
 						<version>${mysql-connector-version}</version>
 					</dependency>
-					<!-- <dependency> <groupId>commons-dbcp</groupId> <artifactId>commons-dbcp</artifactId> 
-						<version>1.2.2</version> </dependency> -->
+					<!-- <dependency>
+							 <groupId>commons-dbcp</groupId>
+							 <artifactId>commons-dbcp</artifactId> 
+							 <version>1.2.2</version>
+					    </dependency> -->
 					<dependency>
 						<groupId>com.alibaba</groupId>
 						<artifactId>druid</artifactId>
@@ -87,17 +90,17 @@
 		</plugins>
 	</build>
 	<repositories>
-        <repository>
-            <id>codehaus.snapshots</id>
-            <url>http://ci.repository.codehaus.org</url>
-        </repository>
-        <repository>
-            <id>tapestry360-stable</id>
-            <url>http://tapestry.formos.com/maven-repository</url>
-        </repository>
-        <repository>
-            <id>tapestry360-snapshot</id>
-            <url>http://tapestry.formos.com/maven-snapshot-repository</url>
-        </repository>
-    </repositories>
+		<repository>
+			<id>codehaus.snapshots</id>
+			<url>http://ci.repository.codehaus.org</url>
+		</repository>
+		<repository>
+			<id>tapestry360-stable</id>
+			<url>http://tapestry.formos.com/maven-repository</url>
+		</repository>
+		<repository>
+			<id>tapestry360-snapshot</id>
+			<url>http://tapestry.formos.com/maven-snapshot-repository</url>
+		</repository>
+	</repositories>
 </project>
