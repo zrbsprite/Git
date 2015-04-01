@@ -93,4 +93,14 @@
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut" />
 	</aop:config>
 
+	<bean class="com.jsprite.web.init.ApplicationInitBean">
+		<property name="applicationStarted">
+			<value></value>
+		</property>
+		<property name="applicationStarteds">
+			<list>
+				<ref bean=""/>
+			</list>
+		</property>
+	</bean>
 </beans>
