@@ -220,3 +220,4 @@ pip-log.txt
 *.project
 *.prefs
 Ease/.project
+Servers/*
