@@ -1,7 +1,5 @@
 package com.jsprite.core.wraper;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
 public class HTMLFilterTest {
