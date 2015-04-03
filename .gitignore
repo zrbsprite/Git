@@ -217,3 +217,4 @@ pip-log.txt
 *.prefs
 Ease/.project
 Servers/*
+*.project
