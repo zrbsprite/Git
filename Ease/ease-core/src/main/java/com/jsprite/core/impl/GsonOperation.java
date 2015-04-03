@@ -15,7 +15,9 @@ public class GsonOperation extends JsonOperation{
 	private Gson gson;
 	
 	{
-		gson = new Gson();
+		//gson = new Gson();
+		//表示启用@Expose注解
+		gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 	}
 	
 	@Override
