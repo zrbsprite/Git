@@ -3,7 +3,7 @@ package com.jsprite.core.wraper;
 import org.springframework.web.util.HtmlUtils;
 
 
-public class HTMLFilter extends TextFilter {
+public class HTMLFilter extends FilterDecorator {
 	
 	private Filter filter;
 	

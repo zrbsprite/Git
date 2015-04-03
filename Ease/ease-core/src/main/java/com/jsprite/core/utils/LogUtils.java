@@ -4,16 +4,19 @@ import org.apache.log4j.Logger;
 
 public class LogUtils {
 
-	private static Logger init(Class<? extends Object> clazz){
+	private static Logger logger;
+	
+	private static void init(Class<? extends Object> clazz){
 		if(null == clazz){
-			return Logger.getLogger(LogUtils.class);
+			logger = Logger.getLogger(LogUtils.class);
 		}else{
-			return Logger.getLogger(clazz);
+			logger = Logger.getLogger(clazz);
 		}
 	}
 	
 	public static void debug(String message, Class<? extends Object> clazz){
-		init(clazz).debug(message);
+		init(clazz);
+		logger.debug(message);
 	}
 	
 	public static void debug(String message){
@@ -21,7 +24,8 @@ public class LogUtils {
 	}
 	
 	public static void info(String message, Class<? extends Object> clazz){
-		init(clazz).info(message);
+		init(clazz);
+		logger.info(message);
 	}
 	
 	public static void info(String message){
@@ -29,7 +33,8 @@ public class LogUtils {
 	}
 	
 	public static void warn(String message, Class<? extends Object> clazz){
-		init(clazz).warn(message);
+		init(clazz);
+		logger.warn(message);
 	}
 	
 	public static void warn(String message){
@@ -37,7 +42,8 @@ public class LogUtils {
 	}
 	
 	public static void error(String message, Class<? extends Object> clazz){
-		init(clazz).error(message);
+		init(clazz);
+		logger.error(message);
 	}
 	
 	public static void error(String message){

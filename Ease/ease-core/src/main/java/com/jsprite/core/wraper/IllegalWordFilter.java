@@ -4,7 +4,7 @@ package com.jsprite.core.wraper;
  * 支持正则表达式
  * @author JSprite
  */
-public class IllegalWordFilter extends TextFilter {
+public class IllegalWordFilter extends FilterDecorator {
 
 	private Filter filter;
 
@@ -24,12 +24,9 @@ public class IllegalWordFilter extends TextFilter {
 	@Override
 	public String doFilter(String msg) {
 		String temp = this.filter.doFilter(msg);
-		if(null!=arrays){
-			for (String key : arrays) {
-				temp = temp.replace(key, "*");
-			}
+		for (String key : arrays) {
+			temp = temp.replace(key, "*");
 		}
-		
 		return temp;
 	}
 
