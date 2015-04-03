@@ -1,15 +1,13 @@
 package com.jsprite.core.wraper;
 
+import com.jsprite.core.utils.LogUtils;
+
+
 public class FilterDecorator implements Filter {
 
-	private Filter filter;
-	
-	public FilterDecorator(Filter filter){
-		this.filter = filter;
-	}
-	
 	public String doFilter(String msg) {
-		return this.filter.doFilter(msg);
+		LogUtils.info("具体的猴子类", FilterDecorator.class);
+		return msg;
 	}
 
 }
