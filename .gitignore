@@ -3,7 +3,6 @@
 #################
 
 *.pydevproject
-.project
 .metadata
 bin/
 tmp/
@@ -15,7 +14,6 @@ local.properties
 .classpath
 .settings/
 .loadpath
-*.project
 *.prefs
 
 # External tool builders
@@ -216,8 +214,6 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
-*.project
-*.project
 *.prefs
 Ease/.project
 Servers/*
