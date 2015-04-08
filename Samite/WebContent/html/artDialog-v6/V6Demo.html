@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>artDialog V6使用实例</title>
+</head>
+<body>
+<input type="button" value="简单的实例" id="simpleDialog">
+<div style="display: block;clear:both;padding:20px;margin: 20px;text-align:center;">
+	<input type="button" value="气泡提示" id="bubleTip">
+</div>
+<!-- 引入脚本 -->
+<script src="./module/sea.js"></script>
+<script>
+	seajs.config({
+		alias : {
+			"jquery" : "jquery-1.10.2.js"
+		}
+	});
+	seajs.use(['jquery', './lib/dialog'], function ($, dialog) {
+		$("#simpleDialog").click(function(){
+			var d = dialog({
+			    //title: '欢迎',
+			    content: '欢迎使用 artDialog 对话框组件！',
+			    fixed : true,
+			    align: 'left',
+			    quickClose: true//鼠标点击空白处关闭
+			});
+			//打开普通的提示
+			//d.show();
+			//气泡提示
+			d.show(document.getElementById("bubleTip"));
+			//打开模态窗口提示
+			//d.showModal();
+		});
+	});
+</script>
+</body>
+</html>

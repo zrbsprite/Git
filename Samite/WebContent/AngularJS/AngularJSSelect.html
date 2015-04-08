@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en" ng-app>
+<head>
+<meta charset="UTF-8">
+<meta name="format-detection" content="telephone=no" />
+<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,width=device-width" />
+<title>银行卡绑定</title>
+<link rel="stylesheet" href="resource/css/mcommon.css"/>
+<link rel="stylesheet" href="resource/css/style.css?v=2015031001"/>
+<script type="text/javascript" src="resource/angular.min.js"></script> 
+<script type="text/javascript" src="resource/AreaData.js"></script> 
+</head>
+<body ng-controller="mulSelect">
+<div id="wx_main">
+    <h2>提现申请</h2>
+    <form id="scroller" class="bindcard" style="padding:1rem 0.8rem;">
+        <div style="border-bottom:1px solid #c9c9c9;">
+            <lable>真实姓名</lable>
+            <p class="name">*霞</p>
+        </div>
+        <div>
+            <lable>请选择开户行</lable>
+        </div>
+        <div>
+            <input type="text" placeholder="不支持提现到信用卡" id="kaiBank" readonly/>
+            <input type="hidden" id="hid_kaiBank" name="" />
+        </div>
+        <div>
+            <lable>开户城市</lable>
+        </div>
+        <div>
+            <input type="text" id="kaiCity" readonly ng-click="toggle();" value="{{getBank()}}"/>
+            <input type="text" name="" id="input_province" hidden="" value="{{thing.province}}">
+            <input type="text" name="" id="input_city" hidden="" value="{{thing.city}}">
+            <input type="text" name="" id="input_county" hidden="" value="{{thing.area}}">
+        </div>
+        <div>
+            <lable>支行名称</lable>
+        </div>
+        <div>
+            <input type="text" id="kaiName" />
+        </div>
+        <p class="tips" style="color:#F00">*如您不确定支行名称，可拨打银行客服电话咨询</p>
+        <div>
+            <lable>银行账号</lable>
+        </div>
+        <div>
+            <input type="number" id="kaiNum" />
+        </div>
+        <p class="tips" style="visibility:visible; color:#F00">*该银行卡开户姓名必须为*霞，否则会提现失败</p>
+        <div>
+            <lable>验证码</lable>
+        </div>
+        <div>
+            <input type="text" placeholder="验证码" value="" class="yan reg_yan"/>
+            <input type="button" value="短信验证" class="yan" id="getValidcode" />
+        </div>
+        <p class="tips">请输入验证码</p>
+        <div style="margin-bottom:25px;">
+            <input type="button" class="reg_submit" value="确认提交"/>
+        </div>
+    </form>
+</div>
+<div class="bindPop" ng-show="visiable">
+    <ul>
+        <li ng-repeat="item in items" ng-click="change(item.id, item.name);">{{item.name}}<span></span></li>
+    </ul>
+</div>
+<script>
+	var mulSelect = function($scope){
+		$scope.visiable=false;
+		$scope.type=0;
+		$scope.items = provinceArray;
+		$scope.bank = "";
+		$scope.thing = {"province":"","city":"","area":""};
+		$scope.toggle=function(){
+			$scope.visiable = !$scope.visiable;	
+		}
+		$scope.change = function(id, name){
+			if($scope.type==0){
+				$scope.bank = "";
+			}
+			$scope.type += 1;
+			$scope.bank += name;
+			if($scope.type==1){
+				$scope.items = cityObject["city_"+id];
+				$scope.thing.province = id;
+			}else if($scope.type==2){
+				$scope.items = areaObject["area_"+id];
+				$scope.thing.city = id;
+			}else if($scope.type==3){
+				$scope.thing.area = id;
+				$scope.type=0;
+				$scope.items = provinceArray;
+				$scope.visiable = !$scope.visiable;
+			}
+		}
+		$scope.getBank = function(){
+			return $scope.bank;
+		}
+	}
+</script>
+</body>
+</html>
