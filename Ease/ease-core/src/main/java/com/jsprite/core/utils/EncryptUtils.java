@@ -121,6 +121,29 @@ public class EncryptUtils {
 		return Base64Utils.encodeToString(src.getBytes());
 	}
 
+	/**
+	 * 获取序列号
+	 * @param str
+	 * @return
+	 */
+	public static String getSerializeCode(String str){
+		str = getMD5(str);
+		String[] arrays = string2ArraysByLen(str);
+		str = StringUtils.arrayToDelimitedString(arrays, "-");
+		return str;
+	}
+	
+	private static String[] string2ArraysByLen(String str){
+		int size = str.length();
+		int len = size/4;
+		String[] arrays = new String[len];
+		for(int j=0; j<len; j++){
+			arrays[j] = str.substring(0,4);
+			str = str.substring(4);
+		}
+		return arrays;
+	}
+	
 	private static String byte2Hex(byte[] byteArray) {
 		StringBuffer sb = new StringBuffer();
 		for (int i = 0; i < byteArray.length; i++) {
