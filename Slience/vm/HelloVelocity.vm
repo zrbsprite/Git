@@ -1,0 +1,76 @@
+/***********基本用法*************/
+名称：$name
+电脑品牌：$cupBean.brand
+电脑尺寸：$cupBean.size
+电脑价格：$cupBean.price
+名称：${name}
+/********条件判断*******/
+这个变量或对象不存在：${notExist}
+如果不存在那么输出""：$!notExist
+这样写不可以：${!notExist}
+另一种写法：$!{img}
+#if($img)
+if判断	img存在
+#else
+if判断	img不存在
+#end
+非的情况：
+#if(!$img)
+if判断	img存在
+#elseif($img)
+if判断	img不存在
+#else
+第三种存在
+#end
+/**********velocity的注释***********/
+我是单行注释：##不会输出出来的
+我是多行注释：#**这个也是不会输出的
+*我会占行的
+第三行*#
+我是文档注释：#***用来说明作用的
+*.....................
+....................*#
+/**************循环*******************/
+#foreach($index as $strs)
+使用内置对象	$velocityCount:$index
+#end
+/**************可以在循环中嵌套条件判断或者循环*****************/
+#foreach($index as $strs)
+#if($velocityCount==1)
+输出第一个
+#end
+#end
+#foreach($index as $strs)
+    #if($velocityCount==1)
+		输出第一个
+    #end
+#end
+/**************使用赋值*************/
+#set($name="masanli")
+name:$name
+#set($head=12)
+#set($tail=11)
+#set($all = $head+$tail)
+总和：$all
+$80 不会被认为I是一个变量
+/**********关系和逻辑运算符**********/
+#if($head>10 && $tail>10)
+>>>>>>
+#else
+<<<<<<
+#end
+#if($head>15 || $tail>10)
+||||||||||||
+#end
+/***********宏定义（其实就是方法）**********/
+#macro(add $head $tail)
+	#set($all = $head+$tail)
+	和是：$all
+#end
+#add($head $tail)
+/*********引入文件************/
+#include("vm/include.vm" "vm/include_01.vm")
+#parse("vm/parse.vm")
+
+/******************获取内置对象session的内容****************/
+$session.getAttribute("name")

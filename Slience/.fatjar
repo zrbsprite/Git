@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Wed Apr 02 15:12:43 CST 2014
+onejar.license.required=true
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=false
+jarname=Slience.jar
+manifest.mergeall=true
+manifest.mainclass=com.cmcc.slience.http.dictionary.BaiDuDictionaryWin
+manifest.file=<createnew>
+jarname.isextern=false
+onejar.expand=
+excludes=<jar|annotations-api.jar>;<jar|catalina-ant.jar>;<jar|catalina-ha.jar>;<jar|catalina-tribes.jar>;<jar|catalina.jar>;<jar|ecj-4.2.1.jar>;<jar|el-api.jar>;<jar|jasper-el.jar>;<jar|jasper.jar>;<jar|jsp-api.jar>;<jar|servlet-api.jar>;<jar|tomcat-api.jar>;<jar|tomcat-coyote.jar>;<jar|tomcat-dbcp.jar>;<jar|tomcat-i18n-es.jar>;<jar|tomcat-i18n-fr.jar>;<jar|tomcat-i18n-ja.jar>;<jar|tomcat-jdbc.jar>;<jar|tomcat-util.jar>;<jar|antlr-2.7.5.jar>;<jar|avalon-logkit-2.1.jar>;<jar|fluent-hc-4.3.3.jar>;<jar|gson-2.2.4.jar>;<jar|oro-2.0.8.jar>;<jar|velocity-1.7.jar>;<jar|velocity-tools-2.0.jar>
+includes=

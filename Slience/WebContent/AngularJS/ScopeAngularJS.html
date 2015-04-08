@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="resource/angular.min.js"></script>
+</head>
+<body ng-app ng-init="name='world'">
+<h1>hello,{{name}}!</h1>
+<div ng-controller="helloCtrl">
+	Say hello to:<input type="text" ng-model="name"/>
+	<h1>hello,{{name}}!</h1>
+<!-- 	<h1>hello,{{name}}!</h1> -->
+</div>
+<!-- 访问父作用域中的属性 -->
+<div ng-controller="helloCtrl1">
+	Say hello to:<input type="text" ng-model="$parent.name"/>
+	<h1>hello,{{name}}!</h1>
+<!-- 	<h1>hello,{{name}}!</h1> -->
+</div>
+<script type="text/javascript">
+	var helloCtrl = function($scope){
+		$scope.name = "world";
+	}
+	var helloCtrl1 = function($scope){
+		$scope.name = "world";
+	}
+</script>
+</body>
+</html>
