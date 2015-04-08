@@ -1,0 +1,27 @@
+/*公共样式 start*/
+body,div,h1,p,h2,header,ul,li,dl,dt,dd,ol,nav,input,footer{ margin:0; padding:0;}
+body{ color:#000;font-family:microsoft yahei;font-size: 12px;}
+body,html{ height:100%;-webkit-touch-callout: none;-webkit-user-select:none;}
+h1,h2,h3,h4,h5,h6{ margin:0; padding:0;font-size:100%; font-weight:normal;}
+ul,li{ list-style:none;}
+html{-webkit-text-size-adjust:none;}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {display:block;}
+img{border:none;  vertical-align:middle; width:100%;}
+input{ font-family: microsoft yahei;}
+a{ text-decoration:none;}
+a:hover{ text-decoration:none;}
+.clearfix:after {content:"\200B"; display:block; height:0; clear:both;}
+.clearfix{ *zoom:1;}
+body{ background: #f4f4f4;}
+/*公共样式 end*/
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+input[type="button"]{border: none;}
+input[type="button"],input[type="submit"],input[type="reset"], input[type="number"],input[type="text"],input[type="password"]{-webkit-appearance: none!important;}
+input {-webkit-box-shadow: none !important;-moz-box-shadow: none !important;box-shadow: none !important;height: 2.3rem;border-radius: 4px;border: 1px solid #c9c9c9;padding-left: 10px;font-size: 1rem;vertical-align: middle;}
+input:not(.yan){width: 100%;}
+input.yan{width: 30%;}
+lable{color: #4d8596;}
