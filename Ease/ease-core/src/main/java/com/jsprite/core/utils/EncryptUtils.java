@@ -1,5 +1,7 @@
 package com.jsprite.core.utils;
 
+import java.math.BigInteger;
+import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
@@ -7,6 +9,7 @@ import java.security.SecureRandom;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
+import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
@@ -15,6 +18,8 @@ import org.springframework.util.StringUtils;
 
 public class EncryptUtils {
 
+	private static final String KEY_TYPE_HMAC = "HmacMD5";
+	
 	private static final String KEYCODE = "AAAAB3NzaC1yc2EAAAADAQABAAAAgQC1ODcwBmuzTZdBwj9Nj4OECPXdIy0OZt7fy"
 			+ "Q1U5wr1f6tnFPZzGTBKjAqDN9chhCgNcez1G8BrD3vQt686c/8GkxdrhzZO0xGEY4rlKr7eVI53ts9O7xg03WDEZlORHotA1Gfk1Z6yxl1koV/MuUkuHuSd9UctB/No7IIkeMJonQ== RSA-1024";
 
@@ -118,7 +123,7 @@ public class EncryptUtils {
 		if (StringUtils.isEmpty(src)) {
 			return "";
 		}
-		return Base64Utils.encodeToString(src.getBytes());
+		return toBase64(src.getBytes());
 	}
 
 	/**
@@ -131,6 +136,62 @@ public class EncryptUtils {
 		String[] arrays = string2ArraysByLen(str);
 		str = StringUtils.arrayToDelimitedString(arrays, "-");
 		return str;
+	}
+	
+	public static String getHMACString(String src){
+		String key = initStaticHMACKey();
+		SecretKey secretKey = new SecretKeySpec(fromBase64(key).getBytes(), KEY_TYPE_HMAC);  
+	    Mac mac;
+		try {
+			mac = Mac.getInstance(secretKey.getAlgorithm());
+			mac.init(secretKey);
+			byte[] bt = mac.doFinal();
+			return byte2Hex(bt);
+		} catch (NoSuchAlgorithmException e) {
+			LogUtils.warn("不支持的加密类型", EncryptUtils.class);
+		} catch (InvalidKeyException e) {
+			LogUtils.warn("key错误", EncryptUtils.class);
+		}
+		return "";
+	}
+	
+	public static String getRandomHMACString(String src){
+		String key = initStaticHMACKey();
+		SecretKey secretKey = new SecretKeySpec(fromBase64(key).getBytes(), KEY_TYPE_HMAC);  
+	    Mac mac;
+		try {
+			mac = Mac.getInstance(secretKey.getAlgorithm());
+			mac.init(secretKey);
+			byte[] bt = mac.doFinal();
+			BigInteger big = new BigInteger(bt);
+			return big.toString(32).toUpperCase();
+		} catch (NoSuchAlgorithmException e) {
+			LogUtils.warn("不支持的加密类型", EncryptUtils.class);
+		} catch (InvalidKeyException e) {
+			LogUtils.warn("key错误", EncryptUtils.class);
+		}
+		return "";
+	}
+	
+	@SuppressWarnings("unused")
+	private static String initHMACKey(){
+		String keyStr = "";
+		try {
+			KeyGenerator generator = KeyGenerator.getInstance(KEY_TYPE_HMAC);
+			SecretKey key = generator.generateKey();
+			keyStr = toBase64(key.getEncoded());
+		} catch (NoSuchAlgorithmException e) {
+			LogUtils.warn("不支持的加密类型", EncryptUtils.class);
+		}
+		return keyStr;
+	}
+	
+	private static String initStaticHMACKey(){
+		return KEYCODE;
+	}
+	
+	private static String toBase64(byte[] by){
+		return Base64Utils.encodeToString(by);
 	}
 	
 	private static String[] string2ArraysByLen(String str){
@@ -216,5 +277,10 @@ public class EncryptUtils {
 			result[i] = (byte) (high * 16 + low);
 		}
 		return result;
+	}
+	
+	public static void main(String[] args) {
+		String result = getHMACString("zhangribo");
+		System.out.println(result);
 	}
 }
