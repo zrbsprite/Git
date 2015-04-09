@@ -3,10 +3,12 @@ package com.jsprite.web.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import com.jsprite.core.BaseModel;
 
-@Entity(name="ease_licence")
+@Entity
+@Table(name="ease_licence")
 public class LicenceModel extends BaseModel {
 
 	//服务器mac地址
