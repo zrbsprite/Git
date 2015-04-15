@@ -1,6 +1,6 @@
 package com.jsprite.core.export;
 
-import java.io.InputStream;
+import org.apache.poi.ss.usermodel.Workbook;
 
 /**
  * @author JSprite
@@ -8,6 +8,6 @@ import java.io.InputStream;
  */
 public interface IExportFile {
 
-	public InputStream export();
+	public Workbook export();
 	
 }

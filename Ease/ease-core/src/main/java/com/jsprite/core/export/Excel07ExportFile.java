@@ -1,10 +1,10 @@
 package com.jsprite.core.export;
 
-import java.io.InputStream;
+import org.apache.poi.ss.usermodel.Workbook;
 
 public class Excel07ExportFile implements IExportFile {
 
-	public InputStream export() {
+	public Workbook export() {
 		
 		return null;
 	}

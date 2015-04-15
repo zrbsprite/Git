@@ -4,6 +4,7 @@ import com.jsprite.core.utils.LogUtils;
 
 public class ExcelExportFactory implements IExportFactory {
 
+	//Class name
 	private String excelVersion="";
 	
 	@SuppressWarnings("unchecked")
