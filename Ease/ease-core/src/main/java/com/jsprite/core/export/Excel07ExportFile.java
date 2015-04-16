@@ -25,7 +25,11 @@ public class Excel07ExportFile implements IExportFile {
 
 	private List<IBaseExcel> listModel;
 	
-	public Excel07ExportFile(List<IBaseExcel> listModel){
+	Excel07ExportFile(){
+		
+	}
+	
+	Excel07ExportFile(List<IBaseExcel> listModel){
 		this.listModel = listModel;
 	}
 	
@@ -163,4 +167,11 @@ public class Excel07ExportFile implements IExportFile {
 		return workbook;
 	}
 
+	public List<IBaseExcel> getListModel() {
+		return listModel;
+	}
+
+	public void setListModel(List<IBaseExcel> listModel) {
+		this.listModel = listModel;
+	}
 }

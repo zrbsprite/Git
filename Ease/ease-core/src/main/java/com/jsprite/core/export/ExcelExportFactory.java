@@ -5,15 +5,15 @@ import com.jsprite.core.utils.LogUtils;
 public class ExcelExportFactory implements IExportFactory {
 
 	//Class name
-	private String excelVersion="";
+	private String className="";
 	
 	@SuppressWarnings("unchecked")
 	public IExportFile create() {
-		if("".equals(excelVersion)){
+		if("".equals(className)){
 			return null;
 		}
 		try {
-			Class<? extends IExportFile> clazz = (Class<? extends IExportFile>) Class.forName(excelVersion);
+			Class<? extends IExportFile> clazz = (Class<? extends IExportFile>) Class.forName(className);
 			return clazz.newInstance();
 		} catch (ClassNotFoundException e) {
 			LogUtils.error("创建IExportFile失败原因是：<"+e.getClass().getName()+">"+e.getMessage());
@@ -26,10 +26,10 @@ public class ExcelExportFactory implements IExportFactory {
 	}
 
 	public String getExcelVersion() {
-		return excelVersion;
+		return className;
 	}
 
 	public void setExcelVersion(String excelVersion) {
-		this.excelVersion = excelVersion;
+		this.className = excelVersion;
 	}
 }

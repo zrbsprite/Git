@@ -25,7 +25,11 @@ public class Excel03ExportFile implements IExportFile {
 
 	private List<IBaseExcel> listModel;
 	
-	public Excel03ExportFile(List<IBaseExcel> listModel){
+	Excel03ExportFile(){
+		
+	}
+	
+	Excel03ExportFile(List<IBaseExcel> listModel){
 		this.listModel = listModel;
 	}
 	
@@ -161,5 +165,13 @@ public class Excel03ExportFile implements IExportFile {
 		titleCell.setCellValue(excelTitle);
 		
 		return workbook;
+	}
+
+	public List<IBaseExcel> getListModel() {
+		return listModel;
+	}
+
+	public void setListModel(List<IBaseExcel> listModel) {
+		this.listModel = listModel;
 	}
 }

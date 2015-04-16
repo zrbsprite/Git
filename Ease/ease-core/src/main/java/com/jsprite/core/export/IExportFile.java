@@ -1,6 +1,5 @@
 package com.jsprite.core.export;
 
-import org.apache.poi.ss.usermodel.Workbook;
 
 /**
  * @author JSprite
@@ -8,6 +7,6 @@ import org.apache.poi.ss.usermodel.Workbook;
  */
 public interface IExportFile {
 
-	public Workbook export();
+	public Object export();
 	
 }
