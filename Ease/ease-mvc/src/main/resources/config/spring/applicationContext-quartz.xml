@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+      http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+	 <!-- 线程执行器配置，用于任务注册 -->
+    <bean id="executor"
+        class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <property name="corePoolSize" value="10" />
+        <property name="maxPoolSize" value="100" />
+        <property name="queueCapacity" value="500" />
+    </bean>
+	
+	<!-- 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序 -->
+	<bean id="startQuertz" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="excuteCycle" />
+				<ref bean="simpleTriggerBean" />
+			</list>
+		</property>
+		<property name="taskExecutor" ref="executor" />
+	</bean>
+	
+	<!-- 要调用的工作类 -->
+	<bean id="dosomethingJob" class="com.jsprite.web.task.DemoJob"></bean>
+	<bean id="jobDetailFactoryBean" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<property name="jobClass" value="com.jsprite.web.task.DemoJob"></property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="jobData" value-ref="someData"></entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="simpleTriggerBean" class="org.springframework.scheduling.quartz.SimpleTriggerBean"> 
+		<property name="jobDetail" ref="dosomethingJob"></property>
+		<property name="repeatInterval" value="2000"></property>
+		<property name="startDelay" value="1000"></property> 
+	</bean>
+
+	<!-- 定义调用对象和调用对象的方法 ,需要分别制定对象和对象的方法 -->
+	<bean id="jobtask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> 
+		<property name="targetObject">
+			<ref bean="dosomethingJob" /> 
+		</property> 
+		<property  name="targetMethod">
+		 	<value>excute</value> 
+		</property>
+	</bean>
+	<!-- 定义触发时间 -->
+	<bean id="excuteCycle" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="jobtask" />
+		</property>
+		<!-- cron表达式 -->
+		<property name="cronExpression">
+			<value>10,15,20,25,30,35,40,45,50,55 * * * * ?</value>
+		</property>
+	</bean>
+	
+	<bean id="annotationSchedulerFactoryBean" class="com.jsprite.web.task.AnnotationSchedulerFactoryBean"></bean>
+</beans>

@@ -18,5 +18,6 @@
     <module>Dependencies</module>
     <module>ease-core</module>
     <module>ease-web</module>
+    <module>ease-mvc</module>
   </modules>
 </project>

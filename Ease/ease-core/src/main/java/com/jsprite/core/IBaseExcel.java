@@ -10,5 +10,4 @@ package com.jsprite.core;
  */
 public interface IBaseExcel {
 
-	public String[] filter();
 }

@@ -74,6 +74,11 @@ public class Test {
 		*/
 		
 		//testArray();
+		testReplaceFileSeperator();
+		
+	}
+	
+	public static void testReplaceFileSeperator(){
 		String parent = "D:/Java/apache-ant-1.9.4";
 		parent = parent.replaceAll("\\\\|\\/", "\\"+File.separator);
 		if(!parent.endsWith(File.separator)){
