@@ -1,5 +1,6 @@
 package com.cmcc.slience.test;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -72,7 +73,13 @@ public class Test {
 		enOrDecode();
 		*/
 		
-		testArray();
+		//testArray();
+		String parent = "D:/Java/apache-ant-1.9.4";
+		parent = parent.replaceAll("\\\\|\\/", "\\"+File.separator);
+		if(!parent.endsWith(File.separator)){
+			parent += File.separator;
+		}
+		System.out.println(parent);
 	}
 	
 	/**

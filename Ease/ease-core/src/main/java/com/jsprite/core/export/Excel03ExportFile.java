@@ -38,7 +38,6 @@ public class Excel03ExportFile implements IExportFile {
 		IBaseExcel template = listModel.get(0);
 		Class<IBaseExcel> clazz = (Class<IBaseExcel>) template.getClass();
 		
-//		String fileName = "数据导出";
 		int index = 0;
 		String sheetName = "New Sheet";
 		int dataRowIndex = 2;
@@ -50,7 +49,6 @@ public class Excel03ExportFile implements IExportFile {
 		
 		if(clazz.isAnnotationPresent(Excel.class)){
 			Excel excel = clazz.getAnnotation(Excel.class);
-			//fileName = excel.fileName();
 			index = excel.index();
 			sheetName = excel.sheetName();
 			dataRowIndex = excel.start();
@@ -148,6 +146,8 @@ public class Excel03ExportFile implements IExportFile {
 						}else{
 							dataCell.setCellValue((Date)value);
 						}
+					}else{
+						dataCell.setCellValue(value.toString());
 					}
 				}
 			}
