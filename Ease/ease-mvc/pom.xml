@@ -124,13 +124,14 @@
 			</plugin> -->
 			<plugin>
 			    <groupId>org.apache.tomcat.maven</groupId>
-			    <artifactId>tomcat7-maven-plugin</artifactId>
-			    <version>2.1</version>
+		        <artifactId>tomcat7-maven-plugin</artifactId>
+		        <version>2.2</version>
 			    <configuration>
 			        <!-- 注意此处的url -->
 			        <url>http://localhost:8080/manager/text</url>
 			        <server>tomcat7</server> <!-- 此处的名字必须和setting.xml中配置的ID一致-->
 			        <path>/easeMvc</path> <!-- 此处的名字是项目发布的工程名-->
+			        <uriEncoding>UTF-8</uriEncoding>
 			    </configuration>
 			    <executions>  
 			        <execution>  
@@ -145,7 +146,7 @@
 		</plugins>
 	</build>
 	<repositories>
-		<repository>
+		<!-- <repository>
 			<id>codehaus.snapshots</id>
 			<url>http://ci.repository.codehaus.org</url>
 		</repository>
@@ -156,7 +157,7 @@
 		<repository>
 			<id>tapestry360-snapshot</id>
 			<url>http://tapestry.formos.com/maven-snapshot-repository</url>
-		</repository>
+		</repository> -->
 		<repository>
 			<id>people.apache.snapshots</id>
 			<url>http://repository.apache.org/content/groups/snapshots-group/  </url>
