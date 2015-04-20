@@ -13,6 +13,9 @@
 	<packaging>war</packaging>
 	<name>ease web Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+	<properties>
+		<tapestry-release-version>5.0.18</tapestry-release-version>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -35,6 +38,48 @@
 			<groupId>${project.groupId}</groupId>
 			<artifactId>ease-core</artifactId>
 			<version>${project.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.tapestry</groupId>
+			<artifactId>tapestry-core</artifactId>
+			<version>${tapestry-release-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tapestry</groupId>
+			<artifactId>tapestry-ioc</artifactId>
+			<version>${tapestry-release-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tapestry</groupId>
+			<artifactId>tapestry5-annotations</artifactId>
+			<version>${tapestry-release-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.tynamo</groupId>
+			<artifactId>tapestry-security</artifactId>
+			<version>0.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tapestry</groupId>
+			<artifactId>tapestry-hibernate</artifactId>
+			<version>${tapestry-release-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.tynamo</groupId>
+			<artifactId>tapestry-hibernate-seedentity</artifactId>
+			<version>0.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tapestry</groupId>
+			<artifactId>tapestry-upload</artifactId>
+			<version>${tapestry-release-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.tapestry</groupId>
+			<artifactId>tapestry-spring</artifactId>
+			<version>5.0.18</version>
 		</dependency>
 	</dependencies>
 	<build>

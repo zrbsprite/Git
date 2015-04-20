@@ -15,11 +15,20 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			classpath:applicationContext.xml,
+			classpath:config/spring/applicationContext*.xml
+		</param-value>
+	</context-param>
+	<!-- 
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath:applicationContext.xml,
 			classpath:config/spring/applicationContext*.xml,
 			classpath:config/mvc/*-*.xml,
 			classpath:config/orm/*-*.xml
 		</param-value>
 	</context-param>
+	 -->
 	<context-param>
 		<param-name>log4jConfigLocation</param-name>
 		<param-value>

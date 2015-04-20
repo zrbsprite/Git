@@ -6,8 +6,7 @@
       http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 
 	 <!-- 线程执行器配置，用于任务注册 -->
-    <bean id="executor"
-        class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+    <bean id="executor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
         <property name="corePoolSize" value="10" />
         <property name="maxPoolSize" value="100" />
         <property name="queueCapacity" value="500" />
@@ -18,27 +17,27 @@
 		<property name="triggers">
 			<list>
 				<ref bean="excuteCycle" />
-				<ref bean="simpleTriggerBean" />
+				<!-- <ref bean="simpleTriggerBean" /> -->
 			</list>
 		</property>
 		<property name="taskExecutor" ref="executor" />
 	</bean>
 	
 	<!-- 要调用的工作类 -->
-	<bean id="dosomethingJob" class="com.jsprite.web.task.DemoJob"></bean>
+	<bean id="dosomethingJob" class="com.jsprite.web.task.LicenceTask"></bean>
 	<bean id="jobDetailFactoryBean" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
-		<property name="jobClass" value="com.jsprite.web.task.DemoJob"></property>
+		<property name="jobClass" value="com.jsprite.web.task.LicenceTask"></property>
 		<property name="jobDataAsMap">
 			<map>
-				<entry key="jobData" value-ref="someData"></entry>
+				<!-- <entry key="jobData" value-ref="someData"></entry> -->
 			</map>
 		</property>
 	</bean>
-	<bean id="simpleTriggerBean" class="org.springframework.scheduling.quartz.SimpleTriggerBean"> 
+	<!-- <bean id="simpleTriggerBean" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean"> 
 		<property name="jobDetail" ref="dosomethingJob"></property>
 		<property name="repeatInterval" value="2000"></property>
 		<property name="startDelay" value="1000"></property> 
-	</bean>
+	</bean> -->
 
 	<!-- 定义调用对象和调用对象的方法 ,需要分别制定对象和对象的方法 -->
 	<bean id="jobtask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> 
@@ -56,7 +55,7 @@
 		</property>
 		<!-- cron表达式 -->
 		<property name="cronExpression">
-			<value>10,15,20,25,30,35,40,45,50,55 * * * * ?</value>
+			<value>0 0 0 1 * ?</value>
 		</property>
 	</bean>
 	
