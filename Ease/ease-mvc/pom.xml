@@ -41,6 +41,14 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework.version}</version>
 		</dependency>
+		
+		<!-- 解决tomcat7和icu不兼容的问题使用高版本冲掉低版本 -->
+		<dependency>  
+		    <groupId>com.ibm.icu</groupId>  
+		    <artifactId>icu4j</artifactId>  
+		    <version>3.4.4</version>  
+		</dependency>
+		
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -58,16 +66,17 @@
 	<build>
 		<finalName>easeMvc</finalName>
 		<plugins>
-			<!-- <plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5.1</version>
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
 					<optimize>true</optimize>
 				</configuration>
 			</plugin>
-
+			
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
@@ -121,17 +130,22 @@
 						<type>jar</type>
 					</dependency>
 			   </dependencies>
-			</plugin> -->
+			</plugin>
+			 
+			  <!--plugin.configuration.server 此处的名字必须和setting.xml中配置的ID一致-->
+			  <!--plugin.configuration.server.path 此处的名字是项目发布的工程名-->
+			 <!-- 
 			<plugin>
 			    <groupId>org.apache.tomcat.maven</groupId>
 		        <artifactId>tomcat7-maven-plugin</artifactId>
 		        <version>2.2</version>
 			    <configuration>
-			        <!-- 注意此处的url -->
 			        <url>http://localhost:8080/manager/text</url>
-			        <server>tomcat7</server> <!-- 此处的名字必须和setting.xml中配置的ID一致-->
-			        <path>/easeMvc</path> <!-- 此处的名字是项目发布的工程名-->
+			        <server>tomcat7</server>
+			        <path>/easeMvc</path>
 			        <uriEncoding>UTF-8</uriEncoding>
+			        <update>true</update>
+			        <jarScanAllDirectories>true</jarScanAllDirectories>
 			    </configuration>
 			    <executions>  
 			        <execution>  
@@ -143,7 +157,62 @@
 			        </execution>  
     			</executions>  
 			</plugin>
-		</plugins>
+			 -->
+			 
+			 <!-- cargo与jetty和tomcat的区别在于前者主要是用来发布，后者是倾向于测试 -->
+			 <plugin>
+				<groupId>org.codehaus.cargo</groupId>
+    			<artifactId>cargo-maven2-plugin</artifactId>
+				<version>1.4.13</version>
+				<configuration>
+					<!-- <wait>true</wait> -->
+					<container>
+						<!-- 标识使用是那一种容器。这个名字是不能随便定的，cargo有一组支持窗口的列表 -->
+						<containerId>tomcat7x</containerId>
+						<!-- 容器的zip安装包。这是cargo非常强大的一点，它能够根据给出的zip安装包路径下裁并 解压到指定的installDir文件夹下。你也可以直接使用home来指定一个已存在的容器位置。 -->
+					    <home>D:\Java\apache-tomcat-7.0.34-10000</home>
+						<!-- <zipUrlInstaller>
+							<url>http://archive.apache.org/dist/tomcat/tomcat-6/v6.0.29/bin/apache-tomcat-6.0.29.zip</url>
+							<installDir>/usr/local/${artifactId}/tomcat-installer</installDir>
+						</zipUrlInstaller> -->
+					</container>
+					<configuration>
+						<!-- 容器的指定安放位置。这个和installDir的区别在于installDir只是一个解压用的文件夹而home是这样一个文件夹：当cargo启动容器时，会将installDir中容器文件拷贝到home文件夹下，以后部署的war包也会放到这个文件夹下的wabapps子文件夹内.-->
+						<type>existing</type>
+						<home>D:\Java\apache-tomcat-7.0.34-10000</home>
+						<properties>
+							<cargo.servlet.port>10000</cargo.servlet.port>
+						</properties>
+					</configuration>
+					<!-- deployer是部署时的相关配置，这个context是用来声明工程部署后的上下文，也就是
+									主机地址后面的一级目录位置。这个设置在maven构建中还是很必要的。因为maven默认打出
+									的war包是工程名+版本号，部署时如果不设置这里的context，那上下文就变成了工程名+版本号
+									的形式。这会使访问变得很不方便。注意，即使你通过修改war插件中的warName也是不能达到这个
+									目的，因为cargo认定的默认war包名就是工程名+版本号的形式。-->					
+					<!-- <deployer>
+						<deployables>
+							<deployable>
+								<groupId>${groupId}</groupId>
+								<artifactId>${artifactId}</artifactId>
+								<type>war</type>
+								<properties>
+									<context>${artifactId}</context>
+								</properties>
+							</deployable>
+						</deployables>
+					</deployer> -->								
+				</configuration>
+			</plugin>
+		 </plugins>
+		 <pluginManagement>
+		 	<plugins>
+		 		<plugin>
+		 			<groupId>org.apache.maven.plugins</groupId>
+		 			<artifactId>maven-site-plugin</artifactId>
+					<version>3.0.1</version>		 			
+		 		</plugin>
+		 	</plugins>
+		 </pluginManagement>
 	</build>
 	<repositories>
 		<!-- <repository>
