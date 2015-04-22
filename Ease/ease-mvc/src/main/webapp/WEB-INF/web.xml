@@ -114,6 +114,23 @@
      </filter-mapping>
 	<!-- druid配置 complete -->
 	
+	<!-- 配置Url重写过滤器 -->
+	<!-- 
+	  <filter>
+	    <filter-name>UrlRewriteFilter</filter-name>
+	    <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+	    <init-param>
+	           <param-name>logLevel</param-name>
+	           <param-value>WARN</param-value>
+	       </init-param>
+	  </filter>
+	 <filter-mapping>
+		<filter-name>UrlRewriteFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	 -->
 	<listener>
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
 	</listener>
@@ -130,4 +147,8 @@
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
+	<error-page>  
+    	<error-code>404</error-code>  
+    	<location>/index.html</location>  
+	</error-page>
 </web-app>

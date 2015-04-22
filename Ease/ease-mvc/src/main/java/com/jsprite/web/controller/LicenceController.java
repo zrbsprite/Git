@@ -8,6 +8,7 @@
  */
 package com.jsprite.web.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**描述：<br>
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 修改日期：2015年4月20日上午9:12:32 <br>
  * E-mail:  <br> 
  */
+@Controller("licenceController")
 @RequestMapping
 public class LicenceController {
 	

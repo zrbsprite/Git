@@ -13,19 +13,113 @@
 	<!--Spring3.1开始的注解 HandlerAdapter -->
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" />
 
+	<!-- 多视图配置start -->
+	<!-- 这种方式需要将所有的视图做出配置-在views.properties配置文件中 -->
+	<!-- 
+	<bean class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
+		<property name="basename" value="config.mvc.views"></property>	
+	</bean>
+	 -->
+
 	<!-- ViewResolver -->
+	<!-- Jsp视图解析 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
 		<property name="prefix" value="/WEB-INF/pages/" />
 		<property name="suffix" value=".jsp" />
+		<property name="order" value="0" />
 	</bean>
+	 <!-- FreeMarker视图解析 -->
+	 <!-- 
+    <bean id="freeMarkerViewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="cache" value="true"/>
+        <property name="prefix" value="/WEB-INF/template/"/>
+        <property name="suffix" value=".ftl"/>
+        <property name="order" value="1" />
+    </bean>
+     -->
+    <!-- velocity视图解析器 -->
+    <!-- 
+    <bean id="velocityViewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+        <property name="cache" value="true"/>
+        <property name="prefix" value="/WEB-INF/vm/"/>
+        <property name="suffix" value=".vm"/>
+        <property name="contentType" value="text/html;charset=UTF-8" />
+        <property name="dateToolAttribute" value="dateFormatter" />
+        <property name="numberToolAttribute" value="numberFormatter" />
+        <property name="exposeRequestAttributes" value="true" />
+        <property name="exposeSessionAttributes" value="true" />
+        <property name="toolboxConfigLocation" value="/WEB-INF/classes/config/mvc/toolbox.xml" />
+        <property name="order" value="2" />  
+    </bean>
+     -->
+    <!-- 
+    <bean id="beanNameViewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver">  
+        <property name="order" value="4"/>  
+    </bean>
+     -->
+	<!-- 多视图配置end -->
 	
+	<!-- 
+	<bean id="viewResolver"  class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">  
+        <property name="defaultContentType" value="application/json" />  
+        <property name="mediaTypes">  
+            <map>  
+                <entry key="html" value="text/html" />  
+                <entry key="json" value="application/json" />  
+                <entry key="xml" value="application/xml" />  
+                <entry key="excel" value="application/excel" />  
+                <entry key="pdf" value="application/pdf" />  
+            </map>  
+        </property>  
+        <property name="viewResolvers">  
+            <list>  
+                <bean class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">  
+                    <property name="viewClass"  
+                        value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"></property>  
+                    <property name="suffix" value=".ftl" />  
+                    <property name="contentType" value="text/html;charset=utf-8" />  
+                    <property name="exposeRequestAttributes" value="true" />  
+                    <property name="exposeSessionAttributes" value="true" />  
+                    <property name="exposeSpringMacroHelpers" value="true" />  
+                </bean>  
+                <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">  
+                    <property name="viewClass"  
+                        value="org.springframework.web.servlet.view.JstlView" />  
+                    <property name="prefix" value="/WEB-INF/jsp/" />  
+                    <property name="suffix" value=".jsp" />  
+                </bean>  
+                  
+            </list>   
+        </property>  
+        <property name="defaultViews">  
+            <list>  
+                <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">  
+                    <property name="prettyPrint" value="true" />  
+                    <property name="contentType" value="text/plain" />  
+                </bean>  
+            </list>  
+        </property>  
+    </bean>
+	-->
+	<!-- 文件上传 -->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="defaultEncoding" value="UTF-8" />
 		<property name="maxUploadSize" value="1024000"/>
 		<!--resolveLazily属性启用是为了推迟文件解析，以便在UploadAction 中捕获文件大小异常-->  
         <property name="resolveLazily" value="true"/> 
 	</bean>
+	
+	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="defaultErrorView">
+			<value>error.html</value>
+		</property>  
+        <property name="exceptionMappings">  
+            <props>  
+                <prop key="java.lang.Exception">error.html</prop>  
+            </props>  
+        </property>  
+    </bean>  
 	
 	<!-- <import resource="config/controller.xml"/> -->
 	
