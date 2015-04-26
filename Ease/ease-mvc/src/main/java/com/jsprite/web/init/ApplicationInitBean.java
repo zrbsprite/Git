@@ -13,7 +13,7 @@ import com.jsprite.core.init.IApplicationStarted;
 
 public class ApplicationInitBean implements InitializingBean {
 	
-	private Logger logger = Logger.getLogger(ApplicationStartedListener.class);
+	private Logger logger = Logger.getLogger(ApplicationInitBean.class);
 	
 	private IApplicationStarted applicationStarted;
 	

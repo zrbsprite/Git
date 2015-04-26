@@ -3,14 +3,31 @@ package com.jsprite.web.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import com.jsprite.core.BaseModel;
 
 @Entity
 @Table(name="ease_licence")
-public class LicenceModel extends BaseModel {
+public class LicenceModel {
 
+	@Id
+	@GeneratedValue(generator="uuidGenerator")
+	@GenericGenerator(name="uuidGenerator", strategy="org.hibernate.id.UUIDGenerator")
+	private String id;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+	
 	//服务器mac地址
 	private String macAddress;
 	

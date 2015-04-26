@@ -132,7 +132,7 @@
 					</execution>
 				</executions>
 				<dependencies>
-					<dependency>
+					<!-- <dependency>
 						<groupId>commons-logging</groupId>
 						<artifactId>commons-logging</artifactId>
 						<version>1.1</version>
@@ -149,7 +149,7 @@
 						<artifactId>log4j</artifactId>
 						<version>1.2.13</version>
 						<type>jar</type>
-					</dependency>
+					</dependency> -->
 			   </dependencies>
 			</plugin>
 			 
