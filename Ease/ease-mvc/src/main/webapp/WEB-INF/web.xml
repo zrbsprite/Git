@@ -136,6 +136,24 @@
 	</filter-mapping>
 	 -->
 	 
+	<!-- 缓存、gzip压缩核心过滤器 -->
+	<!-- <filter>
+		<filter-name>PageEhCacheFilter</filter-name>
+		<filter-class>com.jsprite.web.commons.PageEhCacheFilter</filter-class>
+		<init-param>
+			<param-name>patterns</param-name>
+			<param-value>/cache.jsp, product.action, market.action </param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>PageEhCacheFilter</filter-name>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>PageEhCacheFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping> -->
+	 
 	<!--spring + shiro configuration start(spring与shiro集成)-->
 	<!-- DelegatingFilterProxy作用是自动到spring容器查找名字为shiroFilter（filter-name）的bean并把所有Filter的操作委托给它. -->
    <!--  <filter>  

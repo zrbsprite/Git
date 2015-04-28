@@ -9,8 +9,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.jsprite.core.BaseModel;
-
 @Entity
 @Table(name="ease_licence")
 public class LicenceModel {
