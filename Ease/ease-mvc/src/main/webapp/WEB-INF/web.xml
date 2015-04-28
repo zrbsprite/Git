@@ -31,6 +31,16 @@
 	    <param-value>60000</param-value>    
 	</context-param> -->
 	
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<!-- 可以使用RequestContextHolder.currentRequestAttributes() 获取到请求的attr -->
+    <!-- <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener> -->
 	<!-- 防止spring内存溢出监听器 -->
 	<listener>
 		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
@@ -142,17 +152,6 @@
     </filter-mapping>     -->
 	 <!--spring + shiro configuration end(spring与shiro集成)-->
 	 
-	<listener>
-		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
-	</listener>
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
-	<!-- 可以使用RequestContextHolder.currentRequestAttributes() 获取到请求的attr -->
-    <!-- <listener>
-        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
-    </listener> -->
-	
 	<!-- 验证码 -->
 	<servlet>
 		<servlet-name>check-code</servlet-name>
