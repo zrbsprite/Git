@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"  name="ehcache-main"> 
+
+ <diskStore path="java.io.tmpdir"/>
+ 
+ <!--
+        默认设置
+        maxElementsInMemory : 在內存中最大緩存的对象数量。
+        eternal : 缓存的对象是否永远不变。
+        timeToIdleSeconds ：可以操作对象的时间。
+        timeToLiveSeconds ：缓存中对象的生命周期，时间到后查询数据会从数据库中读取。
+        overflowToDisk ：内存满了，是否要缓存到硬盘。
+    -->
+ <defaultCache maxElementsInMemory="200" eternal="false"  timeToIdleSeconds="50" timeToLiveSeconds="60" overflowToDisk="true"></defaultCache>
  	<!--  
        name:缓存名称。  
        maxElementsInMemory：缓存最大个数。  
@@ -15,7 +27,6 @@
        clearOnFlush：内存数量最大时是否清除。  
     --> 
     
-    <diskStore path="java.io.tmpdir"/>
     <cache name="shiro-activeSessionCache"
            maxEntriesLocalHeap="10000"
            overflowToDisk="false"
