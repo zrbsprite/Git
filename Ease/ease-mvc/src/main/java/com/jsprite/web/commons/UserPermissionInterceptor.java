@@ -17,6 +17,7 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 /**描述：用户权限拦截器<br>
+ * 	结合shiro使用，如果使用了filter那么没必要使用拦截器了<br>
  * 作者：ZRB <br>
  * 修改日期：2015年4月29日下午8:08:42 <br>
  * E-mail:  <br> 
@@ -40,7 +41,7 @@ public class UserPermissionInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		String requestUrl = request.getRequestURL().toString();
-		Subject currentUser = SecurityUtils.getSubject();   
+		Subject currentUser = SecurityUtils.getSubject();
         /**判断是否已经授权*/  
         if(!currentUser.isPermitted(requestUrl)){   
              logger.info("没有有权限");  

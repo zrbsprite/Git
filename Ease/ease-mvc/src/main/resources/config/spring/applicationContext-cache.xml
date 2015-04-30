@@ -16,7 +16,7 @@
 	<bean id="simpleCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean">
 		<property name="cacheManager" ref="cacheManager" />
 		<!-- 使用缓存 关联ehcache.xml中的缓存配置 -->
-		<property name="cacheName" value="shiro-activeSessionCache" />
+		<property name="cacheName" value="spring-commons-cache" />
 	</bean>
     
     <bean class="com.jsprite.web.init.MethodCacheInterceptor" id="methodCacheInterceptor">

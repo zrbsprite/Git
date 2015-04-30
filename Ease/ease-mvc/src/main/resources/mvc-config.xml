@@ -10,10 +10,22 @@
 	<context:component-scan base-package="com.cyhospital.controller" />
 	<context:annotation-config />
 	
-	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
+	<!-- 
+	 	<mvc:annotation-driven /> 会自动注册DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter 两个bean,是spring MVC为@Controllers分发请求所必须的。
+	  -->
+	<!-- 过滤器配置 -->
+	<!-- <bean class="com.jsprite.web.commons.UserPermissionInterceptor" id="userPermissionIntercepter"></bean> -->
 	<!--Spring3.1开始的注解 HandlerAdapter -->
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+		<!-- <property name="interceptors">
+			<list>
+				<ref bean="userPermissionIntercepter"/>
+			</list>
+		</property> -->
+	</bean>
 	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" />
-
+	<!--Spring3.1开始的注解 HandlerAdapter end-->
+	
 	<!-- 多视图配置start -->
 	<!-- 这种方式需要将所有的视图做出配置-在views.properties配置文件中 -->
 	<!-- 
