@@ -8,7 +8,6 @@
  */
 package com.jsprite.web.commons;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -55,11 +54,10 @@ public class UserNamePasswordRealm extends AuthorizingRealm {
         	SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         	//角色
         	//获取用户角色
-        	Set<String> roles = new HashSet<String>();
-        	roles.add("admin");
+        	Set<String> roles = userService.getUserRoles(vo);
         	authorizationInfo.setRoles(roles);
         	//权限
-        	Set<String> permissions = new HashSet<String>();
+        	Set<String> permissions = userService.getUserPermission(username);
         	authorizationInfo.setStringPermissions(permissions);
         	return authorizationInfo;
         }else{

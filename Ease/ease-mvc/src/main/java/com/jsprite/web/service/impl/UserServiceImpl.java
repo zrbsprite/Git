@@ -8,6 +8,8 @@
  */
 package com.jsprite.web.service.impl;
 
+import java.util.Set;
+
 import javax.annotation.Resource;
 
 import com.jsprite.core.BaseService;
@@ -45,4 +47,16 @@ public class UserServiceImpl extends BaseService<UserModel> implements UserServi
 	public UserModel findUser(UserModel user) {
 		return this.userDao.findUser(user);
 	}
+
+	@Override
+	public Set<String> getUserRoles(UserModel user) {
+		return this.userDao.getUserRoles(user);
+	}
+
+	@Override
+	public Set<String> getUserPermission(String username) {
+		return this.userDao.getUserPermission(username);
+	}
+	
+	
 }

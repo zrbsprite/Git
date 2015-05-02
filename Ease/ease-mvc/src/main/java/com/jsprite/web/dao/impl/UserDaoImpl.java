@@ -8,11 +8,17 @@
  */
 package com.jsprite.web.dao.impl;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.HibernateException;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.jsprite.core.BaseDao;
 import com.jsprite.web.dao.UserDao;
@@ -23,6 +29,7 @@ import com.jsprite.web.model.UserModel;
  * 修改日期：2015年4月30日下午3:55:18 <br>
  * E-mail:  <br> 
  */
+@SuppressWarnings("unchecked")
 public class UserDaoImpl extends BaseDao<UserModel> implements UserDao {
 
 	/**方法名称：fillCriteria <br>
@@ -54,7 +61,6 @@ public class UserDaoImpl extends BaseDao<UserModel> implements UserDao {
 	 * @param user
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public UserModel findUser(UserModel user) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(user.getClass());
@@ -63,6 +69,29 @@ public class UserDaoImpl extends BaseDao<UserModel> implements UserDao {
 		if(list!=null&&list.size()>0){
 			return list.get(0);
 		}
+		return null;
+	}
+
+	@Override
+	public Set<String> getUserRoles(UserModel user) {
+		final String queryString = "select t2.role from ease_user t1 left join ease_user_role t3 on t1.id=t3.user_id left join ease_role t2 on t2.id=t3.role_id where t1.username=?";
+		List<String> list = getHibernateTemplate().execute(new HibernateCallback<List<String>>() {
+			@Override
+			public List<String> doInHibernate(Session session) throws HibernateException {
+				SQLQuery query = session.createSQLQuery(queryString);
+				return query.list();
+			}
+		});
+		if(list!=null&&list.size()>0){
+			Set<String> set =  new HashSet<String>();
+			set.addAll(list);
+			return set;
+		}
+		return null;
+	}
+
+	@Override
+	public Set<String> getUserPermission(String username) {
 		return null;
 	}
 

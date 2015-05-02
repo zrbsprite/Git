@@ -8,6 +8,8 @@
  */
 package com.jsprite.web.service;
 
+import java.util.Set;
+
 import com.jsprite.core.IService;
 import com.jsprite.web.model.UserModel;
 
@@ -19,4 +21,8 @@ import com.jsprite.web.model.UserModel;
 public interface UserService extends IService<UserModel>{
 	
 	public UserModel findUser(UserModel user);
+	
+	public Set<String> getUserRoles(UserModel user);
+
+	public Set<String> getUserPermission(String username);
 }
