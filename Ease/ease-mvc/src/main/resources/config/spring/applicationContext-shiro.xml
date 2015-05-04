@@ -36,6 +36,7 @@
          	/resources/**=anon
          	/**/*.html=anon
          	/admin/*.htm=user,roles[admin,sys]
+         	/**=user
 	  	  </value>
 	  	  <!-- 
 	  	  	这里的authc对应 filters里面的key=authc，同理...

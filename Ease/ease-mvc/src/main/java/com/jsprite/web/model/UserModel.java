@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**描述：<br>
  * 作者：ZRB <br>
@@ -38,6 +39,9 @@ public class UserModel {
 	
 	@Column(name="user_status")
 	private String userStatus;
+	
+	@Transient
+	private boolean rememberMe = false;
 
 	public Integer getId() {
 		return id;
@@ -77,5 +81,13 @@ public class UserModel {
 
 	public void setUserStatus(String userStatus) {
 		this.userStatus = userStatus;
+	}
+
+	public boolean getRememberMe() {
+		return rememberMe;
+	}
+
+	public void setRememberMe(boolean rememberMe) {
+		this.rememberMe = rememberMe;
 	}
 }
