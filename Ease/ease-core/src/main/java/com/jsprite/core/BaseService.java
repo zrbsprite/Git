@@ -1,6 +1,5 @@
 package com.jsprite.core;
 
-import javax.annotation.Resource;
 
 public class BaseService<T> implements IService<T> {
 
@@ -27,7 +26,6 @@ public class BaseService<T> implements IService<T> {
 		return baseDao;
 	}
 
-	@Resource
 	public void setBaseDao(BaseDao<T> baseDao) {
 		this.baseDao = baseDao;
 	}

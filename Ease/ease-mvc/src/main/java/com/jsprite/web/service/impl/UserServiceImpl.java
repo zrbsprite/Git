@@ -12,6 +12,8 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Service;
+
 import com.jsprite.core.BaseService;
 import com.jsprite.web.dao.UserDao;
 import com.jsprite.web.model.UserModel;
@@ -22,6 +24,7 @@ import com.jsprite.web.service.UserService;
  * 修改日期：2015年4月30日下午3:57:17 <br>
  * E-mail:  <br> 
  */
+@Service("userService")
 public class UserServiceImpl extends BaseService<UserModel> implements UserService {
 
 	private UserDao userDao;

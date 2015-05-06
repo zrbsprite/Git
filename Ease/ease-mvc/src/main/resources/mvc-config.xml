@@ -7,7 +7,7 @@
            http://www.springframework.org/schema/context/spring-context-2.5.xsd">
            
     <!-- 开启自动寻找controller -->       
-	<context:component-scan base-package="com.cyhospital.controller" />
+	<context:component-scan base-package="com.jsprite.web.controller" />
 	<context:annotation-config />
 	
 	<!-- 
@@ -134,7 +134,10 @@
             <props>  
                 <prop key="java.lang.Exception">error</prop>  
             </props>  
-        </property>  
+        </property>
+        <!-- 设置对应异常视图的返回码 -->
+        <!-- <property name="statusCodes">
+        </property> -->
     </bean>  
 	
 	<!-- <import resource="config/controller.xml"/> -->

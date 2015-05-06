@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
 
 import com.jsprite.core.BaseDao;
 import com.jsprite.web.dao.LicenceDao;
 import com.jsprite.web.model.LicenceModel;
 
+@Repository("licenceDao")
 public class LicenceDaoImpl extends BaseDao<LicenceModel> implements LicenceDao {
 
 	@Override

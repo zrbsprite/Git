@@ -19,6 +19,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate4.HibernateCallback;
+import org.springframework.stereotype.Repository;
 
 import com.jsprite.core.BaseDao;
 import com.jsprite.web.dao.UserDao;
@@ -29,6 +30,7 @@ import com.jsprite.web.model.UserModel;
  * 修改日期：2015年4月30日下午3:55:18 <br>
  * E-mail:  <br> 
  */
+@Repository("userDao")
 @SuppressWarnings("unchecked")
 public class UserDaoImpl extends BaseDao<UserModel> implements UserDao {
 

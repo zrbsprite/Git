@@ -14,9 +14,9 @@
 
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 	    <property name="securityManager" ref="securityManager" />
-	    <property name="successUrl" value="/index.htm" />
-	    <property name="loginUrl" value="/login.htm" />
-	    <property name="unauthorizedUrl" value="/error.htm" />
+	    <property name="successUrl" value="/index.html" />
+	    <property name="loginUrl" value="/login/index.htm" />
+	    <property name="unauthorizedUrl" value="/unauthorized.html" />
 	    <!-- The 'filters' property is usually not necessary unless performing an override, which we  
              want to do here (make authc point to a PassthruAuthenticationFilter instead of the  
              default FormAuthenticationFilter: -->  
@@ -34,8 +34,12 @@
          	/sys/*.htm=user 
          	/anon/**=anon
          	/resources/**=anon
-         	/**/*.html=anon
+         	/login/logout.htm=logout
+         	/login/**=anon
+         	/admin/**=authc,roles[admin,sys]
          	/admin/*.htm=user,roles[admin,sys]
+         	/**/*.html=anon
+         	/=anon
          	/**=user
 	  	  </value>
 	  	  <!-- 
@@ -52,7 +56,9 @@
   	由此可见，连接地址配置为 authc 或 perms[XXX] 表示为受保护资源。
    -->
   
-  <bean id="shiroRealm" class="com.jsprite.web.commons.UserNamePasswordRealm" />
+  <bean id="shiroRealm" class="com.jsprite.web.commons.UserNamePasswordRealm">
+  	<property name="cacheManager" ref="shiroEhcacheManager"></property>
+  </bean>
 
   <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
     <!-- Single realm app.  If you have multiple realms, use the 'realms' property instead. -->

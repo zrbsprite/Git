@@ -88,6 +88,11 @@
 			</props>
 		</property>
 	</bean>
+	
+	<!-- hibernateTemplate配置 -->
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
 
 	<!-- 配置事务管理器 -->
 	<bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">

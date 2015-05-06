@@ -15,7 +15,8 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			classpath:applicationContext.xml,
-			classpath:config/spring/applicationContext-init.xml
+			classpath:config/spring/applicationContext-init.xml,
+			classpath:config/spring/applicationContext-shiro.xml
 		</param-value>
 	</context-param>
 	
@@ -46,21 +47,6 @@
 		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
 	</listener>
 	
-	<servlet>
-		<servlet-name>SpringMVC</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value>classpath:mvc-config.xml</param-value>
-		</init-param>
-		<!-- load-on-startup应该在init-param下面 -->
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>SpringMVC</servlet-name>
-		<url-pattern>*.htm</url-pattern>
-	</servlet-mapping>
-	
 	<filter>
 		<filter-name>CharacterEncoding</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -79,7 +65,7 @@
 	</filter-mapping>
 	<filter>
 		<filter-name>openSessionInView</filter-name>
-		<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+		<filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
 		<init-param>
 			<param-name>sessionFactoryBeanName</param-name>
 			<param-value>sessionFactory</param-value>
@@ -87,7 +73,7 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>openSessionInView</filter-name>
-		<url-pattern>*.html</url-pattern>
+		<url-pattern>*.htm</url-pattern>
 		<!-- <url-pattern>/admin/*</url-pattern> -->
 	</filter-mapping>
 	
@@ -115,17 +101,12 @@
 	<!-- druid配置 complete -->
 	
 	<!-- 配置Url重写过滤器 -->
-	<!-- 
 	  <filter>
 	    <filter-name>UrlRewriteFilter</filter-name>
 	    <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
 		    <init-param>
-		           <param-name>logLevel</param-name>
-		           <param-value>WARN</param-value>
-	      	</init-param>
-		    <init-param>
 		           <param-name>confPath</param-name>
-		           <param-value>config/mvc/urlrewrite.xml</param-value>
+		           <param-value>/WEB-INF/urlrewrite.xml</param-value>
 	      	</init-param>
 	  </filter>
 	 <filter-mapping>
@@ -134,7 +115,6 @@
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
-	 -->
 	 
 	<!-- 缓存、gzip压缩核心过滤器 -->
 	<!-- <filter>
@@ -170,6 +150,21 @@
     </filter-mapping>
 	 <!--spring + shiro configuration end(spring与shiro集成)-->
 	 
+	 <servlet>
+		<servlet-name>SpringMVC</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:mvc-config.xml</param-value>
+		</init-param>
+		<!-- load-on-startup应该在init-param下面 -->
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SpringMVC</servlet-name>
+		<url-pattern>*.htm</url-pattern>
+	</servlet-mapping>
+	 
 	<!-- 验证码 -->
 	<servlet>
 		<servlet-name>check-code</servlet-name>
@@ -189,7 +184,7 @@
 	</welcome-file-list>
 	<error-page>  
     	<error-code>404</error-code>  
-    	<location>/400.html</location>  
+    	<location>/404.html</location>  
 	</error-page>
 	<error-page>  
     	<error-code>500</error-code>  

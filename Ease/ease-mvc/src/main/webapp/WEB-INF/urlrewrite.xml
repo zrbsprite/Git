@@ -15,6 +15,11 @@
         <to>$1.action</to>  
     </rule>
      -->
+     <rule>
+     	<note>自动将模块的跟地址转换成跟地址下的index.htm</note>
+     	<from>(^/[a-z0-9A-Z]*/{0,1}$)</from>
+        <to>$1/index.htm</to>  
+     </rule>
 </urlrewrite>
 
 
