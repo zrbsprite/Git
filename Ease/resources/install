@@ -1,0 +1,1 @@
+	mvn install:install-file -Dfile=C:\Users\qq\Desktop\IKAnalyzer2012FF_u1.jar -DgroupId=com.IKAnalyzer -DartifactId=IKAnalyzer -Dversion=2012FF_u1 -Dpackaging=jar -DgeneratePom=true
