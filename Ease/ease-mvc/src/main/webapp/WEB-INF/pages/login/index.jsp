@@ -65,7 +65,7 @@
 		<img alt="EASE" src="resources/images/person.png">
 	</div>
 	<div id="login-content" class="clearfix">
-		<form class="form-horizontal">
+		<form class="form-horizontal" id="mainForm">
 		  	<div class="text-center">
 		  		<h4 class="text-muted">欢迎登录</h4>
 		  	</div>
@@ -76,23 +76,23 @@
 		  <div class="form-group">
 		    <label for="inputEmail3" class="col-sm-2 control-label sr-only">UserName:</label>
 		    <div class="col-sm-8">
-		      <input type="text" class="form-control" id="input_username" placeholder="UserName">
+		      <input type="text" class="form-control" id="input_username" name="userName" placeholder="UserName">
 		    </div>
 		  </div>
 		  <div class="form-group">
 		    <label for="inputPassword3" class="col-sm-2 control-label sr-only">Password:</label>
 		    <div class="col-sm-8">
-		      <input type="password" class="form-control" id="input_password" placeholder="Password">
+		      <input type="password" class="form-control" id="input_password" name="password" placeholder="Password">
 		    </div>
 		  </div>
 		  <div class="form-group">
 		    <div class="col-sm-offset-2 col-sm-8">
 		      <div class="checkbox">
 		        <label>
-		          <input type="checkbox"> <p class="text-muted">记住我</p>
+		          <input type="checkbox" name="rememberMe"> <p class="text-muted">记住我</p>
 		        </label>
 		        <label class="float-right">
-		          <a class="text-info no-underline"><span>忘记密码？</span></a>
+		          <a class="text-info no-underline" href="javascript:void(0);"><span>忘记密码？</span></a>
 		        </label>
 		      </div>
 		    </div>

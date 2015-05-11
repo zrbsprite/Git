@@ -1,7 +1,7 @@
 /**
  * File Name:TestHelloWorld.java
  * @Description: 
- * Copyright 2012 China Life Insurance Company Ltd.
+ * Copyright 2015 EASE Company Ltd.
  * @author:ZRB
  * @version:v1.0
  * Createdate:2015年4月27日上午9:18:57

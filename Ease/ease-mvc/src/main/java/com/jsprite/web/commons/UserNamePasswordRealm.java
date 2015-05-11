@@ -1,7 +1,7 @@
 /**
  * File Name:UserNamePasswordRealm.java
  * @Description: 
- * Copyright 2012 China Life Insurance Company Ltd.
+ * Copyright 2015 EASE Company Ltd.
  * @author:ZRB
  * @version:v1.0
  * Createdate:2015年4月29日下午8:24:06
