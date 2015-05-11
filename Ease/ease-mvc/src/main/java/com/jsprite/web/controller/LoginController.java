@@ -45,9 +45,9 @@ public class LoginController {
 		token.setRememberMe(user.getRememberMe());
 		try {
 			subject.login(token);
-			return "welcom";
+			return "error";
 		} catch (AuthenticationException e) {
-			LogUtils.warn("用户["+user.getUserName()+"]登录认证失败，原因是：("+e.getMessage()+")");
+			LogUtils.warn("用户["+user.getUserName()+"]登录认证失败，原因是：("+e.getMessage()+")", getClass());
 			ReturnMessage message = new ReturnMessage(ReturnMessage.REQUEST_STATUS_FAIL, "用户名或密码错误!");
 			request.setAttribute("errorMessage", message);
 			return "login/index";

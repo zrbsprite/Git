@@ -1,3 +1,4 @@
+<%@page import="com.jsprite.web.commons.ReturnMessage"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -65,7 +66,7 @@
 		<img alt="EASE" src="resources/images/person.png">
 	</div>
 	<div id="login-content" class="clearfix">
-		<form class="form-horizontal" id="mainForm">
+		<form class="form-horizontal" id="mainForm" action="login/login.htm" method="post">
 		  	<div class="text-center">
 		  		<h4 class="text-muted">欢迎登录</h4>
 		  	</div>
@@ -97,6 +98,18 @@
 		      </div>
 		    </div>
 		  </div>
+		  <%
+		  ReturnMessage errorMessage = (ReturnMessage)request.getAttribute("errorMessage");
+		  	if(errorMessage!=null){
+  		  %>
+		  	<div class="form-group" id="errorMessage">
+			    <div class="col-sm-offset-2 col-sm-10">
+			      <p class="text-danger"><%=errorMessage.getMessage()%></p>
+			    </div>
+		  	</div>
+		  <%
+		  	}
+		  %>
 		  <div class="form-group">
 		    <div class="col-sm-offset-2 col-sm-10">
 		      <button type="submit" class="btn btn-default">登	录</button>

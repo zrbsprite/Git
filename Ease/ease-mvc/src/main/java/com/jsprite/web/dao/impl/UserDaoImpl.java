@@ -22,6 +22,7 @@ import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.stereotype.Repository;
 
 import com.jsprite.core.BaseDao;
+import com.jsprite.core.utils.LogUtils;
 import com.jsprite.web.dao.UserDao;
 import com.jsprite.web.model.UserModel;
 
@@ -47,11 +48,12 @@ public class UserDaoImpl extends BaseDao<UserModel> implements UserDao {
 		if(model.getId()!=null){
 			criteria.add(Restrictions.eq("id", model.getId()));
 		}
+		//criteria应该使用model的属性而不是数据库字段名
 		if(!StringUtils.isEmpty(model.getUserName())){
-			criteria.add(Restrictions.eq("username", model.getUserName()));
+			criteria.add(Restrictions.eq("userName", model.getUserName()));
 		}
 		if(!StringUtils.isEmpty(model.getUserStatus())){
-			criteria.add(Restrictions.eq("user_status", model.getUserStatus()));
+			criteria.add(Restrictions.eq("userStatus", model.getUserStatus()));
 		}
 	}
 
@@ -67,20 +69,25 @@ public class UserDaoImpl extends BaseDao<UserModel> implements UserDao {
 	public UserModel findUser(UserModel user) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(user.getClass());
 		fillCriteria(criteria, user);
-		List<UserModel> list = (List<UserModel>) this.getHibernateTemplate().findByCriteria(criteria);
-		if(list!=null&&list.size()>0){
-			return list.get(0);
+		try {
+			List<UserModel> list = (List<UserModel>) this.getHibernateTemplate().findByCriteria(criteria);
+			if(list!=null&&list.size()>0){
+				return list.get(0);
+			}
+		} catch (Exception e) {
+			LogUtils.warn(e.getMessage(), getClass());
 		}
 		return null;
 	}
 
 	@Override
-	public Set<String> getUserRoles(UserModel user) {
+	public Set<String> getUserRoles(final UserModel user) {
 		final String queryString = "select t2.role from ease_user t1 left join ease_user_role t3 on t1.id=t3.user_id left join ease_role t2 on t2.id=t3.role_id where t1.username=?";
 		List<String> list = getHibernateTemplate().execute(new HibernateCallback<List<String>>() {
 			@Override
 			public List<String> doInHibernate(Session session) throws HibernateException {
 				SQLQuery query = session.createSQLQuery(queryString);
+				query.setString(1, user.getUserName());
 				return query.list();
 			}
 		});
