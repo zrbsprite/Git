@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Unicorn Admin</title>
+		<meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
+		<link rel="stylesheet" href="css/uniform.css" />
+		<link rel="stylesheet" href="css/select2.css" />		
+		<link rel="stylesheet" href="css/unicorn.main.css" />
+		<link rel="stylesheet" href="css/unicorn.grey.css" class="skin-color" />	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+	<body>
+		
+		
+		<div id="header">
+			<h1><a href="./dashboard.html">Unicorn Admin</a></h1>		
+		</div>
+		
+		<div id="search">
+			<input type="text" placeholder="Search here..." /><button type="submit" class="tip-right" title="Search"><i class="icon-search icon-white"></i></button>
+		</div>
+		<div id="user-nav" class="navbar navbar-inverse">
+            <ul class="nav btn-group">
+                <li class="btn btn-inverse"><a title="" href="#"><i class="icon icon-user"></i> <span class="text">Profile</span></a></li>
+                <li class="btn btn-inverse dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-envelope"></i> <span class="text">Messages</span> <span class="label label-important">5</span> <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a class="sAdd" title="" href="#">new message</a></li>
+                        <li><a class="sInbox" title="" href="#">inbox</a></li>
+                        <li><a class="sOutbox" title="" href="#">outbox</a></li>
+                        <li><a class="sTrash" title="" href="#">trash</a></li>
+                    </ul>
+                </li>
+                <li class="btn btn-inverse"><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
+                <li class="btn btn-inverse"><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
+            </ul>
+        </div>
+            
+		<div id="sidebar">
+			<a href="#" class="visible-phone"><i class="icon icon-th-list"></i> Tables</a>
+			<ul>
+				<li><a href="index.html"><i class="icon icon-home"></i> <span>Dashboard</span></a></li>
+				<li class="submenu">
+					<a href="#"><i class="icon icon-th-list"></i> <span>Form elements</span> <span class="label">3</span></a>
+					<ul>
+						<li><a href="form-common.html">Common elements</a></li>
+						<li><a href="form-validation.html">Validation</a></li>
+						<li><a href="form-wizard.html">Wizard</a></li>
+					</ul>
+				</li>
+				<li><a href="buttons.html"><i class="icon icon-tint"></i> <span>Buttons &amp; icons</span></a></li>
+				<li><a href="interface.html"><i class="icon icon-pencil"></i> <span>Interface elements</span></a></li>
+				<li class="active"><a href="tables.html"><i class="icon icon-th"></i> <span>Tables</span></a></li>
+				<li><a href="grid.html"><i class="icon icon-th-list"></i> <span>Grid Layout</span></a></li>
+				<li class="submenu">
+					<a href="#"><i class="icon icon-file"></i> <span>Sample pages</span> <span class="label">4</span></a>
+					<ul>
+						<li><a href="invoice.html">Invioce</a></li>
+						<li><a href="chat.html">Support chat</a></li>
+						<li><a href="calendar.html">Calendar</a></li>
+						<li><a href="gallery.html">Gallery</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="charts.html"><i class="icon icon-signal"></i> <span>Charts &amp; graphs</span></a>
+				</li>
+				<li>
+					<a href="widgets.html"><i class="icon icon-inbox"></i> <span>Widgets</span></a>
+				</li>
+			</ul>
+		
+		</div>
+		
+		<div id="style-switcher">
+			<i class="icon-arrow-left icon-white"></i>
+			<span>Style:</span>
+			<a href="#grey" style="background-color: #555555;border-color: #aaaaaa;"></a>
+			<a href="#blue" style="background-color: #2D2F57;"></a>
+			<a href="#red" style="background-color: #673232;"></a>
+		</div>
+		
+		<div id="content">
+			<div id="content-header">
+				<h1>Tables</h1>
+				<div class="btn-group">
+					<a class="btn btn-large tip-bottom" title="Manage Files"><i class="icon-file"></i></a>
+					<a class="btn btn-large tip-bottom" title="Manage Users"><i class="icon-user"></i></a>
+					<a class="btn btn-large tip-bottom" title="Manage Comments"><i class="icon-comment"></i><span class="label label-important">5</span></a>
+					<a class="btn btn-large tip-bottom" title="Manage Orders"><i class="icon-shopping-cart"></i></a>
+				</div>
+			</div>
+			<div id="breadcrumb">
+				<a href="#" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a>
+				<a href="#" class="current">Tables</a>
+			</div>
+			<div class="container-fluid">
+				<div class="row-fluid">
+					<div id="footer" class="span12">
+						<div class="widget-box">
+							<div class="widget-content nopadding">
+								<table class="table table-bordered data-table" id="mine">
+									<!-- <thead>
+									<tr>
+									<th>Rendering engine</th>
+									<th>Browser</th>
+									<th>Platform(s)</th>
+									<th>Engine version</th>
+									</tr>
+									</thead> -->
+							  </table>
+							  
+							  <!-- alert框体 -->
+							  <div id="myAlert" class="modal hide">
+									<div class="modal-header">
+										<button data-dismiss="modal" class="close" type="button">×</button>
+										<h3>Alert modal</h3>
+									</div>
+									<div class="modal-body">
+										<p>Lorem ipsum dolor sit amet...</p>
+									</div>
+									<div class="modal-footer">
+										<a data-dismiss="modal" class="btn btn-primary" href="#">Confirm</a>
+										<a data-dismiss="modal" class="btn" href="#">Cancel</a>
+									</div>
+								</div>
+							</div>
+							<div id="myModal" class="modal hide">
+									<div class="modal-header">
+										<button data-dismiss="modal" class="close" type="button">×</button>
+										<h3>Alert modal</h3>
+									</div>
+									<div class="modal-body">
+										<p>Lorem ipsum dolor sit amet...</p>
+									</div>
+									<div class="modal-footer">
+										<a data-dismiss="modal" class="btn btn-primary" href="#">Confirm</a>
+										<a data-dismiss="modal" class="btn" href="#">Cancel</a>
+									</div>
+								</div>
+							</div>
+					</div>
+				</div>
+				
+				<div class="hide" id="pick_icon">
+				<div class="container-fluid">
+				<div class="row-fluid">
+					<div class="span6">
+					  <ul style="list-style:none;">
+						<li><i class="icon-glass"></i> icon-glass</li>
+						<li><i class="icon-music"></i> icon-music</li>
+						<li><i class="icon-search"></i> icon-search</li>
+						<li><i class="icon-envelope"></i> icon-envelope</li>
+						<li><i class="icon-heart"></i> icon-heart</li>
+						<li><i class="icon-star"></i> icon-star</li>
+						<li><i class="icon-star-empty"></i> icon-star-empty</li>
+						<li><i class="icon-user"></i> icon-user</li>
+						<li><i class="icon-film"></i> icon-film</li>
+						<li><i class="icon-th-large"></i> icon-th-large</li>
+						<li><i class="icon-th"></i> icon-th</li>
+						<li><i class="icon-th-list"></i> icon-th-list</li>
+						<li><i class="icon-ok"></i> icon-ok</li>
+						<li><i class="icon-remove"></i> icon-remove</li>
+						<li><i class="icon-zoom-in"></i> icon-zoom-in</li>
+						<li><i class="icon-zoom-out"></i> icon-zoom-out</li>
+						<li><i class="icon-off"></i> icon-off</li>
+						<li><i class="icon-signal"></i> icon-signal</li>
+						<li><i class="icon-cog"></i> icon-cog</li>
+						<li><i class="icon-trash"></i> icon-trash</li>
+						<li><i class="icon-home"></i> icon-home</li>
+						<li><i class="icon-file"></i> icon-file</li>
+						<li><i class="icon-time"></i> icon-time</li>
+						<li><i class="icon-road"></i> icon-road</li>
+						<li><i class="icon-download-alt"></i> icon-download-alt</li>
+						<li><i class="icon-download"></i> icon-download</li>
+						<li><i class="icon-upload"></i> icon-upload</li>
+						<li><i class="icon-inbox"></i> icon-inbox</li>
+						<li><i class="icon-play-circle"></i> icon-play-circle</li>
+					  </ul>
+					</div>
+					<div class="span6">
+					  <ul style="list-style:none;">
+						<li><i class="icon-volume-off"></i> icon-volume-off</li>
+						<li><i class="icon-volume-down"></i> icon-volume-down</li>
+						<li><i class="icon-volume-up"></i> icon-volume-up</li>
+						<li><i class="icon-qrcode"></i> icon-qrcode</li>
+						<li><i class="icon-barcode"></i> icon-barcode</li>
+						<li><i class="icon-tag"></i> icon-tag</li>
+						<li><i class="icon-tags"></i> icon-tags</li>
+						<li><i class="icon-book"></i> icon-book</li>
+						<li><i class="icon-bookmark"></i> icon-bookmark</li>
+						<li><i class="icon-print"></i> icon-print</li>
+						<li><i class="icon-camera"></i> icon-camera</li>
+						<li><i class="icon-font"></i> icon-font</li>
+						<li><i class="icon-bold"></i> icon-bold</li>
+						<li><i class="icon-italic"></i> icon-italic</li>
+						<li><i class="icon-text-height"></i> icon-text-height</li>
+						<li><i class="icon-text-width"></i> icon-text-width</li>
+						<li><i class="icon-align-left"></i> icon-align-left</li>
+						<li><i class="icon-align-center"></i> icon-align-center</li>
+						<li><i class="icon-align-right"></i> icon-align-right</li>
+						<li><i class="icon-align-justify"></i> icon-align-justify</li>
+						<li><i class="icon-list"></i> icon-list</li>
+						<li><i class="icon-indent-left"></i> icon-indent-left</li>
+						<li><i class="icon-indent-right"></i> icon-indent-right</li>
+						<li><i class="icon-facetime-video"></i> icon-facetime-video</li>
+						<li><i class="icon-picture"></i> icon-picture</li>
+						<li><i class="icon-pencil"></i> icon-pencil</li>
+						<li><i class="icon-map-marker"></i> icon-map-marker</li>
+						<li><i class="icon-adjust"></i> icon-adjust</li>
+						<li><i class="icon-tint"></i> icon-tint</li>
+					  </ul>
+					</div>
+					</div>
+					</div>
+				  </div>
+				<div class="row-fluid">
+					<div id="footer" class="span12">
+						2012 &copy; Unicorn Admin. Brought to you
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+            
+            <script src="js/jquery.min.js"></script>
+            <script src="js/jquery.ui.custom.js"></script>
+            <script src="js/bootstrap.min.js"></script>
+            <script src="js/jquery.uniform.js"></script>
+            <script src="js/select2.min.js"></script>
+            <script src="js/jquery.dataTables.min.js"></script>
+            <!-- <script src="js/jQuery.dataTables.js"></script> -->
+            <script src="js/unicorn.js"></script>
+            <script src="js/unicorn.tables.js"></script>
+            <script src="layer/layer.js"></script>
+            <script type="text/javascript">
+            function openLayer(){
+            	layer.open({
+				    type: 1,
+				    title: "请选择图标",
+				    closeBtn: 2,
+				    shade: [0.6, '#393D49'],
+				    shadeClose: true,
+				    area: ['600px', '500px'],
+				    content: $("#pick_icon")
+				});
+            }
+            </script>
+	</body>
+</html>
