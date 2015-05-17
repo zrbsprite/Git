@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+      http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context-4.0.xsd
+      http://www.springframework.org/schema/aop
+      http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+      http://www.springframework.org/schema/tx
+      http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+	<!-- 开启@Aspectj注解, Spring默认不支持@AspectJ风格的切面声明-->
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+	
+	<bean id="logAspectjBean" class="com.jsprite.web.commons.LogAspecjBean"></bean>
+	
+	<!-- 使用cglib代理 -->
+	<!-- <aop:aspectj-autoproxy proxy-target-class="true"></aop:aspectj-autoproxy> -->
+	<aop:config proxy-target-class="true"></aop:config>
+	
+	<!-- 
+		<tx:annotation-driven />
+ 		@Transactional 注解可以被应用于接口定义和接口方法、类定义和类的 public 方法上。
+ 		Spring团队的建议是你在具体的类（或类的方法）上使用 @Transactional 注解，而不要使用在类所要实现的任何接口上
+	 -->
+	 
+	 <!-- 这样可以配置切面了 -->
+	<bean class="com.jsprite.web.commons.LogAdvice" id="logAdviceBean"></bean>
+	<aop:config>
+		<aop:pointcut expression="execution(* com.jsprite.web.controller..*.*(..))" id="logDealPointCut"/>
+		<aop:advisor advice-ref="logAdviceBean" pointcut-ref="logDealPointCut"/>
+		<!-- 这个其实同注解的形式，二者选其一即可
+		<aop:aspect ref="">
+			<aop:before method=""/>
+		</aop:aspect>
+		 -->
+	</aop:config>
+</beans>

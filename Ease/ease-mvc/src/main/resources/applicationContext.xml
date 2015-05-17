@@ -16,11 +16,6 @@
 	<context:component-scan base-package="com.jsprite.web.dao,com.jsprite.web.service,com.jsprite.core" />
 	<context:annotation-config />
 	
-	<!-- 使用cglib代理 -->
-	<!-- 
-	<aop:config proxy-target-class="true"> </aop:config>
-	 -->
-
 	<!-- 读取mysql jdbc的配置 -->
 	<context:property-placeholder location="classpath:config.properties" />
 	<!-- 配置数据源，从上面配置文件读取 -->
