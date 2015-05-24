@@ -49,3 +49,17 @@ CREATE TABLE `ease_user_role` (
   `role_id` bigint(20) DEFAULT NULL COMMENT '角色id',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `ease_menu`;
+CREATE TABLE `ease_menu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '菜单唯一标识',
+  `menu_name` varchar(50) DEFAULT NULL COMMENT '菜单显示名称',
+  `menu_desc` varchar(100) DEFAULT NULL COMMENT '对菜单的说明',
+  `menu_url` varchar(100) DEFAULT NULL COMMENT '菜单指向的地址',
+  `menu_type` tinyint(4) DEFAULT NULL COMMENT '菜单类型',
+  `parent_id` int(11) DEFAULT '0' COMMENT '父菜单id',
+  `menu_status` int(11) DEFAULT NULL COMMENT '菜单状态，0-停用，1-启用，2-....',
+  `menu_level` int(11) DEFAULT '0' COMMENT '排序',
+  `isParent` int(11) DEFAULT '0' COMMENT '是否是父菜单',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
