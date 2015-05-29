@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.jsprite.core.BaseService;
+import com.jsprite.core.IDao;
 import com.jsprite.web.dao.LicenceDao;
 import com.jsprite.web.model.LicenceModel;
 import com.jsprite.web.service.LicenceService;
@@ -21,5 +22,10 @@ public class LicenceServiceImpl extends BaseService<LicenceModel> implements Lic
 	@Resource
 	public void setLicenceDao(LicenceDao licenceDao) {
 		this.licenceDao = licenceDao;
+	}
+
+	@Override
+	public IDao<LicenceModel> getBaseDao() {
+		return this.licenceDao;
 	}
 }

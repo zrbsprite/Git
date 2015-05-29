@@ -15,6 +15,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.jsprite.core.BaseService;
+import com.jsprite.core.IDao;
 import com.jsprite.web.dao.UserDao;
 import com.jsprite.web.model.UserModel;
 import com.jsprite.web.service.UserService;
@@ -60,6 +61,9 @@ public class UserServiceImpl extends BaseService<UserModel> implements UserServi
 	public Set<String> getUserPermission(String username) {
 		return this.userDao.getUserPermission(username);
 	}
-	
-	
+
+	@Override
+	public IDao<UserModel> getBaseDao() {
+		return this.userDao;
+	}
 }

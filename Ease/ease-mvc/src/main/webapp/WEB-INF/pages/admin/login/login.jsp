@@ -41,7 +41,7 @@
                
                 <div class="form-actions">
                     <span class="pull-left"><a href="#" class="flip-link btn btn-success" id="to-login">&laquo; 返回登陆页面</a></span>
-                    <span class="pull-right"><a class="btn btn-info"/>接收邮件</a></span>
+                    <span class="pull-right"><a class="btn btn-info">接收邮件</a></span>
                 </div>
             </form>
         </div>
