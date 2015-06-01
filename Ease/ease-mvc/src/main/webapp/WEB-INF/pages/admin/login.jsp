@@ -9,7 +9,7 @@
     </head>
     <body>
         <div id="loginbox">            
-            <form id="loginform" class="form-vertical" action="#">
+            <form id="loginform" class="form-vertical" action="#" method="post">
 				 <div class="control-group normal_text"> <h3><img src="resources/admin/img/logo.png" alt="Logo" /></h3></div>
                 <div class="control-group">
                     <div class="controls">

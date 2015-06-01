@@ -38,7 +38,7 @@ public class UserModel {
 	private String salt;
 	
 	@Column(name="user_status")
-	private String userStatus;
+	private Integer userStatus;
 	
 	@Transient
 	private boolean rememberMe = false;
@@ -75,11 +75,11 @@ public class UserModel {
 		this.salt = salt;
 	}
 
-	public String getUserStatus() {
+	public Integer getUserStatus() {
 		return userStatus;
 	}
 
-	public void setUserStatus(String userStatus) {
+	public void setUserStatus(Integer userStatus) {
 		this.userStatus = userStatus;
 	}
 

@@ -52,7 +52,7 @@ public class UserDaoImpl extends BaseDao<UserModel> implements UserDao {
 		if(!StringUtils.isEmpty(model.getUserName())){
 			criteria.add(Restrictions.eq("userName", model.getUserName()));
 		}
-		if(!StringUtils.isEmpty(model.getUserStatus())){
+		if(model.getUserStatus()!=null){
 			criteria.add(Restrictions.eq("userStatus", model.getUserStatus()));
 		}
 	}
