@@ -34,13 +34,12 @@
          	/sys/*.htm=user,roles[fore]
          	/anon/**=anon
          	/resources/**=anon
+         	/assets/**=anon
+         	/fore/**=anon
          	/login/logout.htm=logout
          	/login/**=anon
-         	/admin/login.htm=anon
-         	/admin/index.htm=anon
-         	/admin/logout.htm=anon
-         	/admin/**=authc,roles[admin,sys]
          	/admin/*.htm=user,roles[admin,sys]
+         	/admin/**=authc,roles[admin,sys]
          	/**/*.html=anon
          	/=anon
          	/**=user,roles[fore]

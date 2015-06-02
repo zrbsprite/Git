@@ -4,7 +4,7 @@
 <head>
         <title>EASE管理后台</title>
         <meta charset="UTF-8" />
-        <%@include file="../include/head.jsp" %>
+        <%@include file="include/head.jsp" %>
         <link rel="stylesheet" href="resources/admin/css/admin-login.css" />
     </head>
     <body>
@@ -46,7 +46,7 @@
             </form>
         </div>
         
-        <%@include file="../include/javascript.jsp" %>
+        <%@include file="include/javascript.jsp" %>
         <script src="resources/admin/js/admin.login.js"></script> 
     </body>
 
