@@ -6,9 +6,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.jsprite.web.commons.inf.ITree;
+
 @Entity
 @Table(name="ease_menu")
-public class Menu {
+public class Menu implements ITree{
 
 	@Id
 	@GeneratedValue
