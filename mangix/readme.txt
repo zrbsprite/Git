@@ -3,4 +3,4 @@ springmvc
 mybatis
 shiro 
 mysql
-framework
+freemarker
