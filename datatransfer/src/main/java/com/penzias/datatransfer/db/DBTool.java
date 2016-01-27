@@ -26,8 +26,6 @@ public class DBTool {
 
 	private static BoneCPDataSource ds;
 
-	private static ThreadLocal<Connection> threadLocal = new ThreadLocal<Connection>();
-
 	static {
 		ResourceBundle rb = ResourceBundle.getBundle("configuration.jdbc");
 		String driverName = rb.getString("database.driverClassName");
@@ -42,16 +40,12 @@ public class DBTool {
 	}
 
 	public static Connection getConnection() {
-		Connection conn = threadLocal.get();
-		if (null == conn) {
-			try {
-				conn = ds.getConnection();
-				threadLocal.set(conn);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+		Connection conn = null;
+		try {
+			conn = ds.getConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-
 		return conn;
 	}
 

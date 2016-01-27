@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import com.penzias.datatransfer.db.DBTool;
 import com.penzias.datatransfer.model.DataSourceMainModel;
+import com.penzias.datatransfer.model.SubSrcModel;
 
 
 /**
@@ -30,21 +31,47 @@ public class App {
 			"Q.","R.","S.","T.","U.","V.","W.","X.","Y.","Z."};
 	
 	public static void main(String[] args) {
+		logger.info("开始执行主表数据导入……");
+		long mainStart = System.currentTimeMillis();
+		importMianTableData();
+		long mainEnd = System.currentTimeMillis();
+		logger.info("执行主表数据导入结束……");
+		logger.info("共耗时：" + (mainEnd - mainStart)/(1000f*60f) +"s");
+		logger.info("开始执行子表数据导入……");
+		long subStart = System.currentTimeMillis();
+		importSubTableData();
+		long subEnd = System.currentTimeMillis();
+		logger.info("执行子表数据导入结束……");
+		logger.info("共耗时：" + (subEnd - subStart)/(1000f*60f) +"s");
+	}
 
+
+	/**方法名称: importMianTableData<br>
+	 * 描述：			<br/>
+	 * 作者: ZRB<br/>
+	 * 修改日期：2016年1月27日下午3:32:32<br/>
+	 */
+	private static void importMianTableData() {
 		final String splitor = "@@"; 
-		Connection connection = DBTool.getConnection();
 		try {
-			connection.setAutoCommit(false);
+			Connection countConnection = DBTool.getConnection();
 			String srcTableCountSql = "select count(Examid) from tblexam";
 			QueryRunner runner = new QueryRunner();
-			int count = ((Long)runner.query(connection, srcTableCountSql, new ScalarHandler<Long>(1))).intValue();
-			int pernum = 1000;
+			int count = ((Long)runner.query(countConnection, srcTableCountSql, new ScalarHandler<Long>(1))).intValue();
+			logger.info("主表数据总量是：" + count);
+			countConnection.close();
+			int pernum = 500;
 			int totalPage = (count+1) / pernum;
 			for(int index=1;index<totalPage;index++){
+				logger.info("主表数据开始处理第【"+index+"】页数据……");
 				int start = pernum * (index - 1);
+				Connection selectConnection = DBTool.getConnection();
 				String srcTableListSql = "select * from tblexam limit " + start + "," + pernum;
-				List<DataSourceMainModel> list = (List<DataSourceMainModel>) runner.query(connection,srcTableListSql, new BeanListHandler<DataSourceMainModel>(DataSourceMainModel.class));
-				Object[][] params = new Object[list.size()][];
+				List<DataSourceMainModel> list = (List<DataSourceMainModel>) runner.query(selectConnection,srcTableListSql, new BeanListHandler<DataSourceMainModel>(DataSourceMainModel.class));
+				selectConnection.close();
+				int size = list.size();
+				logger.info("查出主表数据：" + size);
+				Object[][] params = new Object[size][];
 				int i = 0;
 				for(DataSourceMainModel model : list){
 					float diff = getDifficult(model.getExamdiff());
@@ -74,28 +101,81 @@ public class App {
 					}
 					correctKey = DESEncryptUtil.encrypt(correctKey, ENCRYPT_KEY);
 					params[i] = new Object[]{model.getExamid(),model.getExamsubject(),model.getExamtype(), model.getExamimage(), model.getExamcontent1(),
-							1, new Date(), diff, 0, selectContent, correctKey, 0, 0, '0', '0'};
+							1, new Date(), diff, 0, correctKey, selectContent, 0, 0, 0, 0};
 					i++;
 				}
-				String batchInsertSql = "insert into exam_item(item_id, subject_id, type_id, item_content, creator_id, version, p_value, pump_times,"
-						+ " correct_key, selected_content, test_times, test_correct_times, have_patient, item_flag) values(?,?,?,?,?,?,?,?,?,?,?,?)";
-				int[] effectRow = runner.batch(connection, batchInsertSql, params);
-				logger.info("批量导入数据"+index+"结果是：" + effectRow.toString());
+				String batchInsertSql = "insert into exam_item(item_id, subject_id, type_id, item_image, item_content, creator_id, version, p_value, pump_times,"
+						+ " correct_key, selected_content, test_times, test_correct_times, have_patient, item_flag) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				/*String batchInsertSql = "insert into zrb_main(item_id, subject_id, type_id, item_image, item_content, creator_id, version, p_value, pump_times,"
+						+ " correct_key, selected_content, test_times, test_correct_times, have_patient, item_flag) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";*/
+				Connection insertConnection = DBTool.getConnection();
+				insertConnection.setAutoCommit(false);
+				try {
+					runner.batch(insertConnection, batchInsertSql, params);
+					insertConnection.commit();
+				} catch (Exception e) {
+					e.printStackTrace();
+					insertConnection.rollback();
+					logger.error("批量导入数据出错，系统自动退出！");
+				}finally{
+					insertConnection.close();
+				}
 			}
-			connection.commit();
+			logger.info("主表数据导入完毕，事务已经提交！");
 		} catch (SQLException e) {
 			e.printStackTrace();
-			try {
-				connection.rollback();
-			} catch (SQLException e1) {
-				e1.printStackTrace();
+		}
+	}
+	
+	
+	private static void importSubTableData(){
+		final String splitor = "@@"; 
+		try {
+			Connection countConnection = DBTool.getConnection();
+			String srcTableCountSql = "select count(ExamsubID) from tblexamsub";
+			QueryRunner runner = new QueryRunner();
+			int count = ((Long)runner.query(countConnection, srcTableCountSql, new ScalarHandler<Long>(1))).intValue();
+			countConnection.close();
+			logger.info("查询子表数据总量关闭连接！");
+			int pernum = 1;
+			int totalPage = (count+1) / pernum;
+			for(int index=1;index<totalPage;index++){
+				int start = pernum * (index - 1);
+				Connection selectConnection = DBTool.getConnection();
+				String srcTableListSql = "select * from tblexamsub limit " + start + "," + pernum;
+				List<SubSrcModel> list = (List<SubSrcModel>) runner.query(selectConnection, srcTableListSql, new BeanListHandler<SubSrcModel>(SubSrcModel.class));
+				selectConnection.close();
+				Object[][] params = new Object[list.size()][];
+				int i = 0;
+				for(SubSrcModel model : list){
+					String correctSolu = model.getTrueSolu();
+					if(null!=correctSolu){
+						correctSolu = DESEncryptUtil.encrypt(correctSolu, ENCRYPT_KEY);
+					}else{
+						correctSolu = "";
+					}
+					String selectContent = model.getExamSolu();
+					String[] scArray = selectContent.split(splitor);
+					selectContent = "";
+					int m = 0;
+					for(String str : scArray){
+						selectContent += keyArray[m] + str;
+						m++;
+					}
+					selectContent = DESEncryptUtil.encrypt(selectContent, ENCRYPT_KEY);
+					params[i] = new Object[]{model.getExamSubId(), model.getExamId(), model.getExamContent(), correctSolu, selectContent};
+					i++;
+				}
+				String batchInsertSql = "INSERT INTO exam_subitem (subitem_id, item_id, sub_content, correct_key, select_item) VALUES (?,?,?,?,?)";
+				//String batchInsertSql = "INSERT INTO zrb_sub (subitem_id, item_id, sub_content, correct_key, select_item) VALUES (?,?,?,?,?)";
+				Connection batchInsertConnection = DBTool.getConnection();
+				batchInsertConnection.setAutoCommit(false);
+				runner.batch(batchInsertConnection, batchInsertSql, params);
+				batchInsertConnection.commit();
+				batchInsertConnection.close();
 			}
-		} finally{
-			try {
-				connection.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	
