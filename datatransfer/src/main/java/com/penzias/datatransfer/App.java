@@ -76,14 +76,14 @@ public class App {
 				for(DataSourceMainModel model : list){
 					float diff = getDifficult(model.getExamdiff());
 					String selectContent = model.getExamsolu();
-					String[] scArray = selectContent.split(splitor);
+					/*String[] scArray = selectContent.split(splitor);
 					selectContent = "";
 					int m = 0;
 					for(String str : scArray){
 						selectContent += keyArray[m] + str;
 						m++;
 					}
-					m = 0;
+					m = 0;*/
 					selectContent = DESEncryptUtil.encrypt(selectContent, ENCRYPT_KEY);
 					String correctKey = model.getTruesolu();
 					int examType = model.getExamtype().intValue();
@@ -92,20 +92,20 @@ public class App {
 					}else if(28==examType||29==examType||30==examType||31==examType||34==examType){
 						// do nothing
 					}else if(26==examType){
-						String[] ckArray = correctKey.split(splitor);
+						/*String[] ckArray = correctKey.split(splitor);
 						correctKey = "";
 						for(String str : ckArray){
 							correctKey += keyArray[m] + str;
 							m++;
-						}
+						}*/
 					}
 					correctKey = DESEncryptUtil.encrypt(correctKey, ENCRYPT_KEY);
 					params[i] = new Object[]{model.getExamid(),model.getExamsubject(),model.getExamtype(), model.getExamimage(), model.getExamcontent1(),
-							1, new Date(), diff, 0, correctKey, selectContent, 0, 0, 0, 0};
+							1, new Date(), diff, 0, correctKey, selectContent, 0, 0, 0, 0, 1};
 					i++;
 				}
 				String batchInsertSql = "insert into exam_item(item_id, subject_id, type_id, item_image, item_content, creator_id, version, p_value, pump_times,"
-						+ " correct_key, selected_content, test_times, test_correct_times, have_patient, item_flag) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+						+ " correct_key, selected_content, test_times, test_correct_times, have_patient, item_flag, status_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 				/*String batchInsertSql = "insert into zrb_main(item_id, subject_id, type_id, item_image, item_content, creator_id, version, p_value, pump_times,"
 						+ " correct_key, selected_content, test_times, test_correct_times, have_patient, item_flag) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";*/
 				Connection insertConnection = DBTool.getConnection();
@@ -155,13 +155,13 @@ public class App {
 						correctSolu = "";
 					}
 					String selectContent = model.getExamSolu();
-					String[] scArray = selectContent.split(splitor);
+					/*String[] scArray = selectContent.split(splitor);
 					selectContent = "";
 					int m = 0;
 					for(String str : scArray){
 						selectContent += keyArray[m] + str;
 						m++;
-					}
+					}*/
 					selectContent = DESEncryptUtil.encrypt(selectContent, ENCRYPT_KEY);
 					params[i] = new Object[]{model.getExamSubId(), model.getExamId(), model.getExamContent(), correctSolu, selectContent};
 					i++;
@@ -203,5 +203,11 @@ public class App {
 			break;
 		}
 		return result;
+	}
+	
+	private static void checkConstruction(){
+		String src = "QO48BKctyHBsuH+v9PDId3llFhI/MqYcizhdIOmoTNoQ6yHxPF1e2h4gTi3H0VBRPjabbkPyeqxHCUe7gU0kQ13Ddtg2rCpuc0PlKCIAOayLHiqeiBM6jSTFBEira73lNXne7rGvEvQF4baJkWyxrcFvoZvydJG+x1T010zVclvi4Qi7unpUHrkU5G6eBqmpwb3lWcASkUw1PzrYCCJujFrvxCu3lrz9";
+		String out = DESEncryptUtil.decrypt(src, ENCRYPT_KEY);
+		System.out.println(out);
 	}
 }

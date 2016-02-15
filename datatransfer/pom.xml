@@ -154,7 +154,7 @@
                         <mainClass>com.penzias.datatransfer.App</mainClass>
                       </manifest>
                     </archive>
- 
+ 					<finalName>dt</finalName>
                 </configuration>
                 <executions>
                   <execution>
@@ -162,10 +162,25 @@
                     <!-- bind to the packaging phase -->
                     <phase>package</phase> 
                     <goals>
-                        <goal>assembly</goal>
+                        <goal>single</goal>
                     </goals>
                   </execution>
                 </executions>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<mainClass>com.penzias.datatransfer.App</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
