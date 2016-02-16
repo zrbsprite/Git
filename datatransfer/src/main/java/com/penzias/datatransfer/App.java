@@ -21,6 +21,7 @@ import com.penzias.datatransfer.model.SubSrcModel;
  * 描述：数据处理start<br>
  * 作者：ZRB <br>
  */
+@SuppressWarnings("unused")
 public class App {
 	
 	private static Logger logger = LoggerFactory.getLogger(App.class);
@@ -86,19 +87,19 @@ public class App {
 					m = 0;*/
 					selectContent = DESEncryptUtil.encrypt(selectContent, ENCRYPT_KEY);
 					String correctKey = model.getTruesolu();
-					int examType = model.getExamtype().intValue();
+					/*int examType = model.getExamtype().intValue();
 					if(15==examType||18==examType||25==examType||27==examType||33==examType){
 						correctKey = correctKey.replaceAll(splitor, ",");
 					}else if(28==examType||29==examType||30==examType||31==examType||34==examType){
 						// do nothing
 					}else if(26==examType){
-						/*String[] ckArray = correctKey.split(splitor);
+						String[] ckArray = correctKey.split(splitor);
 						correctKey = "";
 						for(String str : ckArray){
 							correctKey += keyArray[m] + str;
 							m++;
-						}*/
-					}
+						}
+					}*/
 					correctKey = DESEncryptUtil.encrypt(correctKey, ENCRYPT_KEY);
 					params[i] = new Object[]{model.getExamid(),model.getExamsubject(),model.getExamtype(), model.getExamimage(), model.getExamcontent1(),
 							1, new Date(), diff, 0, correctKey, selectContent, 0, 0, 0, 0, 1};
@@ -129,7 +130,7 @@ public class App {
 	
 	
 	private static void importSubTableData(){
-		final String splitor = "@@"; 
+		//final String splitor = "@@"; 
 		try {
 			Connection countConnection = DBTool.getConnection();
 			String srcTableCountSql = "select count(ExamsubID) from tblexamsub";
@@ -207,6 +208,13 @@ public class App {
 	
 	private static void checkConstruction(){
 		String src = "QO48BKctyHBsuH+v9PDId3llFhI/MqYcizhdIOmoTNoQ6yHxPF1e2h4gTi3H0VBRPjabbkPyeqxHCUe7gU0kQ13Ddtg2rCpuc0PlKCIAOayLHiqeiBM6jSTFBEira73lNXne7rGvEvQF4baJkWyxrcFvoZvydJG+x1T010zVclvi4Qi7unpUHrkU5G6eBqmpwb3lWcASkUw1PzrYCCJujFrvxCu3lrz9";
+		String out = DESEncryptUtil.decrypt(src, ENCRYPT_KEY);
+		System.out.println(out);
+	}
+	
+	private static void checkAnswer(){
+//		String src = "ceupNInVj5h+nIAUclkqYQ==";
+		String src = "4SgjieHU11o5fgbUEkChpg==";
 		String out = DESEncryptUtil.decrypt(src, ENCRYPT_KEY);
 		System.out.println(out);
 	}
