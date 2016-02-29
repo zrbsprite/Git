@@ -13,8 +13,8 @@ import javax.crypto.Mac;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.springframework.util.Base64Utils;
-import org.springframework.util.StringUtils;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang3.StringUtils;
 
 public class EncryptUtils {
 
@@ -81,7 +81,7 @@ public class EncryptUtils {
 	 * @return
 	 */
 	public static String fromBase64(String base64Str) {
-		byte[] temp = Base64Utils.decodeFromString(base64Str);
+		byte[] temp = Base64.decodeBase64(base64Str.getBytes());
 		return new String(temp);
 	}
 
@@ -134,7 +134,7 @@ public class EncryptUtils {
 	public static String getSerializeCode(String str){
 		str = getMD5(str);
 		String[] arrays = string2ArraysByLen(str);
-		str = StringUtils.arrayToDelimitedString(arrays, "-");
+		str = StringUtils.join(arrays, "-");
 		return str;
 	}
 	
@@ -191,7 +191,7 @@ public class EncryptUtils {
 	}
 	
 	private static String toBase64(byte[] by){
-		return Base64Utils.encodeToString(by);
+		return new String(Base64.encodeBase64(by));
 	}
 	
 	private static String[] string2ArraysByLen(String str){

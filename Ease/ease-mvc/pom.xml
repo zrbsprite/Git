@@ -5,20 +5,26 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.jsprite</groupId>
-		<artifactId>Dependencies</artifactId>
+		<artifactId>Ease</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../Dependencies/pom.xml</relativePath>
+		<relativePath>../Ease/pom.xml</relativePath>
 	</parent>
 	<artifactId>ease-mvc</artifactId>
 	<packaging>war</packaging>
 	<name>ease web Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-	
+
 	<properties>
 		<lucene-version>4.10.4</lucene-version>
 	</properties>
-	
+
 	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
@@ -46,48 +52,38 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework.version}</version>
 		</dependency>
-		
+
 		<!-- 解决tomcat7和icu不兼容的问题使用高版本冲掉低版本 -->
-		<dependency>  
-		    <groupId>com.ibm.icu</groupId>  
-		    <artifactId>icu4j</artifactId>  
-		    <version>3.4.4</version>  
+		<dependency>
+			<groupId>com.ibm.icu</groupId>
+			<artifactId>icu4j</artifactId>
+			<version>3.4.4</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.tuckey</groupId>
 			<artifactId>urlrewritefilter</artifactId>
 			<version>4.0.4</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.freemarker</groupId>
 			<artifactId>freemarker</artifactId>
 			<version>2.3.22</version>
 		</dependency>
-		
-		 <!-- 
-		 <dependency>
-			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity</artifactId>
-			<version>1.7</version>
-		</dependency>
-		 -->
-		 
+
+		<!-- <dependency> <groupId>org.apache.velocity</groupId> <artifactId>velocity</artifactId> 
+			<version>1.7</version> </dependency> -->
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>${mysql-connector-version}</version>
 		</dependency>
 		<!-- oracle -->
-		<!-- 
-		<dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc14</artifactId>
-			<version>10.2.0.3.0</version>
-		</dependency>
-		 -->
-		 <!-- shiro -->
+		<!-- <dependency> <groupId>com.oracle</groupId> <artifactId>ojdbc14</artifactId> 
+			<version>10.2.0.3.0</version> </dependency> -->
+		<!-- shiro -->
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-core</artifactId>
@@ -103,32 +99,23 @@
 			<artifactId>shiro-spring</artifactId>
 			<version>1.2.3</version>
 		</dependency>
-        <!-- shiro -->
-        <!--
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-quartz</artifactId>
-            <version>1.2.2</version>
-        </dependency> 
-        <dependency>
-            <groupId>org.apache.shiro</groupId>
-            <artifactId>shiro-cas</artifactId>
-            <version>1.2.3</version>
-        </dependency>
-         -->
-         <!-- 验证码 -->
-         <dependency>
+		<!-- shiro -->
+		<!-- <dependency> <groupId>org.apache.shiro</groupId> <artifactId>shiro-quartz</artifactId> 
+			<version>1.2.2</version> </dependency> <dependency> <groupId>org.apache.shiro</groupId> 
+			<artifactId>shiro-cas</artifactId> <version>1.2.3</version> </dependency> -->
+		<!-- 验证码 -->
+		<dependency>
 			<groupId>com.github.axet</groupId>
 			<artifactId>kaptcha</artifactId>
 			<version>0.0.9</version>
 		</dependency>
-		
-         <dependency>
+
+		<dependency>
 			<groupId>net.sf.ehcache</groupId>
 			<artifactId>ehcache-web</artifactId>
 			<version>2.0.4</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>taglibs</groupId>
 			<artifactId>standard</artifactId>
@@ -139,43 +126,134 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+		</dependency>
+
+		<!-- Expression Language (depends on spring-core) Define this if you use 
+			Spring Expression APIs (org.springframework.expression.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-expression</artifactId>
+		</dependency>
+
+		<!-- Bean Factory and JavaBeans utilities (depends on spring-core) Define 
+			this if you use Spring Bean APIs (org.springframework.beans.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+		</dependency>
+
+		<!-- Aspect Oriented Programming (AOP) Framework (depends on spring-core, 
+			spring-beans) Define this if you use Spring AOP APIs (org.springframework.aop.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+		</dependency>
+
+		<!-- Application Context (depends on spring-core, spring-expression, spring-aop, 
+			spring-beans) This is the central artifact for Spring's Dependency Injection 
+			Container and is generally always defined -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+
+		<!-- Various Application Context utilities, including EhCache, JavaMail, 
+			Quartz, and Freemarker integration Define this if you need any of these integrations -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+
+		<!-- Transaction Management Abstraction (depends on spring-core, spring-beans, 
+			spring-aop, spring-context) Define this if you use Spring Transactions or 
+			DAO Exception Hierarchy (org.springframework.transaction.*/org.springframework.dao.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+		</dependency>
+
+		<!-- JDBC Data Access Library (depends on spring-core, spring-beans, spring-context, 
+			spring-tx) Define this if you use Spring's JdbcTemplate API (org.springframework.jdbc.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+		</dependency>
+
+		<!-- Object-to-Relation-Mapping (ORM) integration with Hibernate, JPA, 
+			and iBatis. (depends on spring-core, spring-beans, spring-context, spring-tx) 
+			Define this if you need ORM (org.springframework.orm.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+		</dependency>
+
+		<!-- Object-to-XML Mapping (OXM) abstraction and integration with JAXB, 
+			JiBX, Castor, XStream, and XML Beans. (depends on spring-core, spring-beans, 
+			spring-context) Define this if you need OXM (org.springframework.oxm.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
+		</dependency>
+
+		<!-- Web application development utilities applicable to both Servlet and 
+			Portlet Environments (depends on spring-core, spring-beans, spring-context) 
+			Define this if you use Spring MVC, or wish to use Struts, JSF, or another 
+			web framework with Spring (org.springframework.web.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+
+
 		<dependency>
 			<groupId>org.apache.lucene</groupId>
 			<artifactId>lucene-core</artifactId>
 			<version>${lucene-version}</version>
 		</dependency>
-		
 		<dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-highlighter</artifactId>
-            <version>${lucene-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-memory</artifactId>
-            <version>${lucene-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-queries</artifactId>
-            <version>${lucene-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-queryparser</artifactId>
-            <version>${lucene-version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.lucene</groupId>
-            <artifactId>lucene-analyzers-common</artifactId>
-            <version>${lucene-version}</version>
-        </dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.3.2</version>
+		</dependency>
 		<dependency>
-            <groupId>com.IKAnalyzer</groupId>
-            <artifactId>IKAnalyzer</artifactId>
-            <version>2012FF_u1</version>
-        </dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-highlighter</artifactId>
+			<version>${lucene-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-memory</artifactId>
+			<version>${lucene-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-queries</artifactId>
+			<version>${lucene-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-queryparser</artifactId>
+			<version>${lucene-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-analyzers-common</artifactId>
+			<version>${lucene-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.IKAnalyzer</groupId>
+			<artifactId>IKAnalyzer</artifactId>
+			<version>2012FF_u1</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>easeMvc</finalName>
@@ -190,7 +268,7 @@
 					<optimize>true</optimize>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
@@ -209,74 +287,43 @@
 						<id>start-jetty</id>
 						<phase>pre-integration-test</phase>
 						<goals>
-						       <goal>run</goal>
+							<goal>run</goal>
 						</goals>
 						<configuration>
 							<scanIntervalSeconds>0</scanIntervalSeconds>
 							<daemon>true</daemon>
-					        </configuration>
+						</configuration>
 					</execution>
 					<execution>
 						<id>stop-jetty</id>
-					        <phase>post-integration-test</phase>
-					        <goals>
+						<phase>post-integration-test</phase>
+						<goals>
 							<goal>stop</goal>
 						</goals>
 					</execution>
 				</executions>
 				<dependencies>
-					<!-- <dependency>
-						<groupId>commons-logging</groupId>
-						<artifactId>commons-logging</artifactId>
-						<version>1.1</version>
-						<type>jar</type>
-					</dependency>
-					<dependency>
-						<groupId>org.slf4j</groupId>
-						<artifactId>slf4j-jcl</artifactId>
-						<version>1.0.1</version>
-						<type>jar</type>
-					</dependency>
-					<dependency>
-						<groupId>log4j</groupId>
-						<artifactId>log4j</artifactId>
-						<version>1.2.13</version>
-						<type>jar</type>
-					</dependency> -->
-			   </dependencies>
+					<!-- <dependency> <groupId>commons-logging</groupId> <artifactId>commons-logging</artifactId> 
+						<version>1.1</version> <type>jar</type> </dependency> <dependency> <groupId>org.slf4j</groupId> 
+						<artifactId>slf4j-jcl</artifactId> <version>1.0.1</version> <type>jar</type> 
+						</dependency> <dependency> <groupId>log4j</groupId> <artifactId>log4j</artifactId> 
+						<version>1.2.13</version> <type>jar</type> </dependency> -->
+				</dependencies>
 			</plugin>
-			 
-			  <!--plugin.configuration.server 此处的名字必须和setting.xml中配置的ID一致-->
-			  <!--plugin.configuration.server.path 此处的名字是项目发布的工程名-->
-			 <!-- 
+
+			<!--plugin.configuration.server 此处的名字必须和setting.xml中配置的ID一致 -->
+			<!--plugin.configuration.server.path 此处的名字是项目发布的工程名 -->
+			<!-- <plugin> <groupId>org.apache.tomcat.maven</groupId> <artifactId>tomcat7-maven-plugin</artifactId> 
+				<version>2.2</version> <configuration> <url>http://localhost:8080/manager/text</url> 
+				<server>tomcat7</server> <path>/easeMvc</path> <uriEncoding>UTF-8</uriEncoding> 
+				<update>true</update> <jarScanAllDirectories>true</jarScanAllDirectories> 
+				</configuration> <executions> <execution> <id>tomcat-deploy</id> <phase>deploy</phase> 
+				<goals> <goal>deploy</goal> </goals> </execution> </executions> </plugin> -->
+
+			<!-- cargo与jetty和tomcat的区别在于前者主要是用来发布，后者是倾向于测试 -->
 			<plugin>
-			    <groupId>org.apache.tomcat.maven</groupId>
-		        <artifactId>tomcat7-maven-plugin</artifactId>
-		        <version>2.2</version>
-			    <configuration>
-			        <url>http://localhost:8080/manager/text</url>
-			        <server>tomcat7</server>
-			        <path>/easeMvc</path>
-			        <uriEncoding>UTF-8</uriEncoding>
-			        <update>true</update>
-			        <jarScanAllDirectories>true</jarScanAllDirectories>
-			    </configuration>
-			    <executions>  
-			        <execution>  
-			            <id>tomcat-deploy</id>  
-			            <phase>deploy</phase>  
-			            <goals>  
-			                   <goal>deploy</goal>  
-			            </goals>  
-			        </execution>  
-    			</executions>  
-			</plugin>
-			 -->
-			 
-			 <!-- cargo与jetty和tomcat的区别在于前者主要是用来发布，后者是倾向于测试 -->
-			 <plugin>
 				<groupId>org.codehaus.cargo</groupId>
-    			<artifactId>cargo-maven2-plugin</artifactId>
+				<artifactId>cargo-maven2-plugin</artifactId>
 				<version>1.4.13</version>
 				<configuration>
 					<!-- <wait>true</wait> -->
@@ -284,63 +331,42 @@
 						<!-- 标识使用是那一种容器。这个名字是不能随便定的，cargo有一组支持窗口的列表 -->
 						<containerId>tomcat7x</containerId>
 						<!-- 容器的zip安装包。这是cargo非常强大的一点，它能够根据给出的zip安装包路径下裁并 解压到指定的installDir文件夹下。你也可以直接使用home来指定一个已存在的容器位置。 -->
-					    <home>D:\Java\apache-tomcat-7.0.34-10000</home>
-						<!-- <zipUrlInstaller>
-							<url>http://archive.apache.org/dist/tomcat/tomcat-6/v6.0.29/bin/apache-tomcat-6.0.29.zip</url>
-							<installDir>/usr/local/${artifactId}/tomcat-installer</installDir>
-						</zipUrlInstaller> -->
+						<home>D:\Java\apache-tomcat-7.0.34-10000</home>
+						<!-- <zipUrlInstaller> <url>http://archive.apache.org/dist/tomcat/tomcat-6/v6.0.29/bin/apache-tomcat-6.0.29.zip</url> 
+							<installDir>/usr/local/${artifactId}/tomcat-installer</installDir> </zipUrlInstaller> -->
 					</container>
 					<configuration>
-						<!-- 容器的指定安放位置。这个和installDir的区别在于installDir只是一个解压用的文件夹而home是这样一个文件夹：当cargo启动容器时，会将installDir中容器文件拷贝到home文件夹下，以后部署的war包也会放到这个文件夹下的wabapps子文件夹内.-->
+						<!-- 容器的指定安放位置。这个和installDir的区别在于installDir只是一个解压用的文件夹而home是这样一个文件夹：当cargo启动容器时，会将installDir中容器文件拷贝到home文件夹下，以后部署的war包也会放到这个文件夹下的wabapps子文件夹内. -->
 						<type>existing</type>
 						<home>D:\Java\apache-tomcat-7.0.34-10000</home>
 						<properties>
 							<cargo.servlet.port>10000</cargo.servlet.port>
 						</properties>
 					</configuration>
-					<!-- deployer是部署时的相关配置，这个context是用来声明工程部署后的上下文，也就是
-									主机地址后面的一级目录位置。这个设置在maven构建中还是很必要的。因为maven默认打出
-									的war包是工程名+版本号，部署时如果不设置这里的context，那上下文就变成了工程名+版本号
-									的形式。这会使访问变得很不方便。注意，即使你通过修改war插件中的warName也是不能达到这个
-									目的，因为cargo认定的默认war包名就是工程名+版本号的形式。-->					
-					<!-- <deployer>
-						<deployables>
-							<deployable>
-								<groupId>${groupId}</groupId>
-								<artifactId>${artifactId}</artifactId>
-								<type>war</type>
-								<properties>
-									<context>${artifactId}</context>
-								</properties>
-							</deployable>
-						</deployables>
-					</deployer> -->								
+					<!-- deployer是部署时的相关配置，这个context是用来声明工程部署后的上下文，也就是 主机地址后面的一级目录位置。这个设置在maven构建中还是很必要的。因为maven默认打出 
+						的war包是工程名+版本号，部署时如果不设置这里的context，那上下文就变成了工程名+版本号 的形式。这会使访问变得很不方便。注意，即使你通过修改war插件中的warName也是不能达到这个 
+						目的，因为cargo认定的默认war包名就是工程名+版本号的形式。 -->
+					<!-- <deployer> <deployables> <deployable> <groupId>${groupId}</groupId> 
+						<artifactId>${artifactId}</artifactId> <type>war</type> <properties> <context>${artifactId}</context> 
+						</properties> </deployable> </deployables> </deployer> -->
 				</configuration>
 			</plugin>
-		 </plugins>
-		 <pluginManagement>
-		 	<plugins>
-		 		<plugin>
-		 			<groupId>org.apache.maven.plugins</groupId>
-		 			<artifactId>maven-site-plugin</artifactId>
-					<version>3.0.1</version>		 			
-		 		</plugin>
-		 	</plugins>
-		 </pluginManagement>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>3.0.1</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 	<repositories>
-		<!-- <repository>
-			<id>codehaus.snapshots</id>
-			<url>http://ci.repository.codehaus.org</url>
-		</repository>
-		<repository>
-			<id>tapestry360-stable</id>
-			<url>http://tapestry.formos.com/maven-repository</url>
-		</repository>
-		<repository>
-			<id>tapestry360-snapshot</id>
-			<url>http://tapestry.formos.com/maven-snapshot-repository</url>
-		</repository> -->
+		<!-- <repository> <id>codehaus.snapshots</id> <url>http://ci.repository.codehaus.org</url> 
+			</repository> <repository> <id>tapestry360-stable</id> <url>http://tapestry.formos.com/maven-repository</url> 
+			</repository> <repository> <id>tapestry360-snapshot</id> <url>http://tapestry.formos.com/maven-snapshot-repository</url> 
+			</repository> -->
 		<repository>
 			<id>people.apache.snapshots</id>
 			<url>http://repository.apache.org/content/groups/snapshots-group/  </url>
