@@ -400,6 +400,22 @@
 			<artifactId>IKAnalyzer</artifactId>
 			<version>2012FF_u1</version>
 		</dependency>
+		<dependency>
+			<groupId>com.chenlb.mmseg4j</groupId>
+			<artifactId>mmseg4j-core</artifactId>
+			<version>1.10.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.chenlb.mmseg4j</groupId>
+			<artifactId>mmseg4j-analysis</artifactId>
+			<version>1.9.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.chenlb.mmseg4j</groupId>
+			<artifactId>mmseg4j-core-with-dic</artifactId>
+			<version>1.8.6</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
