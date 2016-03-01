@@ -7,11 +7,11 @@
 		<groupId>com.jsprite</groupId>
 		<artifactId>Ease</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../Ease/pom.xml</relativePath>
 	</parent>
 	<artifactId>ease-core</artifactId>
 	<name>ease-core</name>
 	<url>http://maven.apache.org</url>
+	<packaging>jar</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -169,4 +169,18 @@
 			<artifactId>lombok</artifactId>
 		</dependency>
 	</dependencies>
+	<build>
+		<finalName>ease-ssm</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

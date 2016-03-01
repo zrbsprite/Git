@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:context="http://www.springframework.org/schema/context" 
+	xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.1.xsd">
+
+	 <!-- 使用annotation 自动注册bean,并检查@Required,@Autowired的属性已被注入 -->
+	<context:component-scan base-package="com.penzias.controller,com.penzias.service"/>
+    
+    <!-- spring读取配置文件 -->
+    <util:properties id="propertiesReader" location="classpath:configuration/commons/configuration.properties" />
+     
+    <!-- @ResultMapping标签的解析  声明是没有 defaultAnnotationHandlerMapping这个属性的 -->
+	<mvc:annotation-driven />
+	<bean  class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" >
+		<!-- 全局属性编辑器 -->
+		<!--  
+		<property name="webBindingInitializer">
+			<bean class="com.penzias.core.commons.DateWebBindingInitializer"></bean>
+		</property>
+		-->
+		<property name="messageConverters">      
+            <list >      
+                <ref bean="mappingJacksonHttpMessageConverter" />      
+            </list>      
+        </property>  
+	</bean>
+	<bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">    
+	    <property name="supportedMediaTypes">    
+	        <list>    
+	            <value>application/json;charset=UTF-8</value>    
+	       </list>    
+	    </property>  
+	</bean>  
+  
+    <mvc:view-controller path="/" view-name="login"/>
+    <mvc:view-controller path="/index.htm" view-name="login"/>
+    <!-- <mvc:view-controller path="/" view-name="redirect:/login"/>  -->
+    <!-- 定义一些不被拦截的静态资源 -->
+    <mvc:resources mapping="/assets/**" location="/assets/" />
+    
+    <!-- 拦截器 -->
+    <mvc:interceptors>  
+        <bean class="com.penzias.core.interceptor.SystemInterceptor">
+        	<property name="noFilters">
+        		<list>
+        			<value>/verifycode.htm</value>
+        			<value>/sign.htm</value>
+        		</list>
+        	</property>
+        	<property name="whiteListRule">
+        		<value>^/anno/\w{1,}.*\.htm$</value>
+        	</property>
+        </bean>
+        <!-- 拦截器单独配置 -->
+        <!-- 
+        <mvc:interceptor>
+         	<mvc:mapping path="/**" />
+         	<bean class="com.wx.interceptor.TokenIntercepter"></bean>
+        </mvc:interceptor>
+        -->
+    </mvc:interceptors>  
+
+	<!-- i18n -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+	    <!-- 国际化信息所在的文件名 -->                     
+	    <property name="basename">
+	    	<array>
+	    		<value>configuration/i18n/messages</value>
+	    	</array>
+	    </property>   
+	    <!-- 如果在国际化资源文件中找不到对应代码的信息，就用这个代码作为名称  -->               
+	    <property name="useCodeAsDefaultMessage" value="true" />           
+	</bean>
+
+   <!-- file upload configuration -->
+   <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+        <property name="defaultEncoding" value="utf-8"></property>   
+        <property name="maxUploadSize" value="10485760000"></property>  
+        <property name="maxInMemorySize" value="40960"></property>  
+   </bean>  
+   
+    <!-- ===================================================== -->
+    <!-- ViewResolver For FreeMarkerConfigurer -->
+    <!-- ===================================================== -->
+     <bean id="freemarkerResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="order" value="1" />
+        <property name="suffix" value=".ftl" />
+        <property name="contentType" value="text/html;charset=utf-8" />
+        <property name="viewClass">
+            <value>org.springframework.web.servlet.view.freemarker.FreeMarkerView</value>
+        </property>
+        <property name="requestContextAttribute" value="request"/>
+    </bean>
+    
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath">
+            <value>/WEB-INF/pages/</value>
+        </property>
+        <property name="defaultEncoding" value="UTF-8" />
+        <property name="freemarkerSettings"><!-- 设置FreeMarker环境属性 -->
+            <props>
+                <prop key="template_update_delay">5</prop><!--刷新模板的周期，单位为秒 -->
+                <prop key="default_encoding">UTF-8</prop><!--模板的编码格式 -->
+                <prop key="locale">UTF-8</prop><!-- 本地化设置 -->
+                <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+                <prop key="date_format">yyyy-MM-dd</prop>
+                <prop key="time_format">HH:mm:ss</prop>
+                <prop key="number_format">0.####</prop>
+                <prop key="boolean_format">true,false</prop>
+                <prop key="whitespace_stripping">true</prop>
+                <prop key="tag_syntax">auto_detect</prop>
+                <prop key="url_escaping_charset">UTF-8</prop>
+                <prop key="classic_compatible">true</prop> 
+            </props>
+        </property>
+    </bean>
+    <import resource="applicationContext-bean.xml"/>
+</beans>

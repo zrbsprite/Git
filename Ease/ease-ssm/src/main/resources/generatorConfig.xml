@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="MBG" targetRuntime="MyBatis3">
+        <commentGenerator type="com.penzias.main.mybatis.RobertoCommentGenerator">
+            <property name="suppressAllComments" value="true"/><!-- 是否取消注释 -->  
+            <property name="suppressDate" value="true" /> <!-- 是否生成注释代时间戳-->  
+        </commentGenerator>
+       <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/hn_ncz"
+            userId="root" password="root">
+        </jdbcConnection>
+        <!--
+       <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://119.90.131.199:3306/hn_ncz"
+            userId="root" password="root">
+        </jdbcConnection>
+        -->
+         <!-- 类型转换 -->  
+        <javaTypeResolver>
+             <!-- 是否使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） -->  
+            <property name="forceBigDecimals" value="false"/>  
+        </javaTypeResolver>
+        
+        <javaModelGenerator targetPackage="com.penzias.entity" targetProject="${targetProject}">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径com.oop.eksp.user.model， true:com.oop.eksp.user.model.[schemaName] -->  
+            <property name="enableSubPackages" value="false" />
+            <!-- 是否针对string类型的字段在set的时候进行trim调用 -->  
+            <property name="trimStrings" value="false" />
+        </javaModelGenerator>
+        
+        <sqlMapGenerator targetPackage="com.penzias.entity.mapper" targetProject="${targetProject}">
+            <!-- 是否在当前路径下新加一层schema,eg：fase路径com.oop.eksp.user.model， true:com.oop.eksp.user.model.[schemaName] --> 
+            <property name="enableSubPackages" value="false" />
+        </sqlMapGenerator>
+        
+         <!-- 生成mapxml对应client，也就是接口dao -->      
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.penzias.dao" targetProject="${targetProject}">
+            <property name="enableSubPackages" value="false" />
+        </javaClientGenerator>
+        
+        <table schema="" tableName="sm_role_modular" domainObjectName="SmRoleModular">
+            <property name="useActualColumnNames" value="false" />
+        </table>
+        
+    </context>
+</generatorConfiguration>

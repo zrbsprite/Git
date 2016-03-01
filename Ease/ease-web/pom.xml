@@ -7,7 +7,6 @@
 		<groupId>com.jsprite</groupId>
 		<artifactId>Ease</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
-		<relativePath>../Ease/pom.xml</relativePath>
 	</parent>
 	<artifactId>ease-web</artifactId>
 	<packaging>war</packaging>
@@ -169,6 +168,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5.1</version>
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
