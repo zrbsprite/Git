@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.penzias</groupId>
@@ -554,13 +553,13 @@
 			</dependency>
 			<!-- xml解析 end -->
 			<!-- Model管理 end -->
-			<!-- 校验－JDK的接�? �? s -->
+			<!-- 校验－JDK的接�?? �?? s -->
 			<dependency>
 				<groupId>javax.validation</groupId>
 				<artifactId>validation-api</artifactId>
 				<version>1.0.0.GA</version>
 			</dependency>
-			<!-- 校验－JDK的接�? �? e -->
+			<!-- 校验－JDK的接�?? �?? e -->
 			<!-- hibernate-validator - s -->
 			<dependency>
 				<groupId>org.hibernate</groupId>
@@ -715,5 +714,6 @@
 	</build>
 	<modules>
 		<module>mangix-redis</module>
-	</modules>
+    <module>mangix-solr</module>
+  </modules>
 </project>
