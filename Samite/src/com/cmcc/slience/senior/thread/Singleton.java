@@ -10,7 +10,9 @@ public class Singleton {
 	
 	public static Singleton getInstence(){
 		if(bean==null){
-			bean = new Singleton();
+			synchronized (Singleton.class) {
+				bean = new Singleton();
+			}
 		}
 		return bean;
 	}
