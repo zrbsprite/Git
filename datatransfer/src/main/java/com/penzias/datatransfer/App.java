@@ -86,9 +86,15 @@ public class App {
 						m++;
 					}
 					m = 0;*/
-					selectContent = DESEncryptUtil.encrypt(selectContent, ENCRYPT_KEY);
 					String correctKey = model.getTruesolu();
 					int examType = model.getExamtype().intValue();
+					//填空题
+					if(28==examType||29==examType||30==examType||31==examType||34==examType){
+						selectContent = "";
+					}
+					if(!StringUtils.isEmpty(selectContent)){
+						selectContent = DESEncryptUtil.encrypt(selectContent, ENCRYPT_KEY);
+					}
 					/*if(15==examType||18==examType||25==examType||27==examType||33==examType){
 						correctKey = correctKey.replaceAll(splitor, ",");
 					}else if(28==examType||29==examType||30==examType||31==examType||34==examType){
@@ -101,10 +107,6 @@ public class App {
 							m++;
 						}
 					}*/
-					//填空题
-					if(28==examType||29==examType||30==examType||31==examType||34==examType){
-						selectContent = "";
-					}
 					correctKey = DESEncryptUtil.encrypt(correctKey, ENCRYPT_KEY);
 					params[i] = new Object[]{model.getExamid(),model.getExamsubject(),model.getExamtype(), model.getExamimage(), model.getExamcontent1(),
 							1, new Date(), diff, 0, correctKey, selectContent, 0, 0, 0, 0, 1};
