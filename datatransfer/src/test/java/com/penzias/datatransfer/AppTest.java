@@ -27,5 +27,8 @@ public class AppTest {
 		String srcStr = "111@@222@@333@@444";
 		String tarStr = DESEncryptUtil.encrypt(srcStr, ENCRYPT_KEY);
 		System.out.println(tarStr);//HWD6bIWvybKv4aoKEOEQwICoieK0C5uN
+		String str1 = "VjqN5C6zkssxPPaiKu3453giPxe7t39XG7iDTx+BJ2Q=";
+		String outStr1 = DESEncryptUtil.decrypt(str1, ENCRYPT_KEY);
+		System.out.println(outStr1);
 	}
 }
