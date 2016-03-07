@@ -107,7 +107,9 @@ public class App {
 							m++;
 						}
 					}*/
-					correctKey = DESEncryptUtil.encrypt(correctKey, ENCRYPT_KEY);
+					if(!StringUtils.isEmpty(correctKey)){
+						correctKey = DESEncryptUtil.encrypt(correctKey, ENCRYPT_KEY);
+					}
 					params[i] = new Object[]{model.getExamid(),model.getExamsubject(),model.getExamtype(), model.getExamimage(), model.getExamcontent1(),
 							1, new Date(), diff, 0, correctKey, selectContent, 0, 0, 0, 0, 1};
 					i++;
