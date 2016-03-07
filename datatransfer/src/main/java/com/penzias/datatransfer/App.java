@@ -110,7 +110,7 @@ public class App {
 							1, new Date(), diff, 0, correctKey, selectContent, 0, 0, 0, 0, 1};
 					i++;
 				}
-				String batchInsertSql = "insert into exam_item(item_id, subject_id, type_id, item_image, item_content, creator_id, version, p_value, pump_times,"
+				String batchInsertSql = "insert into exam_item_temp(item_id, subject_id, type_id, item_image, item_content, creator_id, version, p_value, pump_times,"
 						+ " correct_key, selected_content, test_times, test_correct_times, have_patient, item_flag, status_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 				/*String batchInsertSql = "insert into zrb_main(item_id, subject_id, type_id, item_image, item_content, creator_id, version, p_value, pump_times,"
 						+ " correct_key, selected_content, test_times, test_correct_times, have_patient, item_flag) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";*/
@@ -174,7 +174,7 @@ public class App {
 					params[i] = new Object[]{model.getExamSubId(), model.getExamId(), model.getExamContent(), correctSolu, selectContent};
 					i++;
 				}
-				String batchInsertSql = "INSERT INTO exam_subitem (subitem_id, item_id, sub_content, correct_key, select_item) VALUES (?,?,?,?,?)";
+				String batchInsertSql = "INSERT INTO exam_subitem_temp (subitem_id, item_id, sub_content, correct_key, select_item) VALUES (?,?,?,?,?)";
 				//String batchInsertSql = "INSERT INTO zrb_sub (subitem_id, item_id, sub_content, correct_key, select_item) VALUES (?,?,?,?,?)";
 				Connection batchInsertConnection = DBTool.getConnection();
 				batchInsertConnection.setAutoCommit(false);
