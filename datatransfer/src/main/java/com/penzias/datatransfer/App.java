@@ -8,6 +8,7 @@ import java.util.List;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
+import org.apache.commons.lang3.StringUtils;
 import org.framework.util.DESEncryptUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -87,8 +88,8 @@ public class App {
 					m = 0;*/
 					selectContent = DESEncryptUtil.encrypt(selectContent, ENCRYPT_KEY);
 					String correctKey = model.getTruesolu();
-					/*int examType = model.getExamtype().intValue();
-					if(15==examType||18==examType||25==examType||27==examType||33==examType){
+					int examType = model.getExamtype().intValue();
+					/*if(15==examType||18==examType||25==examType||27==examType||33==examType){
 						correctKey = correctKey.replaceAll(splitor, ",");
 					}else if(28==examType||29==examType||30==examType||31==examType||34==examType){
 						// do nothing
@@ -100,7 +101,11 @@ public class App {
 							m++;
 						}
 					}*/
-					correctKey = DESEncryptUtil.encrypt(correctKey, ENCRYPT_KEY);
+					if(28==examType||29==examType||30==examType||31==examType||34==examType){
+						correctKey = "";
+					}else{
+						correctKey = DESEncryptUtil.encrypt(correctKey, ENCRYPT_KEY);
+					}
 					params[i] = new Object[]{model.getExamid(),model.getExamsubject(),model.getExamtype(), model.getExamimage(), model.getExamcontent1(),
 							1, new Date(), diff, 0, correctKey, selectContent, 0, 0, 0, 0, 1};
 					i++;
@@ -163,6 +168,12 @@ public class App {
 						selectContent += keyArray[m] + str;
 						m++;
 					}*/
+					if(!StringUtils.isEmpty(selectContent)){
+						selectContent = selectContent.trim();
+					}
+					if(null==selectContent){
+						selectContent = "";
+					}
 					selectContent = DESEncryptUtil.encrypt(selectContent, ENCRYPT_KEY);
 					params[i] = new Object[]{model.getExamSubId(), model.getExamId(), model.getExamContent(), correctSolu, selectContent};
 					i++;
