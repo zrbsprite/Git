@@ -5,3 +5,7 @@ mvn install:install-file
  -Dversion=1.0 
  -Dpackaging=jar 
  -DgeneratePom=true
+ 
+ 
+ 
+ assembly的指令使用：mvn assembly:assembly

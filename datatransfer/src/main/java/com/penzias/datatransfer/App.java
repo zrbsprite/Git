@@ -8,7 +8,7 @@ import java.util.List;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.framework.util.DESEncryptUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -86,9 +86,15 @@ public class App {
 						m++;
 					}
 					m = 0;*/
-					selectContent = DESEncryptUtil.encrypt(selectContent, ENCRYPT_KEY);
 					String correctKey = model.getTruesolu();
-					int examType = model.getExamtype().intValue();
+										int examType = model.getExamtype().intValue();
+					//填空题
+					if(28==examType||29==examType||30==examType||31==examType||34==examType){
+						selectContent = "";
+					}
+					if(!StringUtils.isEmpty(selectContent)){
+						selectContent = DESEncryptUtil.encrypt(selectContent, ENCRYPT_KEY);
+					}
 					/*if(15==examType||18==examType||25==examType||27==examType||33==examType){
 						correctKey = correctKey.replaceAll(splitor, ",");
 					}else if(28==examType||29==examType||30==examType||31==examType||34==examType){
@@ -101,16 +107,14 @@ public class App {
 							m++;
 						}
 					}*/
-					if(28==examType||29==examType||30==examType||31==examType||34==examType){
-						correctKey = "";
-					}else{
+					if(!StringUtils.isEmpty(correctKey)){
 						correctKey = DESEncryptUtil.encrypt(correctKey, ENCRYPT_KEY);
 					}
 					params[i] = new Object[]{model.getExamid(),model.getExamsubject(),model.getExamtype(), model.getExamimage(), model.getExamcontent1(),
 							1, new Date(), diff, 0, correctKey, selectContent, 0, 0, 0, 0, 1};
 					i++;
 				}
-				String batchInsertSql = "insert into exam_item(item_id, subject_id, type_id, item_image, item_content, creator_id, version, p_value, pump_times,"
+				String batchInsertSql = "insert into exam_item_temp(item_id, subject_id, type_id, item_image, item_content, creator_id, version, p_value, pump_times,"
 						+ " correct_key, selected_content, test_times, test_correct_times, have_patient, item_flag, status_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 				/*String batchInsertSql = "insert into zrb_main(item_id, subject_id, type_id, item_image, item_content, creator_id, version, p_value, pump_times,"
 						+ " correct_key, selected_content, test_times, test_correct_times, have_patient, item_flag) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";*/
@@ -168,17 +172,16 @@ public class App {
 						selectContent += keyArray[m] + str;
 						m++;
 					}*/
-					if(!StringUtils.isEmpty(selectContent)){
-						selectContent = selectContent.trim();
+					if(!StringUtils.isEmpty(selectContent) && !selectContent.trim().equals("")){
+						selectContent = DESEncryptUtil.encrypt(selectContent.trim(), ENCRYPT_KEY);
 					}
-					if(null==selectContent){
-						selectContent = "";
+					if(!StringUtils.isEmpty(selectContent) && !selectContent.trim().equals("")){
+						selectContent = DESEncryptUtil.encrypt(selectContent.trim(), ENCRYPT_KEY);
 					}
-					selectContent = DESEncryptUtil.encrypt(selectContent, ENCRYPT_KEY);
 					params[i] = new Object[]{model.getExamSubId(), model.getExamId(), model.getExamContent(), correctSolu, selectContent};
 					i++;
 				}
-				String batchInsertSql = "INSERT INTO exam_subitem (subitem_id, item_id, sub_content, correct_key, select_item) VALUES (?,?,?,?,?)";
+				String batchInsertSql = "INSERT INTO exam_subitem_temp (subitem_id, item_id, sub_content, correct_key, select_item) VALUES (?,?,?,?,?)";
 				//String batchInsertSql = "INSERT INTO zrb_sub (subitem_id, item_id, sub_content, correct_key, select_item) VALUES (?,?,?,?,?)";
 				Connection batchInsertConnection = DBTool.getConnection();
 				batchInsertConnection.setAutoCommit(false);
