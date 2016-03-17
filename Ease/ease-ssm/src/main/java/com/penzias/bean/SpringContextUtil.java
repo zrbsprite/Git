@@ -8,7 +8,7 @@ import org.springframework.context.ApplicationContextAware;
 /**
  * 以静态变量保存Spring ApplicationContext.
  * 
- * @author calvin
+ * @author penzias
  */
 
 public class SpringContextUtil implements ApplicationContextAware {
@@ -52,7 +52,7 @@ public class SpringContextUtil implements ApplicationContextAware {
 	/**
 	 * @author: Bob
 	 * 修改时间：2015年12月11日 - 上午9:38:18<br/>
-	 * 功能说明：获取zh_cn的国际化问价<br/>
+	 * 功能说明：获取zh_cn的国际化配置<br/>
 	 * @param key
 	 * @return
 	 */
