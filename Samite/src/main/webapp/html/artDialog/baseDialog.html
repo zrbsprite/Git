@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>artDialog使用</title>
+<script type="text/javascript" src="../../resources/artDialog/artDialog.js?skin=default"></script>
+<style type="text/css">
+	.center_div{
+		width: 100%;
+		height: 100%;
+		text-align: center;
+		vertical-align: middle;
+	}
+</style>
+<script type="text/javascript">
+	function show(){
+		var dialog = art.dialog({
+			//内容，当然content的内容可以是HTML
+			content:"这是基本对话框！",
+			//标题
+			title:"提示信息",
+			//是否开启模态窗口
+			lock:true,
+			//模态窗口的透明度，值越小表示透明度越高
+			opacity:0.3,
+			//如果为true那么关闭窗口，等价于ok:truek
+			//调用内部的函数
+			ok:function(){
+				//调用关闭方法
+				//this.close();
+				//修改内容区域
+				this.content("修改了content的内容，并使用HTML<div style='color:red'>红色的内容使用了HTML</div>");
+				//修改或添加按钮
+				//this.button({});
+				//调整位置
+				this.position("50%","50%");
+				//调整大小，带单位是字符串，不带是数字
+				this.size("10em",70);
+				//锁屏
+				//this.lock();
+				//解锁
+				//this.unlock();
+				//隐藏弹出框
+				//this.hide();
+				//定时关闭对话框，于上面的hide方法联合使用
+				//this.time(2);
+				return false;
+			},
+			//返回false窗口就会被阻止关闭，可以用this来访问artDialog的内部api
+			cancel:function(){
+				this.title("窗口不会关闭");
+				return false;
+			},
+			//改变确定按钮的显示内容
+			okVal:"YES",
+			//改变取消按钮的显示内容
+			cancelVal:"CANCEL",
+			//设置弹出窗口的宽度，可以带单位，默认为"auto"，同height
+			//width:300
+			width:"15em",
+			//设置窗口的高度
+			height:80,
+			//开启静止，不会随着滚动条跑动
+			fixed:true,
+			//左侧距离百分比，默认50%
+			left:"100%",
+			//顶部距离百分比，默认50%
+			top:"100%",
+			//依附于某个元素,但是这个功能在4.17版本中会出现bug，建议不使用
+			//follow:"#btn_follow"
+			//自定义按钮,此时要把ok的相关设置注释掉
+			//button:{"name":"登录",callback:function(){this.title("你点击了登录按钮");return false;},"focus":true}
+			//设置背景色
+			 background: '#600',
+			 //设置图标
+			 icon:"question",
+			 //设置对话框显示时间，对话框的关闭调用的是cancel的方法
+			 time:3,
+			 //是否可以改变对话框的大小，默认true
+			 resize:false,
+			 //是否可以拖动，默认是true
+			 drag:false,
+			 //是否允许用户按esc来关闭窗口，默认是true
+			 esc:false,
+			 //设置id
+			 id:"pop_test",
+			 //对话框弹出后执行的方法
+			 init:function(){this.title("对话框执行init方法");},
+			 //弹出窗口关闭前执行的方法
+			 //close:function(){this.title("窗口准备关闭，但是会被阻止");return false;},
+			 //是否显示对话框，默认是true，有遮罩但不显示对话框
+			 //show:false,
+			 //设置全局zindex值
+			 //zIndex:1987
+		});
+		//通过list可以找到想要的dialog，并调用扩展方法
+		//art.dialog.list['pop_test'].content('通过list找到指定id的dialog改变content');
+		//通过定义对象来调用扩展方法
+		dialog.content("定义对象改变content").title("扩展方法可以链式操作");
+	}
+	
+	function show2(){
+		var dialog = art.dialog({
+			//内容，当然content的内容可以是HTML
+			content:"这是基本对话框！",
+			//标题
+			title:"提示信息",
+			//是否开启模态窗口
+			lock:true,
+			//模态窗口的透明度，值越小表示透明度越高
+			opacity:0.3
+		});
+	}
+//如果项目中使用jquery可以使用jquery的版本，当然也可以不用
+</script>
+</head>
+<body>
+	<div class="center_div">
+		<input id="btn_follow" type="button" value="基本对话框" onclick="show();"/>
+		<input id="btn_follow" type="button" value="基本对话框" onclick="show2();"/>
+	</div>
+</body>
+</html>
