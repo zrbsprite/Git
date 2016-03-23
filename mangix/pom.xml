@@ -553,13 +553,13 @@
 			</dependency>
 			<!-- xml解析 end -->
 			<!-- Model管理 end -->
-			<!-- 校验－JDK的接�?? �?? s -->
+			<!-- 校验－JDK的接�?? �?? s -->
 			<dependency>
 				<groupId>javax.validation</groupId>
 				<artifactId>validation-api</artifactId>
 				<version>1.0.0.GA</version>
 			</dependency>
-			<!-- 校验－JDK的接�?? �?? e -->
+			<!-- 校验－JDK的接�?? �?? e -->
 			<!-- hibernate-validator - s -->
 			<dependency>
 				<groupId>org.hibernate</groupId>
@@ -714,6 +714,7 @@
 	</build>
 	<modules>
 		<module>mangix-redis</module>
-    <module>mangix-solr</module>
-  </modules>
+	    <module>mangix-solr</module>
+	    <module>mangix-rest</module>
+	 </modules>
 </project>
