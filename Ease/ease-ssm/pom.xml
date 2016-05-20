@@ -446,6 +446,7 @@
 					<verbose>true</verbose>
 					<overwrite>true</overwrite>
 					<configurationFile>${basedir}/exclude/generatorConfig.xml</configurationFile>
+					<outputDirectory>${project.build.directory}/generated-sources/mybatis-generator</outputDirectory>
 				</configuration>
 			</plugin>
 		</plugins>
