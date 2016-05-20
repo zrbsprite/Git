@@ -1,0 +1,8 @@
+target_dir=build/serviceCreator/service
+
+read_dao_folder=com/bank/dao
+read_dao_names=WxmenuMapper,SysConfigMapper
+
+output_dao_dir=com.zyht.bank.dao
+output_entity_dir=com.zyht.bank.entity
+output_service_dir=com.zyht.bank.service

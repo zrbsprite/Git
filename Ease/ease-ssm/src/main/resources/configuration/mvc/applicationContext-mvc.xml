@@ -45,17 +45,7 @@
     
     <!-- 拦截器 -->
     <mvc:interceptors>  
-        <bean class="com.penzias.core.interceptor.SystemInterceptor">
-        	<property name="noFilters">
-        		<list>
-        			<value>/verifycode.htm</value>
-        			<value>/sign.htm</value>
-        		</list>
-        	</property>
-        	<property name="whiteListRule">
-        		<value>^/anno/\w{1,}.*\.htm$</value>
-        	</property>
-        </bean>
+        <bean class="com.penzias.core.UserPermissionInterceptor"></bean>
         <!-- 拦截器单独配置 -->
         <!-- 
         <mvc:interceptor>
@@ -98,8 +88,10 @@
     </bean>
     
     <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-        <property name="templateLoaderPath">
-            <value>/WEB-INF/pages/</value>
+        <property name="templateLoaderPaths">
+        	<array>
+	            <value>/WEB-INF/pages/</value>
+        	</array>
         </property>
         <property name="defaultEncoding" value="UTF-8" />
         <property name="freemarkerSettings"><!-- 设置FreeMarker环境属性 -->
