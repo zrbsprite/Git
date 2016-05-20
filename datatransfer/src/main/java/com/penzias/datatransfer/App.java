@@ -111,10 +111,10 @@ public class App {
 						correctKey = DESEncryptUtil.encrypt(correctKey, ENCRYPT_KEY);
 					}
 					params[i] = new Object[]{model.getExamid(),model.getExamsubject(),model.getExamtype(), model.getExamimage(), model.getExamcontent1(),
-							1, new Date(), diff, 0, correctKey, selectContent, 0, 0, 0, 0, 1};
+							1, new Date(), diff, 0, "2000-01-01 00:00:01", correctKey, selectContent, 0, 0, 0, 0, 1};
 					i++;
 				}
-				String batchInsertSql = "insert into exam_item_temp(item_id, subject_id, type_id, item_image, item_content, creator_id, version, p_value, pump_times,"
+				String batchInsertSql = "insert into exam_item_temp(item_id, subject_id, type_id, item_image, item_content, creator_id, version, p_value, pump_times, lasted_pumpdate"
 						+ " correct_key, selected_content, test_times, test_correct_times, have_patient, item_flag, status_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 				/*String batchInsertSql = "insert into zrb_main(item_id, subject_id, type_id, item_image, item_content, creator_id, version, p_value, pump_times,"
 						+ " correct_key, selected_content, test_times, test_correct_times, have_patient, item_flag) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";*/
