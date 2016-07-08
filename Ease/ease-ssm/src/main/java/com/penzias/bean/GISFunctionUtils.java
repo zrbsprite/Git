@@ -29,7 +29,7 @@ public class GISFunctionUtils {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
 	private final String GeocodingAPIURL="http://api.map.baidu.com/geocoder/v2/"
-			+ "?ak=8fdb90b5c858bda85705faef17f5c80f&output=json&coordtype=gcj02ll&location=";
+			+ "?ak=8fdb90b5c858bda85705faef17f5c80f&output=json&coordtype=wgs84ll&location=";
 	
 	private static final Map<Integer, String> statusInfo = new HashMap<Integer, String>();
 	
@@ -43,26 +43,26 @@ public class GISFunctionUtils {
 
 	static{
 		statusInfo.put(0, "正常");
-		statusInfo.put(1, "服务器内部错误");
+		statusInfo.put(1, "服务器内部错�?);
 		statusInfo.put(2, "请求参数非法");
 		statusInfo.put(3, "权限校验失败");
 		statusInfo.put(4, "配额校验失败");
-		statusInfo.put(5, "ak不存在或者非法");
+		statusInfo.put(5, "ak不存在或者非�?);
 		statusInfo.put(101, "服务禁用");
 		statusInfo.put(102, "不通过白名单或者安全码不对");
-		statusInfo.put(200, "无权限");
+		statusInfo.put(200, "无权�?);
 		statusInfo.put(300, "配额错误");
 	}
 	
 	/**
-	 * <b>作者:</b> Bob<br/>
-	 * <b>修改时间：</b>2016年6月23日 - 下午1:47:19<br/>
-	 * <b>功能说明：</b>	获取指定坐标的地理信息<br/>
+	 * <b>作�?</b> Bob<br/>
+	 * <b>修改时间�?/b>2016�?�?3�?- 下午1:47:19<br/>
+	 * <b>功能说明�?/b>	获取指定坐标的地理信�?br/>
 	 * @param loc 地理信息如：116.30814954222,40.056885091681
-	 * @return  json对象形如：{"result":{"addressComponent":{"adcode":"110102","city":"北京市","country":"中国","country_code":0,"direction":"附近",
-	 * 						"distance":"38","district":"西城区","province":"北京市","street":"湾子街","street_number":"甲一号"},"business":"西客站,广外大街,马连道",
-	 * 						"cityCode":131,"formatted_address":"北京市西城区湾子街甲一号","location":{"lat":39.89534418269883,"lng":116.33283972795194},
-	 * 						"poiRegions":[{"direction_desc":"内","name":"马连道北里","tag":"房地产"}],"pois":[],"sematic_description":"马连道北里内"},"status":0}
+	 * @return  json对象形如：{"result":{"addressComponent":{"adcode":"110102","city":"北京�?,"country":"中国","country_code":0,"direction":"附近",
+	 * 						"distance":"38","district":"西城�?,"province":"北京�?,"street":"湾子�?,"street_number":"甲一�?},"business":"西客�?广外大街,马连�?,
+	 * 						"cityCode":131,"formatted_address":"北京市西城区湾子街甲一�?,"location":{"lat":39.89534418269883,"lng":116.33283972795194},
+	 * 						"poiRegions":[{"direction_desc":"�?,"name":"马连道北�?,"tag":"房地�?}],"pois":[],"sematic_description":"马连道北里内"},"status":0}
 	 * @throws HttpException 说明此次http请求异常，需要调用者处理此异常
 	 */
 	public JSONObject fetchPosition(String loc) throws HttpException{
@@ -96,15 +96,15 @@ public class GISFunctionUtils {
 				}else{
 					errorMsg = statusInfo.get(error);
 				}
-				logger.error("请求接口获取用户地理信息异常：" + errorMsg);
+				logger.error("请求接口获取用户地理信息异常�? + errorMsg);
 				throw new HttpException(errorMsg);
 			}
 		} catch (HttpException e){
-			logger.error("发送http请求异常，查询用户地理位置信息异常。");
+			logger.error("发送http请求异常，查询用户地理位置信息异常�?);
 			e.printStackTrace();
 			throw e;
 		} catch (IOException e){
-			logger.error("发送http请求异常，查询用户地理位置信息IO异常。");
+			logger.error("发送http请求异常，查询用户地理位置信息IO异常�?);
 			e.printStackTrace();
 			throw new HttpException("http请求IO异常");
 		}finally{
