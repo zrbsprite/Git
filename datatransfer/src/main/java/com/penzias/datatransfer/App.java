@@ -78,16 +78,8 @@ public class App {
 				for(DataSourceMainModel model : list){
 					float diff = getDifficult(model.getExamdiff());
 					String selectContent = model.getExamsolu();
-					/*String[] scArray = selectContent.split(splitor);
-					selectContent = "";
-					int m = 0;
-					for(String str : scArray){
-						selectContent += keyArray[m] + str;
-						m++;
-					}
-					m = 0;*/
 					String correctKey = model.getTruesolu();
-										int examType = model.getExamtype().intValue();
+					int examType = model.getExamtype().intValue();
 					//填空题
 					if(28==examType||29==examType||30==examType||31==examType||34==examType){
 						selectContent = "";
@@ -147,9 +139,10 @@ public class App {
 			int count = ((Long)runner.query(countConnection, srcTableCountSql, new ScalarHandler<Long>(1))).intValue();
 			countConnection.close();
 			logger.info("查询子表数据总量关闭连接！");
-			int pernum = 1;
+			int pernum = 500;
 			int totalPage = (count+1) / pernum;
 			for(int index=1;index<totalPage;index++){
+				logger.info("主表数据开始处理第【"+index+"】页数据……");
 				int start = pernum * (index - 1);
 				Connection selectConnection = DBTool.getConnection();
 				String srcTableListSql = "select * from tblexamsub limit " + start + "," + pernum;
@@ -165,16 +158,6 @@ public class App {
 						correctSolu = "";
 					}
 					String selectContent = model.getExamSolu();
-					/*String[] scArray = selectContent.split(splitor);
-					selectContent = "";
-					int m = 0;
-					for(String str : scArray){
-						selectContent += keyArray[m] + str;
-						m++;
-					}*/
-					if(!StringUtils.isEmpty(selectContent) && !selectContent.trim().equals("")){
-						selectContent = DESEncryptUtil.encrypt(selectContent.trim(), ENCRYPT_KEY);
-					}
 					if(!StringUtils.isEmpty(selectContent) && !selectContent.trim().equals("")){
 						selectContent = DESEncryptUtil.encrypt(selectContent.trim(), ENCRYPT_KEY);
 					}
