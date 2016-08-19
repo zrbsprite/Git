@@ -87,6 +87,18 @@ public class App {
 					if(!StringUtils.isEmpty(selectContent)){
 						selectContent = DESEncryptUtil.encrypt(selectContent, ENCRYPT_KEY);
 					}
+					
+					//26-b1
+					int m=0;
+					if(26==examType){
+						String[] ckArray = selectContent.split(splitor);
+						selectContent = "";
+						for(String str : ckArray){
+							correctKey += keyArray[m] + str;
+							m++;
+						}
+					}
+					
 					/*if(15==examType||18==examType||25==examType||27==examType||33==examType){
 						correctKey = correctKey.replaceAll(splitor, ",");
 					}else if(28==examType||29==examType||30==examType||31==examType||34==examType){
