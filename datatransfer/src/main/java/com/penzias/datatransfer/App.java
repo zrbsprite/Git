@@ -78,16 +78,8 @@ public class App {
 				for(DataSourceMainModel model : list){
 					float diff = getDifficult(model.getExamdiff());
 					String selectContent = model.getExamsolu();
-					/*String[] scArray = selectContent.split(splitor);
-					selectContent = "";
-					int m = 0;
-					for(String str : scArray){
-						selectContent += keyArray[m] + str;
-						m++;
-					}
-					m = 0;*/
 					String correctKey = model.getTruesolu();
-										int examType = model.getExamtype().intValue();
+					int examType = model.getExamtype().intValue();
 					//填空题
 					if(28==examType||29==examType||30==examType||31==examType||34==examType){
 						selectContent = "";
@@ -95,6 +87,20 @@ public class App {
 					if(!StringUtils.isEmpty(selectContent)){
 						selectContent = DESEncryptUtil.encrypt(selectContent, ENCRYPT_KEY);
 					}
+					
+					String content = model.getExamcontent1();
+					
+					//26-b1
+					int m=0;
+					if(26==examType){
+						String[] ckArray = content.split(splitor);
+						content = "";
+						for(String str : ckArray){
+							content += keyArray[m] + str;
+							m++;
+						}
+					}
+					
 					/*if(15==examType||18==examType||25==examType||27==examType||33==examType){
 						correctKey = correctKey.replaceAll(splitor, ",");
 					}else if(28==examType||29==examType||30==examType||31==examType||34==examType){
@@ -110,12 +116,12 @@ public class App {
 					if(!StringUtils.isEmpty(correctKey)){
 						correctKey = DESEncryptUtil.encrypt(correctKey, ENCRYPT_KEY);
 					}
-					params[i] = new Object[]{model.getExamid(),model.getExamsubject(),model.getExamtype(), model.getExamimage(), model.getExamcontent1(),
+					params[i] = new Object[]{model.getExamid(),model.getExamsubject(),model.getExamtype(), model.getExamimage(), content,
 							1, new Date(), diff, 0, "2000-01-01 00:00:01", correctKey, selectContent, 0, 0, 0, 0, 1};
 					i++;
 				}
-				String batchInsertSql = "insert into exam_item_temp(item_id, subject_id, type_id, item_image, item_content, creator_id, version, p_value, pump_times, lasted_pumpdate"
-						+ " correct_key, selected_content, test_times, test_correct_times, have_patient, item_flag, status_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				String batchInsertSql = "insert into exam_item_temp(item_id, subject_id, type_id, item_image, item_content, creator_id, version, p_value, pump_times, lasted_pumpdate,"
+						+ " correct_key, selected_content, test_times, test_correct_times, have_patient, item_flag, status_id) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 				/*String batchInsertSql = "insert into zrb_main(item_id, subject_id, type_id, item_image, item_content, creator_id, version, p_value, pump_times,"
 						+ " correct_key, selected_content, test_times, test_correct_times, have_patient, item_flag) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";*/
 				Connection insertConnection = DBTool.getConnection();
@@ -125,8 +131,10 @@ public class App {
 					insertConnection.commit();
 				} catch (Exception e) {
 					e.printStackTrace();
+					logger.error(e.getLocalizedMessage());
 					insertConnection.rollback();
 					logger.error("批量导入数据出错，系统自动退出！");
+					System.exit(1);
 				}finally{
 					insertConnection.close();
 				}
@@ -139,7 +147,6 @@ public class App {
 	
 	
 	private static void importSubTableData(){
-		//final String splitor = "@@"; 
 		try {
 			Connection countConnection = DBTool.getConnection();
 			String srcTableCountSql = "select count(ExamsubID) from tblexamsub";
@@ -147,11 +154,13 @@ public class App {
 			int count = ((Long)runner.query(countConnection, srcTableCountSql, new ScalarHandler<Long>(1))).intValue();
 			countConnection.close();
 			logger.info("查询子表数据总量关闭连接！");
-			int pernum = 1;
+			int pernum = 500;
 			int totalPage = (count+1) / pernum;
 			for(int index=1;index<totalPage;index++){
+				logger.info("主表数据开始处理第【"+index+"】页数据……");
 				int start = pernum * (index - 1);
 				Connection selectConnection = DBTool.getConnection();
+				//数据库中tureSolu需要改成truesolu
 				String srcTableListSql = "select * from tblexamsub limit " + start + "," + pernum;
 				List<SubSrcModel> list = (List<SubSrcModel>) runner.query(selectConnection, srcTableListSql, new BeanListHandler<SubSrcModel>(SubSrcModel.class));
 				selectConnection.close();
@@ -165,16 +174,6 @@ public class App {
 						correctSolu = "";
 					}
 					String selectContent = model.getExamSolu();
-					/*String[] scArray = selectContent.split(splitor);
-					selectContent = "";
-					int m = 0;
-					for(String str : scArray){
-						selectContent += keyArray[m] + str;
-						m++;
-					}*/
-					if(!StringUtils.isEmpty(selectContent) && !selectContent.trim().equals("")){
-						selectContent = DESEncryptUtil.encrypt(selectContent.trim(), ENCRYPT_KEY);
-					}
 					if(!StringUtils.isEmpty(selectContent) && !selectContent.trim().equals("")){
 						selectContent = DESEncryptUtil.encrypt(selectContent.trim(), ENCRYPT_KEY);
 					}
