@@ -44,6 +44,31 @@ public class Stack {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
+	public <T> T peer(){
+		if(lastIndex>-1){
+			return (T) elementData[lastIndex];
+		}else{
+			return null;
+		}
+	}
+	
+	public boolean isEmpty(){
+		return lastIndex<=-1;
+	}
+	
+	public int getLastElementIndex(){
+		return lastIndex;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public <T> T getElement(int index){
+		if(index<=lastIndex && index>-1){
+			return (T) elementData[index];
+		}
+		throw new IndexOutOfBoundsException();
+	}
+	
 	private void ensureCapacity(int minCapacity) {
 		// 如果数组的原有长度小于目前所需的长度
 		int oldCapacity = elementData.length;

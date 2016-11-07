@@ -36,8 +36,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
 		return isContain(node, root);
 	}
 
-	/**方法名称: isContain<br>
-	 * 描述：			<br/>
+	 /* 描述：	<br/>
 	 * 作者: ZRB<br/>
 	 * 修改日期：2016年11月4日上午11:30:26<br/>
 	 * @param comp
