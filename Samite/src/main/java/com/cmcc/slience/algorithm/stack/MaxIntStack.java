@@ -8,8 +8,11 @@
  */
 package com.cmcc.slience.algorithm.stack;
 
+import org.junit.Assert;
+import org.junit.Test;
 
-/**描述：最小栈<br>
+
+/**描述：最大栈<br>
  * 作者：ZRB <br>
  * 修改日期：2016年11月7日下午4:57:05 <br>
  * E-mail:  <br> 
@@ -63,5 +66,25 @@ public class MaxIntStack {
 	
 	public boolean isEmpty(){
 		return valueStack.isEmpty();
+	}
+	
+	@Test
+	public void test(){
+		MaxIntStack maxStack = new MaxIntStack();
+		int firstValue = maxStack.push(1);
+		Assert.assertEquals(1, firstValue);
+		int firstMax = maxStack.getMaxValue();
+		Assert.assertEquals(1, firstMax);
+		int firstPop = maxStack.pop();
+		Assert.assertEquals(1, firstPop);
+		maxStack.push(10);
+		maxStack.push(8);
+		maxStack.push(11);
+		maxStack.push(13);
+		maxStack.push(9);
+		maxStack.push(14);
+		maxStack.push(6);
+		int secondMax = maxStack.getMaxValue();
+		Assert.assertEquals(14, secondMax);
 	}
 }

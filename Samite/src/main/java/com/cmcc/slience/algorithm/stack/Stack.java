@@ -38,10 +38,10 @@ public class Stack {
 		if(lastIndex>-1){
 			T tempEle = (T) elementData[lastIndex];
 			elementData[lastIndex] = null;
+			lastIndex--;
 			return tempEle;
-		}else{
-			return null;
 		}
+		return null;
 	}
 	
 	@SuppressWarnings("unchecked")
