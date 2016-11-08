@@ -6,7 +6,7 @@
  * @version:v1.0
  * Createdate:2016年11月7日下午4:57:05
  */
-package com.cmcc.slience.algorithm.stack;
+package com.cmcc.slience.datastructures.stack;
 
 import org.junit.Assert;
 import org.junit.Test;

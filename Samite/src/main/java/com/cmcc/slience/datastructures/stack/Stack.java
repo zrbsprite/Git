@@ -6,7 +6,7 @@
  * @version:v1.0
  * Createdate:2016年11月3日下午4:38:01
  */
-package com.cmcc.slience.algorithm.stack;
+package com.cmcc.slience.datastructures.stack;
 
 import java.util.Arrays;
 
