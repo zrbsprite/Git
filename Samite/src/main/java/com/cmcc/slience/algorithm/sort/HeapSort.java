@@ -1,4 +1,4 @@
-package com.cmcc.slience.algorithm;
+package com.cmcc.slience.algorithm.sort;
 
 import org.junit.Test;
 
