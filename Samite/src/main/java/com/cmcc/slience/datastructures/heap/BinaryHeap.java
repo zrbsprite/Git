@@ -62,8 +62,9 @@ public class BinaryHeap<T extends Comparable<T>> {
 		//首先被挖空的是根节点
 		int hole = 1;
 		//将根节点删除，并将最后一个叶子节点放于根处，同时堆的大小减一
-		heap[hole] = heap[realSize--];
+ 		heap[hole] = heap[realSize--];
 		percolateDown(hole);
+		heap[realSize+1]=null;
 		return root;
 	}
 
@@ -80,7 +81,7 @@ public class BinaryHeap<T extends Comparable<T>> {
 	
 	public void buildHeap(T[] items){
 		realSize = items.length;
-		heap = new Object[realSize];
+		heap = new Object[realSize+1+realSize*3/2];
 		int index=1;
 		for(T t : items){
 			heap[index++]=t;
@@ -143,5 +144,11 @@ public class BinaryHeap<T extends Comparable<T>> {
 			newCapacity = minCapacity;
 		// minCapacity is usually close to size, so this is a win:
 		heap = Arrays.copyOf(heap, newCapacity);
+	}
+	
+	public static void main(String[] args) {
+		BinaryHeap<Integer> heap = new BinaryHeap<Integer>();
+		heap.buildHeap(new Integer[]{10,11,9,15,8,7,6,16});
+		System.out.println(heap.deleteMin().toString());
 	}
 }
