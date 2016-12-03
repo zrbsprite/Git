@@ -1,7 +1,7 @@
 package com.cmcc.slience.algorithm.sort;
 
 /**
- * 描述：<br>
+ * 描述：希尔排序<br>
  * 作者：ZRB <br>
  * 修改日期：2016年11月18日下午3:12:10 <br>
  * E-mail:  <br> 
