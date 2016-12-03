@@ -64,8 +64,12 @@ public class HeapSort<T extends Comparable<T>> {
 
 	@Test
 	public void test(){
-		Integer[] array = new Integer[]{10,11,9,15,8,7,6,16};
+		Integer[] array = new Integer[]{11,5,7,2,3,17};
+		//Integer[] array = new Integer[]{10,11,9,15,8,7,6,16};
 		HeapSort<Integer> heapsort = new HeapSort<Integer>();
 		heapsort.heapSort(array);
+		for(Integer one : array){
+			System.out.println(one+",");
+		}
 	}
 }
