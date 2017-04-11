@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<!-- saved from url=(0050)http://www.cnblogs.com/larryzeal/p/5799195.html#c1 -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spring Boot 官方文档学习（一）入门及使用 - LarryZeal - 博客园</title>
+<link type="text/css" rel="stylesheet" href="./官方文档学习入门一_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./官方文档学习入门一_files/bundle-ClearGertrude.css">
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="./官方文档学习入门一_files/bundle-ClearGertrude-mobile.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/larryzeal/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/larryzeal/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/larryzeal/wlwmanifest.xml">
+<script async="" src="./官方文档学习入门一_files/analytics.js"></script><script type="text/javascript" src="./官方文档学习入门一_files/encoder.js"></script><script src="./官方文档学习入门一_files/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'larryzeal', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="./官方文档学习入门一_files/blog-common.js" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<div id="header">
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/larryzeal/">LarryZeal</a></h1>
+<p id="tagline">佳句杯中游、歌舞自风流、如是风光不知愁；
+忆得容颜凭照影，看来岁月似翻书</p></div>
+<div id="main">
+	
+<div id="post_detail">
+	<div class="post">
+		<h2>
+			<a id="cb_post_title_url" href="http://www.cnblogs.com/larryzeal/p/5799195.html">Spring Boot 官方文档学习（一）入门及使用</a>
+		</h2>
+		<div class="postText"><div id="cnblogs_post_body"><p>个人说明：本文内容都是从为知笔记上复制过来的，样式难免走样，以后再修改吧。另外，本文可以看作官方文档的选择性的翻译（大部分），以及个人使用经验及问题。</p>
+<div>其他说明：<strong>如果对Spring Boot没有概念，请先移步上一篇文章 <span style="font-size: 18px; color: #ff0000;"><a href="http://www.cnblogs.com/larryzeal/p/5765945.html" target="_blank"><span style="color: #ff0000;"><span style="font-size: large;">Spring Boot 学习</span></span></a></span></strong>。本篇原本是为了深入了解下Spring Boot而出现的。</div>
+<div>另外，Spring Boot 仍然是基于Spring的，建议在赶完工之后深入学习下Spring，有兴趣可以看看我的 <a href="http://www.cnblogs.com/larryzeal/p/6001000.html">Spring 4 官方文档学习（十一）Web MVC 框架</a> 。欢迎探讨，笑~</div>
+<hr>
+<div><span style="font-size: x-large;"><strong>目录：</strong></span></div>
+<ol>
+<li><a href="http://www.cnblogs.com/larryzeal/p/5799195.html#c1">内置Servlet Container</a></li>
+<li><a href="http://www.cnblogs.com/larryzeal/p/5799195.html#c2">使用Spring Boot</a></li>
+<li><a href="http://www.cnblogs.com/larryzeal/p/5799195.html#c3">安装Spring Boot CLI</a></li>
+<li><a href="http://www.cnblogs.com/larryzeal/p/5799195.html#c4">开发一个简单的Spring Boot应用--使用最原始的方式</a><ol>
+<li><a href="http://www.cnblogs.com/larryzeal/p/5799195.html#c4-1">创建一个文件夹</a></li>
+<li><a href="http://www.cnblogs.com/larryzeal/p/5799195.html#c4-2">新建一个pom.xml文件</a></li>
+<li><a href="http://www.cnblogs.com/larryzeal/p/5799195.html#c4-3">命令：mvn package</a></li>
+<li><a href="http://www.cnblogs.com/larryzeal/p/5799195.html#c4-4">添加依赖</a></li>
+<li><a href="http://www.cnblogs.com/larryzeal/p/5799195.html#c4-5">开始写代码</a></li>
+<li><a href="http://www.cnblogs.com/larryzeal/p/5799195.html#c4-6">启动项目</a></li>
+<li><a href="http://www.cnblogs.com/larryzeal/p/5799195.html#c4-7">打包</a></li>
+<li><a href="http://www.cnblogs.com/larryzeal/p/5799195.html#c4-8">执行</a></li>
+</ol></li>
+<li><a href="http://www.cnblogs.com/larryzeal/p/5799195.html#c5">Dependency Management</a><ol>
+<li><a href="http://www.cnblogs.com/larryzeal/p/5799195.html#c5-1">继承 spring-boot-starter-parent </a></li>
+<li><a href="http://www.cnblogs.com/larryzeal/p/5799195.html#c5-2">不继承 spring-boot-starter-parent </a></li>
+</ol></li>
+<li><a href="http://www.cnblogs.com/larryzeal/p/5799195.html#c6">Starters</a></li>
+<li><a href="http://www.cnblogs.com/larryzeal/p/5799195.html#c7">自动配置</a></li>
+<li><a href="http://www.cnblogs.com/larryzeal/p/5799195.html#c8">Spring Beans 和 依赖注入（略）</a></li>
+<li><a href="http://www.cnblogs.com/larryzeal/p/5799195.html#c9">@SpringBootApplication</a></li>
+<li><a href="http://www.cnblogs.com/larryzeal/p/5799195.html#c10">运行Spring Boot Application</a><ol>
+<li><a href="http://www.cnblogs.com/larryzeal/p/5799195.html#c10-1">从IDE中运行</a></li>
+<li><a href="http://www.cnblogs.com/larryzeal/p/5799195.html#c10-2">运行fat jar（executable jar）</a></li>
+<li><a href="http://www.cnblogs.com/larryzeal/p/5799195.html#c10-3">使用Maven Plugin</a></li>
+<li><a href="http://www.cnblogs.com/larryzeal/p/5799195.html#c10-4">Hot swapping</a></li>
+</ol></li>
+<li><a href="http://www.cnblogs.com/larryzeal/p/5799195.html#c11">Developer tools</a><ol>
+<li><a href="http://www.cnblogs.com/larryzeal/p/5799195.html#c11-1">Property defaults</a></li>
+<li><a href="http://www.cnblogs.com/larryzeal/p/5799195.html#c11-2">自动重启</a></li>
+<li><a href="http://www.cnblogs.com/larryzeal/p/5799195.html#c11-3">热加载 LiveReload</a></li>
+<li><a href="http://www.cnblogs.com/larryzeal/p/5799195.html#c11-4">全局设置</a></li>
+<li><a href="http://www.cnblogs.com/larryzeal/p/5799195.html#c11-5">远程应用</a><ol>
+<li><a href="http://www.cnblogs.com/larryzeal/p/5799195.html#c11-5-1">远程调试</a></li>
+</ol></li>
+</ol></li>
+<li><a href="http://www.cnblogs.com/larryzeal/p/5799195.html#c12">生产打包</a></li>
+</ol><hr>
+<div>&nbsp;</div>
+<div><span style="font-size: 18pt;"><a name="c1"></a>一、内置Servlet Container：</span></div>
+<blockquote>
+<table style="border-width: 0.5pt; border-style: solid; border-color: -moz-use-text-color; border-collapse: collapse; width: 487px;"><colgroup> <col class="col_1"> <col class="col_2"> <col class="col_3"></colgroup>
+<thead>
+<tr><th style="border-right: 0.5pt solid; border-bottom: 0.5pt solid;" align="left" valign="top" width="139">Name</th><th style="border-right: 0.5pt solid; border-bottom: 0.5pt solid;" align="left" valign="top" width="191">Servlet Version</th><th style="border-bottom: 0.5pt solid;" align="left" valign="top" width="155">Java Version</th></tr>
+</thead>
+<tbody>
+<tr>
+<td style="border-right: 0.5pt solid; border-bottom: 0.5pt solid;" align="left" valign="top" width="139">
+<p>Tomcat 8</p>
+</td>
+<td style="border-right: 0.5pt solid; border-bottom: 0.5pt solid;" align="left" valign="top" width="191">
+<p>3.1</p>
+</td>
+<td style="border-bottom: 0.5pt solid;" align="left" valign="top" width="155">
+<p>Java 7+</p>
+</td>
+</tr>
+<tr>
+<td style="border-right: 0.5pt solid; border-bottom: 0.5pt solid;" align="left" valign="top" width="139">
+<p>Tomcat 7</p>
+</td>
+<td style="border-right: 0.5pt solid; border-bottom: 0.5pt solid;" align="left" valign="top" width="191">
+<p>3.0</p>
+</td>
+<td style="border-bottom: 0.5pt solid;" align="left" valign="top" width="155">
+<p>Java 6+</p>
+</td>
+</tr>
+<tr>
+<td style="border-right: 0.5pt solid; border-bottom: 0.5pt solid;" align="left" valign="top" width="139">
+<p>Jetty 9.3</p>
+</td>
+<td style="border-right: 0.5pt solid; border-bottom: 0.5pt solid;" align="left" valign="top" width="191">
+<p>3.1</p>
+</td>
+<td style="border-bottom: 0.5pt solid;" align="left" valign="top" width="155">
+<p>Java 8+</p>
+</td>
+</tr>
+<tr>
+<td style="border-right: 0.5pt solid; border-bottom: 0.5pt solid;" align="left" valign="top" width="139">
+<p>Jetty 9.2</p>
+</td>
+<td style="border-right: 0.5pt solid; border-bottom: 0.5pt solid;" align="left" valign="top" width="191">
+<p>3.1</p>
+</td>
+<td style="border-bottom: 0.5pt solid;" align="left" valign="top" width="155">
+<p>Java 7+</p>
+</td>
+</tr>
+<tr>
+<td style="border-right: 0.5pt solid; border-bottom: 0.5pt solid;" align="left" valign="top" width="139">
+<p>Jetty 8</p>
+</td>
+<td style="border-right: 0.5pt solid; border-bottom: 0.5pt solid;" align="left" valign="top" width="191">
+<p>3.0</p>
+</td>
+<td style="border-bottom: 0.5pt solid;" align="left" valign="top" width="155">
+<p>Java 6+</p>
+</td>
+</tr>
+<tr>
+<td style="border-right: 0.5pt solid;" align="left" valign="top" width="139">
+<p>Undertow 1.3</p>
+</td>
+<td style="border-right: 0.5pt solid;" align="left" valign="top" width="191">
+<p>3.1</p>
+</td>
+<td align="left" valign="top" width="155">
+<p>Java 7+</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div>&nbsp;</div>
+<div>此外，你仍然可以部署Spring Boot项目到任何兼容Servlet3.0+的容器。</div>
+</blockquote>
+<div><span style="font-size: 18pt;"><a name="c2"></a>二、使用Spring Boot。</span></div>
+<div>&nbsp;&nbsp;&nbsp; 你可以像使用标准的Java库文件一样使用Spring Boot。简单的将需要的 <em>spring-boot-*.jar</em> 添加到classpath即可。</div>
+<div>&nbsp;&nbsp;&nbsp; Spring Boot不要求任何特殊的工具集成，所以可以使用任何IDE，甚至文本编辑器。</div>
+<div>&nbsp;</div>
+<div>&nbsp;&nbsp;&nbsp; 只是，仍然建议使用build工具：Maven 或 Gradle。</div>
+<div>&nbsp;</div>
+<div>&nbsp;&nbsp;&nbsp; Spring Boot依赖 使用 <code class="literal">org.springframework.boot</code><span class="Apple-converted-space">&nbsp;<code class="literal">groupId</code> 。</span></div>
+<div>&nbsp;&nbsp;&nbsp; 通常，让你的Maven POM文件继承 spring-boot-starter-parent，并声明一个或多个 Starter POMs依赖即可。Spring Boot也提供了一个可选的 Maven Plugin来创建可执行的jars。&nbsp;&nbsp; 如下：</div>
+<div class="cnblogs_code" style="background-color: #f5f5f5; border: #cccccc 1px solid; padding: 5px;"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./官方文档学习入门一_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">&lt;?</span><span style="color: #ff00ff;">xml version="1.0" encoding="UTF-8"</span><span style="color: #0000ff;">?&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">project </span><span style="color: #ff0000;">xmlns</span><span style="color: #0000ff;">="http://maven.apache.org/POM/4.0.0"</span><span style="color: #ff0000;"> xmlns:xsi</span><span style="color: #0000ff;">="http://www.w3.org/2001/XMLSchema-instance"</span><span style="color: #ff0000;">
+    xsi:schemaLocation</span><span style="color: #0000ff;">="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">modelVersion</span><span style="color: #0000ff;">&gt;</span>4.0.0<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">modelVersion</span><span style="color: #0000ff;">&gt;</span>
+
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">groupId</span><span style="color: #0000ff;">&gt;</span>com.example<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">groupId</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">artifactId</span><span style="color: #0000ff;">&gt;</span>myproject<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">artifactId</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">version</span><span style="color: #0000ff;">&gt;</span>0.0.1-SNAPSHOT<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">version</span><span style="color: #0000ff;">&gt;</span>
+
+    <span style="color: #008000;">&lt;!--</span><span style="color: #008000;"> Inherit defaults from Spring Boot </span><span style="color: #008000;">--&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">parent</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">groupId</span><span style="color: #0000ff;">&gt;</span>org.springframework.boot<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">groupId</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">artifactId</span><span style="color: #0000ff;">&gt;</span>spring-boot-starter-parent<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">artifactId</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">version</span><span style="color: #0000ff;">&gt;</span>1.4.0.RELEASE<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">version</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">parent</span><span style="color: #0000ff;">&gt;</span>
+
+    <span style="color: #008000;">&lt;!--</span><span style="color: #008000;"> Add typical dependencies for a web application </span><span style="color: #008000;">--&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">dependencies</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">dependency</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">groupId</span><span style="color: #0000ff;">&gt;</span>org.springframework.boot<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">groupId</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">artifactId</span><span style="color: #0000ff;">&gt;</span>spring-boot-starter-web<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">artifactId</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">dependency</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">dependencies</span><span style="color: #0000ff;">&gt;</span>
+
+    <span style="color: #008000;">&lt;!--</span><span style="color: #008000;"> Package as an executable jar </span><span style="color: #008000;">--&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">build</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">plugins</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">plugin</span><span style="color: #0000ff;">&gt;</span>
+                <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">groupId</span><span style="color: #0000ff;">&gt;</span>org.springframework.boot<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">groupId</span><span style="color: #0000ff;">&gt;</span>
+                <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">artifactId</span><span style="color: #0000ff;">&gt;</span>spring-boot-maven-plugin<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">artifactId</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">plugin</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">plugins</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">build</span><span style="color: #0000ff;">&gt;</span>
+
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">project</span><span style="color: #0000ff;">&gt;</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./官方文档学习入门一_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<div>&nbsp;</div>
+<div>&nbsp;&nbsp;&nbsp; 需要注意的是， spring-boot-starter-parent 是一个非常好的方法，但并不适用于所有情况。有时你需要继承其他的POM，或者你不喜欢默认的设置。-- 办法见后面。</div>
+<div>&nbsp;</div>
+<div><span style="font-size: 18pt;"><a name="c3"></a>三、安装Spring Boot CLI。</span></div>
+<div>&nbsp;&nbsp;&nbsp; 这是一个命令行工具，可以执行Groove脚本。是执行一个Spring Boot的最快途径。</div>
+<div>&nbsp;&nbsp;&nbsp; -- 好吧，Linux下无敌，Win下还是休息吧。</div>
+<div>&nbsp;</div>
+<div><span style="font-size: 18pt;"><a name="c4"></a>四、开发一个简单的Spring Boot应用--使用最原始的方式。</span></div>
+<div>&nbsp;&nbsp;&nbsp; 务必注意：前提是maven + jdk。</div>
+<div>&nbsp;&nbsp;&nbsp; <a name="c4-1"></a>1、创建一个文件夹。SpringBootSample01</div>
+<div>&nbsp;&nbsp;&nbsp; <a name="c4-2"></a>2、新建一个pom.xml文件。内容如下：<br>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./官方文档学习入门一_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">&lt;?</span><span style="color: #ff00ff;">xml version="1.0" encoding="UTF-8"</span><span style="color: #0000ff;">?&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">project </span><span style="color: #ff0000;">xmlns</span><span style="color: #0000ff;">="http://maven.apache.org/POM/4.0.0"</span><span style="color: #ff0000;"> xmlns:xsi</span><span style="color: #0000ff;">="http://www.w3.org/2001/XMLSchema-instance"</span><span style="color: #ff0000;">
+    xsi:schemaLocation</span><span style="color: #0000ff;">="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">modelVersion</span><span style="color: #0000ff;">&gt;</span>4.0.0<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">modelVersion</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">groupId</span><span style="color: #0000ff;">&gt;</span>com.example<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">groupId</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">artifactId</span><span style="color: #0000ff;">&gt;</span>myproject<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">artifactId</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">version</span><span style="color: #0000ff;">&gt;</span>0.0.1-SNAPSHOT<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">version</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">parent</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">groupId</span><span style="color: #0000ff;">&gt;</span>org.springframework.boot<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">groupId</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">artifactId</span><span style="color: #0000ff;">&gt;</span>spring-boot-starter-parent<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">artifactId</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">version</span><span style="color: #0000ff;">&gt;</span>1.4.0.RELEASE<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">version</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">parent</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #008000;">&lt;!--</span><span style="color: #008000;"> Additional lines to be added here... </span><span style="color: #008000;">--&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">project</span><span style="color: #0000ff;">&gt;</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./官方文档学习入门一_files/copycode.gif" alt="复制代码"></a></span></div></div>
+</div>
+<div>&nbsp;&nbsp;&nbsp; <a name="c4-3"></a>3、上面没有添加任何依赖，但仍然可以build。命令行：mvn package。注意，是当前路径下 //SpringBootSample01/ 。</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 当然，你也可以使用IDE，不过使用文本编辑器会让我们对它更理解。</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="./官方文档学习入门一_files/870358-20160823140753401-1038020327.png" alt="" width="623" height="482"></div>
+<div>&nbsp;&nbsp;&nbsp; <a name="c4-4"></a>4、现在需要添加依赖 -- 其实就是把依赖的jar添加到buildpath。</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 由于我们已经继承了 spring-boot-starter-parent ，而 spring-boot-starter-parent 又提供了 dependency-management ，所以我们可以忽略被选中依赖的版本。</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在添加依赖之前，我们先看一下现在已有什么：mvn dependency:tree。该命令会打印一个当前项目的依赖树。</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+<div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 结果表明，当前没有任何依赖。&nbsp;</div>
+<div>&nbsp; <img src="./官方文档学习入门一_files/870358-20160823140837636-431733277.png" alt="" width="655" height="310"></div>
+<div class="tag">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; OK，现在我们添加一个Starter 模块。<br>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./官方文档学习入门一_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">dependencies</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">dependency</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">groupId</span><span style="color: #0000ff;">&gt;</span>org.springframework.boot<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">groupId</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">artifactId</span><span style="color: #0000ff;">&gt;</span>spring-boot-starter-web<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">artifactId</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">dependency</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">dependencies</span><span style="color: #0000ff;">&gt;</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./官方文档学习入门一_files/copycode.gif" alt="复制代码"></a></span></div></div>
+　　　</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 现在再次查看一下依赖树。</div>
+<div>　　 <img src="./官方文档学习入门一_files/870358-20160823140955026-2074443483.png" alt="" width="705" height="664"></div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 可以看出，spring-boot-starter-web&nbsp; 包含了很多内容，spring-webmvc、spring-web、jackson、validation、tomcat、starter。</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a name="c4-5"></a>5、现在就可以开始写代码了。</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 由于Maven默认编译路径为 src/main/java 下面的源码，所以，默认设置下，需要创建这些文件夹。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+<div class="kwd">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 然后，编写文件 src/main/java/Example.java：</div>
+<div class="kwd">
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./官方文档学习入门一_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">import</span> org.springframework.boot.*<span style="color: #000000;">;
+</span><span style="color: #0000ff;">import</span> org.springframework.boot.autoconfigure.*<span style="color: #000000;">;
+</span><span style="color: #0000ff;">import</span> org.springframework.stereotype.*<span style="color: #000000;">;
+</span><span style="color: #0000ff;">import</span> org.springframework.web.bind.annotation.*<span style="color: #000000;">;
+@RestController
+@EnableAutoConfiguration
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> Example {
+    @RequestMapping(</span>"/"<span style="color: #000000;">)
+    String home() {
+        </span><span style="color: #0000ff;">return</span> "Hello World!"<span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span> main(String[] args) <span style="color: #0000ff;">throws</span><span style="color: #000000;"> Exception {
+        SpringApplication.run(Example.</span><span style="color: #0000ff;">class</span><span style="color: #000000;">, args);
+    }
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./官方文档学习入门一_files/copycode.gif" alt="复制代码"></a></span></div></div>
+</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 这里我们只需要关心 @EnableAutoConfiguration 即可。这个注解是让Spring Boot<em>猜测 </em>你想怎么配置Spring，但实际上，它是根据你添加到classpath中的依赖来判断的。</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 注意，自动配置 可以配合 Starter POMs 一起工作，但二者不是捆绑到一起的。你仍然可以将Starter POMs中的依赖单独拣出使用，Spring Boot还是会自动配置。</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a name="c4-6"></a>6、启动项目。由于我们使用了 spring-boot-starter-parent POM，所以可以使用 mvn spring-boot:run来启动项目（根路径）。</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 启动之后就可以访问了，默认地址：<span class="Apple-converted-space">&nbsp;<a href="http://localhost:8080/">http://localhost:8080/</a></span></div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a name="c4-7"></a>7、打包。executable jars 又称 fat jars，是可以直接在生产环境中运行的，包含所有编译生成的class文件以及依赖包。</div>
+<div class="tag">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 注意，Spring Boot的这种打包方式需要使用Spring Boot提供的 spring-boot-maven-plugin 。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+<div class="tag">
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./官方文档学习入门一_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">build</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">plugins</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">plugin</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">groupId</span><span style="color: #0000ff;">&gt;</span>org.springframework.boot<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">groupId</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">artifactId</span><span style="color: #0000ff;">&gt;</span>spring-boot-maven-plugin<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">artifactId</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">plugin</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">plugins</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">build</span><span style="color: #0000ff;">&gt;</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./官方文档学习入门一_files/copycode.gif" alt="复制代码"></a></span></div></div>
+</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 注意，spring-boot-starter-parent POM中包含了 &lt;executions&gt; 的配置信息，绑定了 repackage goal （maven）。如果你不使用parent POM，你需要自己来声明这个配置信息。</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 现在，可以打包了： mvn package 。</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="./官方文档学习入门一_files/870358-20160823141223308-1742864308.png" alt="" width="693" height="518"></div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 现在，你可以在/target目录下看到 myproject-0.0.1-SNAPSHOT.jar ，大约10 Mb左右。可以通过 jar tvf target/myproject-0.0.1-SNAPSHOT.jar 来查看其中的内容。</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 此外，在/target目录下，还可以看到 myproject-0.0.1-SNAPSHOT.jar.original ，这是Maven打包出来的---在Spring Boot repackage 之前。</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a name="c4-8"></a>8、执行。正常的jar执行：java -jar target/myproject-0.0.1-SNAPSHOT.jar&nbsp; ，启动信息如下：</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="./官方文档学习入门一_files/870358-20160823141246698-37489453.png" alt=""></div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 执行 ctrl+c，退出。</div>
+<div><span style="font-size: 18pt;"><a name="c5"></a>五、Dependency Management</span></div>
+<div>每个版本的Spring Boot都提供了一个依赖列表。这个列表包含了你可能通过Spring Boot用到的所有的Spring模块以及第三方库。该列表可以以<span style="color: #ff0000;"><strong>BOM</strong></span>（Bills of Material）的形式支持Maven。 ---<span class="Apple-converted-space">&nbsp;<span style="color: #ff0000;"><strong>怎么理解BOM和Starter？</strong></span>什么区别？？</span></div>
+<div>&nbsp;</div>
+<div><a name="c5-1"></a><span style="font-size: large;"><strong>1、继承 spring-boot-starter-parent </strong></span>：</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp; <span class="Apple-converted-space">&nbsp;<em>spring-boot-starter-parent project&nbsp; </em></span></div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 默认是 Java 1.6。 Resource filtering。exec plugin、surefire、Git commit ID、shade。</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Resource filtering for application.properties 和 application.yml，以及，profile-specific file，如application-foo.properties 或 application-foo.yml。</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -- 注意Maven filtering使用 <em><span style="font-size: 18pt;">@..@</span></em> 占位符，你可以在Maven property中覆盖：resource.delimiter。</div>
+<div>&nbsp;</div>
+<div class="tag">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 如果不想使用Spring Boot中的默认版本，可以在&lt;properties&gt;覆盖相应的版本，如，想使用不同版本的Spring Data，具体如下：</div>
+<div class="tag">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">properties</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">spring-data-releasetrain.version</span><span style="color: #0000ff;">&gt;</span>Fowler-SR2<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">spring-data-releasetrain.version</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">properties</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color: #ff0000;"><strong>想使用不同版本的JDK</strong></span>：</div>
+<div>
+<div class="cnblogs_code">
+<pre><span style="color: #008000;">&lt;!--</span><span style="color: #008000;"> 使用 java 1.8 </span><span style="color: #008000;">--&gt;</span>
+<span style="color: #0000ff;">&lt;</span><span style="color: #800000;">java.version</span><span style="color: #0000ff;">&gt;</span>1.8<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">java.version</span><span style="color: #0000ff;">&gt;</span></pre>
+</div>
+</div>
+<div>&nbsp;</div>
+<div><a name="c5-2"></a><strong><span style="font-size: large;">2、不继承 spring-boot-starter-parent</span></strong> ：</div>
+<div class="tag">这种情况下，仍然可以使用dependency management，但不能使用plugin management啦。方式如下：</div>
+<div class="tag">
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./官方文档学习入门一_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">dependencyManagement</span><span style="color: #0000ff;">&gt;</span>
+     <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">dependencies</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">dependency</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #008000;">&lt;!--</span><span style="color: #008000;"> Import dependency management from Spring Boot </span><span style="color: #008000;">--&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">groupId</span><span style="color: #0000ff;">&gt;</span>org.springframework.boot<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">groupId</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">artifactId</span><span style="color: #0000ff;">&gt;</span>spring-boot-dependencies<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">artifactId</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">version</span><span style="color: #0000ff;">&gt;</span>1.4.0.RELEASE<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">version</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">type</span><span style="color: #0000ff;">&gt;</span>pom<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">type</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">scope</span><span style="color: #0000ff;">&gt;</span>import<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">scope</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">dependency</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">dependencies</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">dependencyManagement</span><span style="color: #0000ff;">&gt;</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./官方文档学习入门一_files/copycode.gif" alt="复制代码"></a></span></div></div>
+</div>
+<div class="tag">注意，scope是 <strong>import</strong> 。而且，这种情况下，不再允许在&lt;properties&gt;覆盖相应的版本。如果要使用其他版本，需要在上面的前面添加一个完整的dependency。如下：</div>
+<div class="tag">
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./官方文档学习入门一_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">dependencyManagement</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">dependencies</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #008000;">&lt;!--</span><span style="color: #008000;"> Override Spring Data release train provided by Spring Boot </span><span style="color: #008000;">--&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">dependency</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">groupId</span><span style="color: #0000ff;">&gt;</span>org.springframework.data<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">groupId</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">artifactId</span><span style="color: #0000ff;">&gt;</span>spring-data-releasetrain<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">artifactId</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">version</span><span style="color: #0000ff;">&gt;</span>Fowler-SR2<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">version</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">scope</span><span style="color: #0000ff;">&gt;</span>import<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">scope</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">type</span><span style="color: #0000ff;">&gt;</span>pom<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">type</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">dependency</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">dependency</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">groupId</span><span style="color: #0000ff;">&gt;</span>org.springframework.boot<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">groupId</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">artifactId</span><span style="color: #0000ff;">&gt;</span>spring-boot-dependencies<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">artifactId</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">version</span><span style="color: #0000ff;">&gt;</span>1.4.0.RELEASE<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">version</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">type</span><span style="color: #0000ff;">&gt;</span>pom<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">type</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">scope</span><span style="color: #0000ff;">&gt;</span>import<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">scope</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">dependency</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">dependencies</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">dependencyManagement</span><span style="color: #0000ff;">&gt;</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./官方文档学习入门一_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>&nbsp;</p>
+</div>
+<div>
+<div>另外，Spring Boot还提供了一个Maven Plugin：spring-boot-maven-plugin，用于将项目打包成fat jar（executable jar）。</div>
+</div>
+<div>继承时只需要<strong>声明</strong>一下即可使用：</div>
+<div>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./官方文档学习入门一_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">build</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">plugins</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">plugin</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">groupId</span><span style="color: #0000ff;">&gt;</span>org.springframework.boot<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">groupId</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">artifactId</span><span style="color: #0000ff;">&gt;</span>spring-boot-maven-plugin<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">artifactId</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">plugin</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">plugins</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">build</span><span style="color: #0000ff;">&gt;</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./官方文档学习入门一_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>&nbsp;</p>
+</div>
+<div>
+<div><span style="font-size: 18pt;"><a name="c6"></a>六、Starters</span></div>
+<div>可以创建自己的Starter，但名字格式不能是 spring-boot-starter-*，而是 *-spring-boot-starter。类似Maven插件的规则。</div>
+<div>&nbsp;</div>
+<div><span style="font-size: 18pt;"><a name="c7"></a>七、自动配置</span></div>
+<div>@Import 和 @ComponentScan 类似；</div>
+<div>@EnableAutoConfiguration 和 @SpringBootApplication 类似；---注意，只能使用一次，建议用在primary @Configuration class上。</div>
+<div>&nbsp;</div>
+<div>注意，自动配置永远是第二位的，一旦你配置自己的东西，那自动配置的就会被覆盖。</div>
+<div>查看自动配置都配置了什么，以及为什么，启动应用的时候加上 --debug即可。</div>
+<div class="kwd">禁用特定的自动配置：</div>
+<div class="kwd">
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./官方文档学习入门一_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">import</span> org.springframework.boot.autoconfigure.*<span style="color: #000000;">;
+</span><span style="color: #0000ff;">import</span> org.springframework.boot.autoconfigure.jdbc.*<span style="color: #000000;">;
+</span><span style="color: #0000ff;">import</span> org.springframework.context.annotation.*<span style="color: #000000;">;
+@Configuration
+@EnableAutoConfiguration(exclude</span>={DataSourceAutoConfiguration.<span style="color: #0000ff;">class</span><span style="color: #000000;">})
+</span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span><span style="color: #000000;"> MyConfiguration {
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./官方文档学习入门一_files/copycode.gif" alt="复制代码"></a></span></div></div>
+</div>
+<div>
+<div>如果class不在classpath中，可以使用<span class="Apple-converted-space">&nbsp;<span style="color: #ff0000;">excludeName</span>，然后使用<strong>全路径</strong>即可。</span></div>
+</div>
+</div>
+<div>&nbsp;</div>
+<div><span style="font-size: 18pt;"><a name="c8"></a>八、Spring Beans 和 依赖注入。</span></div>
+<div><span style="font-size: 18pt;"><a name="c9"></a>九、@SpringBootApplication</span></div>
+<div>@SpringBootApplication 等同于默认的属性的 <code class="literal">@Configuration</code>,<span class="Apple-converted-space">&nbsp;<code class="literal">@EnableAutoConfiguration</code><span class="Apple-converted-space"> and<span class="Apple-converted-space">&nbsp;<code class="literal">@ComponentScan</code>。&nbsp; </span></span></span></div>
+<div>-- 注意，@ComponentScan 不能凭空使用。</div>
+<div>&nbsp;&nbsp;</div>
+<div><span style="font-size: 18pt;"><a name="c10"></a>十、运行Spring Boot Application</span></div>
+<div><span style="font-size: 18pt;"><a name="c10-1"></a>1、从IDE中运行</span></div>
+<div>需要导入现有Maven项目。</div>
+<div>如果不小心运行了两次，出现端口占用问题，STS（Spring Tools Suite）使用Relaunch即可。</div>
+<div>&nbsp;</div>
+<div><span style="font-size: 18pt;"><a name="c10-2"></a>2、运行fat jar（executable jar）</span></div>
+<div>java -jar target/xxxx.jar&nbsp;&nbsp;&nbsp; 注意，是在项目路径下执行。</div>
+<div>开启<strong><span style="color: #ff0000;">远程调试支持</span></strong>：</div>
+<div>
+<div class="cnblogs_code">
+<pre>java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8000,suspend=n -jar target/myproject-0.0.1-SNAPSHOT.jar</pre>
+</div>
+<p>&nbsp;</p>
+</div>
+<div><span style="font-size: 18pt;"><a name="c10-3"></a>3、使用Maven Plugin</span></div>
+<div>
+<div><ol class="linenums">
+<li class="L0"><code class="language-java"><span class="pln">mvn spring<span class="pun">-<span class="pln">boot<span class="pun">:<span class="pln">run</span></span></span></span></span></code></li>
+</ol></div>
+<div><span style="font-size: 18pt;"><a name="c10-4"></a>4、Hot swapping&nbsp; <span class="Apple-converted-space">&nbsp;<strong><span style="color: #ff0000;">热部署？？？</span></strong><span class="Apple-converted-space"> 好像不是，是热加载。</span></span></span></div>
+</div>
+<div>因为Spring Boot应用都是简单的Java应用，所以JVM Hot-swapping可以直接使用。但是，JVM Hot-swapping对于能够替换的字节码有些限制，所以建议使用JRebel或者Spring Loaded？？</div>
+<div>spring-boot-devtools 模块同样包含了快速重启应用的支持。</div>
+<div>另外，貌似JVM Hot-swapping 只能在debug期间修改方法体？？&nbsp;&nbsp;&nbsp;&nbsp;</div>
+<div>&nbsp;</div>
+</div>
+<div><span style="font-size: 18pt;"><a name="c11"></a>十一、Developer tools</span></div>
+<div>Spring Boot包含一组附加的开发期工具。</div>
+<div>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./官方文档学习入门一_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">dependencies</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">dependency</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">groupId</span><span style="color: #0000ff;">&gt;</span>org.springframework.boot<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">groupId</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">artifactId</span><span style="color: #0000ff;">&gt;</span>spring-boot-devtools<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">artifactId</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">optional</span><span style="color: #0000ff;">&gt;</span>true<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">optional</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">dependency</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">dependencies</span><span style="color: #0000ff;">&gt;</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./官方文档学习入门一_files/copycode.gif" alt="复制代码"></a></span></div></div>
+</div>
+<div>
+<div>注意，生产环境下（java -jar或者通过特定的类加载器启动），这些开发工具自动被禁止。</div>
+</div>
+<div>上面的 <span class="tag"><strong>&lt;optional&gt;</strong><span class="pln"><strong>true</strong><span class="tag"><strong>&lt;/optional&gt;</strong> 是一个最佳实践，可以有效阻止用于其他模块。</span></span></span></div>
+<div>如果想确保生产Build中不包含devtools，可以使用excludeDevtools build property。</div>
+<div>&nbsp;</div>
+<div><span style="font-size: 18pt;"><a name="c11-1"></a><span style="font-size: large;"><strong>1、Property defaults</strong></span></span></div>
+<div>一些Spring Boot支持的库使用了cache增进性能。但是cache，在开发过程中可能会是一个阻碍。例如你无法立即更新一个模板（thymeleaf的）。</div>
+<div>cache设置通常在 application.properties 中。但是，比起手动设置这些，spring-boot-devtools模块会自动应用这些开发期的设置。</div>
+<div>&nbsp;</div>
+<div><span style="font-size: 18pt;"><a name="c11-2"></a><span style="font-size: large;"><strong>2、自动重启</strong></span></span></div>
+<div>使用spring-boot-devtools模块的应用，当classpath中的文件有改变时，会自动重启！ -- 就是说，默认会监视classpath入口。</div>
+<div>静态资源和视图模板不需要重启！</div>
+<div>注意，不同的IDE有不同的表现，例如Eclipse中只要改变了文件并保存，那就会导致classpath中的内容改变。而Intellij IDEA则需要 Build #Make Project。</div>
+<div class="tag">可以通过build plugin启动应用，只要开启了forking支持，因为Devtools需要一个隔离的classloader才能运行正常。Maven下要这样开启：</div>
+<div class="tag">
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./官方文档学习入门一_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre><span style="color: #0000ff;">&lt;</span><span style="color: #800000;">build</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">plugins</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">plugin</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">groupId</span><span style="color: #0000ff;">&gt;</span>org.springframework.boot<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">groupId</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">artifactId</span><span style="color: #0000ff;">&gt;</span>spring-boot-maven-plugin<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">artifactId</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">configuration</span><span style="color: #0000ff;">&gt;</span>
+                <span style="color: #0000ff;">&lt;</span><span style="color: #800000;">fork</span><span style="color: #0000ff;">&gt;</span>true<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">fork</span><span style="color: #0000ff;">&gt;</span>
+            <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">configuration</span><span style="color: #0000ff;">&gt;</span>
+        <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">plugin</span><span style="color: #0000ff;">&gt;</span>
+    <span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">plugins</span><span style="color: #0000ff;">&gt;</span>
+<span style="color: #0000ff;">&lt;/</span><span style="color: #800000;">build</span><span style="color: #0000ff;">&gt;</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./官方文档学习入门一_files/copycode.gif" alt="复制代码"></a></span></div></div>
+</div>
+<div>
+<div><span style="font-size: 14pt;">注意</span>：在使用LiveReload（热加载）时，自动重启仍然可以正常工作。如果你使用了JRebel，自动重启会被禁用以支持动态类加载。此时，devtools其他方面仍然可以使用。</div>
+</div>
+<div><span style="font-size: 14pt;">注意</span>：DevTools在重启过程中依赖应用上下文的shutdown hook来关掉它（应用）。所以如果禁用了shutdown hook，它就无法正常工作了：SpringApplication.setRegisterShutdownHook(false)。</div>
+<div>&nbsp;</div>
+<div>Spring Boot使用的重启技术，实际上是使用了两个类加载器：不变的base类加载器、可变的restart类加载器。前者加载第三方jar之类的。后者加载项目代码。重启的时候，只是丢弃可变的restart类加载器，然后重新创建一个，所以速度比较快。</div>
+<div>如果你觉得这样仍然不够快，或者遇到了类加载器问题，那你可以考虑JRebel之类的重加载技术。（重写了类？？）</div>
+<div>Spring Loaded项目提供了另一个选择，但是支持的框架不够多，且没有商业支持。</div>
+<div>&nbsp;</div>
+<div>一些特定的资源改变时没有必要引起重启。有一些不会引起重启，但是会重加载。如果你想自定义的设置一下，可以使用 <em>spring.devtools.restart.exclude</em> 属性。如下：</div>
+<div>
+<div class="cnblogs_code">
+<pre>spring.devtools.restart.exclude=static/**,public/**</pre>
+</div>
+</div>
+<div>
+<div>如果想在默认的设置之外<span style="color: #ff0000;"><strong>再添加</strong></span>新的排除选项，可以使用 <em>spring.devtools.restart.additional-exclude</em> 属性。</div>
+</div>
+<div>&nbsp;</div>
+<div>如果想在修改classpath之外的文件时也让应用重启，可以使用 spring.devtools.restart.additional-paths 属性。还可以配合上面提到的 <em>spring.devtools.restart.exclude</em> 属性，来控制是重启还是重加载。</div>
+<div>&nbsp;</div>
+<div>如果不想使用自动重启功能，可以使用 <em>spring.devtools.restart.enabled</em> 属性。多数情况下，可以在 application.properties 中设置，这样<span style="font-size: 14pt;">仍然会创建</span>一个restart类加载器，但不再监视改变。</div>
+<div class="kwd">如果想完全禁止自动重启，需要在调用 <em>SpringApplication.run(..)</em> 之前设置一个System属性。如下：</div>
+<div class="kwd">
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">static</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> main(String[] args) {
+    System.setProperty(</span>"spring.devtools.restart.enabled", "false"<span style="color: #000000;">);
+    SpringApplication.run(MyApp.</span><span style="color: #0000ff;">class</span><span style="color: #000000;">, args);
+}</span></pre>
+</div>
+</div>
+<div>
+<div>&nbsp;</div>
+</div>
+<div>如果你的IDE会随改随编译，你可能会倾向于只在特定时刻引发重启（否则会很烦人，而且性能下降）。这时，你可以使用“trigger file”，就是一个特定的文件，只有修改这个文件时才会触发重启。使用 <em>spring.devtools.restart.trigger-file</em> 属性即可。（还可以设置为全局属性，这样所有的项目都可以使用了！见十八。）</div>
+<div>&nbsp;</div>
+<div>自定义restart类加载器。</div>
+<div>如果有一个多模块项目，只有部分导入到你的IDE中，你可能需要自定义一下。首先创建一个文件：META-INF/spring-devtools.properties。该文件中，可以有以前缀 <em>restart.exclude.</em> 和 <em>restart.include.</em> 开头的属性。前者会被放入base类加载器，后者则被放入restart类加载器。</div>
+<div class="pln">该属性的value，是正则表达式。例如：</div>
+<div class="pln">
+<div class="cnblogs_code">
+<pre>restart.include.companycommonlibs=/mycorp-common-[\\w-]+<span style="color: #000000;">\.jar
+restart.include.projectcommon</span>=/mycorp-myproj-[\\w-]+\.jar</pre>
+</div>
+</div>
+<div>
+<div>注意，key只要是前缀 restart.exclude. 和 restart.include. 开头即可，<span style="color: #ff0000;"><strong>后缀任意</strong></span>。</div>
+</div>
+<div>&nbsp;</div>
+<div><span style="font-size: 14pt;">已知限制：</span></div>
+<div>自动重启，在使用 ObjectInputStream 反序列化时，会出问题。如果你想使用反序列化，应该使用Spring的 ConfigurableObjectInputStream 配合 Thread.currentThread().getContextClassLoader() 使用。</div>
+<div>可惜的是，一些第三方jars中没有考虑到这个问题，无解。</div>
+<div>&nbsp;</div>
+<div><span style="font-size: 18pt;"><a name="c11-3"></a><span style="font-size: large;"><strong>3、热加载 LiveReload</strong></span></span></div>
+<div>spring-boot-devtools 模块内置了一个 LiveReload Server，可以保证在改变资源时 浏览的刷新。LiveReload的浏览器扩展，免费支持Chrome、Firefox、Safari。</div>
+<div>如果想禁用：<em>spring.devtools.livereload.enabled=false</em>&nbsp;&nbsp; 。</div>
+<div>注意：只能运行<span style="font-size: 18pt;">一个</span>LiveReload Server。如果同时开启多个项目，那只有第一个。</div>
+<div>&nbsp;</div>
+<div><span style="font-size: 18pt;"><a name="c11-4"></a><span style="font-size: large;"><strong>4、全局设置</strong>（前面有提到）</span></span></div>
+<div>$HOME 文件夹下添加一个文件 <em>.spring-boot-devtools.properties</em> ，该文件中的内容会被作用于所有的Spring Boot项目。例如设置 <em>触发文件</em>：</div>
+<div>
+<div class="cnblogs_code">
+<pre>spring.devtools.reload.trigger-file=.reloadtrigger</pre>
+</div>
+</div>
+<div>&nbsp;</div>
+<div><span style="font-size: 18pt;"><a name="c19"></a><span style="font-size: large;"><strong>5、远程应用</strong></span></span></div>
+<div>Spring Boot 的developer tools也可以在远程使用（应该是使用一部分）。需要开启支持。例如：</div>
+<div>
+<div class="cnblogs_code">
+<pre>spring.devtools.remote.secret=mysecret</pre>
+</div>
+</div>
+<div>
+<div>问题：值是什么意思？</div>
+</div>
+<div>注意：不要在生产环境下开启！！</div>
+<div>&nbsp;</div>
+<div>远程devtools支持是成对出现的。服务器端+客户端。当设置了上面的属性时，服务器端会自动开启。</div>
+<div>&nbsp;</div>
+<div>运行远程客户端应用：</div>
+<div>运行 org.springframework.boot.devtools.RemoteSpringApplication ，需要使用和远程项目相同的classpath！</div>
+<div>传递给应用的non-option参数应该是你要连接到的URL。（<span style="font-size: 14pt;">问题，什么是non-option参数？</span>）</div>
+<div>例如，你在使用Eclipse或者STS，有一个项目 my-app ，部署到了Cloud Foundry，那你需要进行如下操作：</div>
+<div>
+<div><ol class="linenums">
+<li class="L0"><code class="language-html"><span class="pln">Select Run -&gt; Run Configurations...</span></code></li>
+<li class="L1"><code class="language-html"><span class="pln">Create a new Java Application "launch configuration"</span></code></li>
+<li class="L2"><code class="language-html"><span class="pln">Browse for the my-app project</span></code></li>
+<li class="L3"><code class="language-html"><span class="pln">Use org.springframework.boot.devtools.RemoteSpringApplication as the main class.</span></code></li>
+<li class="L4"><code class="language-html"><span class="pln">Add https://myapp.cfapps.io to the Program arguments (or whatever your remote URL is).</span></code></li>
+</ol></div>
+<div>
+<div>&nbsp;<img src="./官方文档学习入门一_files/870358-20160823142241105-1873460000.png" alt="" width="856" height="528"></div>
+<div><img src="./官方文档学习入门一_files/870358-20160823142325917-721008881.png" alt="" width="859" height="529"></div>
+</div>
+</div>
+<div>代理访问远程的设置方法（略）。p47(60/346)</div>
+<div>&nbsp;</div>
+<div>远程方式下，客户端的任何更新都会被push到服务器端，并按设置触发restart。比较快。</div>
+<div>&nbsp;</div>
+<div><span style="font-size: 18pt;"><a name="c11-5-1"></a><span style="font-size: large;">5.1、远程调试</span></span></div>
+<div>并不总是能开启Java远程调试功能。（直接翻译的，略拗口。其实就是有时候能开启，有时候不能）</div>
+<div>为了改进这些限制，devtools支持Http协议的远程调试通道。远程客户端提供了一个本地服务器（默认8000端口，可修改），用于绑定远程调试器。当一个连接被创建时，debug信息就会通过HTTP发送到远程应用。</div>
+<div>修改默认端口： <em>spring.devtools.remote.debug.local-port</em> 。</div>
+<div class="pln">但是，首先，你需要确认远程应用以远程调试方式启动。通常，配置JAVA_OPTS即可达到目的。例如，在Cloud Foundry上，你可以在 manifest.yml 中添加如下信息：</div>
+<div class="pln">
+<div class="cnblogs_code">
+<pre><span style="color: #000000;">---
+  env:
+    JAVA_OPTS: "-Xdebug -Xrunjdwp:server=y,transport=dt_socket,suspend=n"</span></pre>
+</div>
+</div>
+<div>
+<div>注意，通过网络进行远程调试，可能很慢，所以你需要增加超时时间。Eclipse中：Java -&gt; Debug -&gt; Debugger timeout (ms)，设成60000很不错。</div>
+</div>
+<div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+</div>
+<div><span style="font-size: 18pt;"><a name="c12"></a>十二、生产打包</span></div>
+<div>Executable jars可以直接在生产环境下使用。</div>
+<div>其他的生产就绪功能，例如监控等，可以考虑 <em>spring-boot-actuator</em> 。后面会有介绍。</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div>官方文档： <a href="http://docs.spring.io/spring-boot/docs/1.3.7.RELEASE/reference/htmlsingle/#using-boot-maven">http://docs.spring.io/spring-boot/docs/1.4.0.RELEASE/reference/htmlsingle/</a></div>
+<div class="clear"></div>
+</body></html>

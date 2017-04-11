@@ -27,10 +27,12 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<!-- spring-data-jpa程序的启动项依赖，底层为hibernate实现，若不使用此框架则可以依赖其他的orm框架 -->
+		<!-- 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
+		 -->
 		<!-- thymeleaf程序的启动项依赖，spring-boot对thymeleaf模板引擎支持最好，建议模板引擎使用此框架 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -41,9 +43,16 @@
 			<artifactId>spring-boot-starter-freemarker</artifactId>
 		</dependency>
 		<!-- mysql依赖，使用spring-data-jpa需要指定一个数据库方言，用于连接数据库，即mysql驱动 -->
+		<!-- 
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+		 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
