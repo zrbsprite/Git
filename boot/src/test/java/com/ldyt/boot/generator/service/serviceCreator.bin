@@ -1,0 +1,8 @@
+##
+base_folder=com/zyht/bank
+read_dao_folder=com/zyht/bank/dao
+read_dao_names=WdbCustomersMapper
+
+output_dao_dir=com.zyht.bank.dao
+output_entity_dir=com.zyht.bank.entity
+output_service_dir=com.zyht.bank.service
