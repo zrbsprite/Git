@@ -425,14 +425,33 @@
 			<version>${org.springframework.version}</version>
 		</dependency>
 		
+		<!-- date api -->
+		<dependency>
+		  <groupId>org.threeten</groupId>
+		  <artifactId>threeten-extra</artifactId>
+		  <version>1.0</version>
+		</dependency>
+		
 		<!-- netty -->
 		<dependency>
-    <groupId>io.netty</groupId>
-    <artifactId>netty-all</artifactId>
-    <version>5.0.0.Alpha2</version>
-</dependency>
+		    <groupId>io.netty</groupId>
+		    <artifactId>netty-all</artifactId>
+		    <version>5.0.0.Alpha2</version>
+		</dependency>
 	</dependencies>
 	<repositories>
+		<repository>
+			<id>aliyun</id>
+			<name>aliyun maven</name>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<url>http://maven.aliyun.com/nexus/content/groups/public</url>
+		</repository>
+		
 		<repository>
 			<id>oschina</id>
 			<name>oschina</name>

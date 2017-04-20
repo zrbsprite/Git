@@ -31,12 +31,12 @@
 		<version>1.5.2.RELEASE</version>
 	</parent>
 	<dependencies>
-		<!-- web程序的启动项依赖，�?�过此依赖可引入内嵌的tomcat等web必须的jars -->
+		<!-- web程序的启动项依赖，过此依赖可引入内嵌的tomcat等web必须的jars -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<!-- thymeleaf程序的启动项依赖，spring-boot对thymeleaf模板引擎支持�?好，建议模板引擎使用此框�? -->
+		<!-- thymeleaf程序的启动项依赖，spring-boot对thymeleaf模板引擎支持好，建议模板引擎使用此框 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -60,6 +60,13 @@
 			<version>1.0.29</version>
 		</dependency>
 		
+		<!-- 补充java日历 -->
+		<dependency>
+		  <groupId>org.threeten</groupId>
+		  <artifactId>threeten-extra</artifactId>
+		  <version>1.0</version>
+		</dependency>
+		
 	</dependencies>
 
 	<dependencyManagement>
@@ -69,7 +76,7 @@
 
 	<build>
 		<plugins>
-			<!-- 通过maven构建的插�? -->
+			<!-- 通过maven构建的插 -->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
